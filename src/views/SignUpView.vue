@@ -107,11 +107,11 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
             />
             <label class="form-check-label fs-8" for="flexCheckDefault">
               Acepta nuestros
-              <a href="https://bakano.ec/terminos-y-condiciones-de-uso" about="_blank"
+              <a href="https://bakano.ec/terminos-y-condiciones-de-uso" target="_blank"
                 >Términos y condiciones</a
               >
               y
-              <a href="https://bakano.ec/politica-de-privacidad" about="_blank">
+              <a href="https://bakano.ec/politica-de-privacidad" target="_blank">
                 Políticas de privacidad
               </a>
             </label>
