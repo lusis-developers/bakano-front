@@ -32,6 +32,7 @@ const {
             @close="closeAlert"
           />
           <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4" />
+          <p class="fs-3 text-center">Inicia Sesión</p>
           <EmailAndPasswordInput
             :validations="emailValidations"
             label="Correo electrónico"
