@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { AlertType } from '@/enum/components/base/BaseAlert.interface'
+import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
 import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
-import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
+import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 
 const {
   alertMessage,
@@ -23,15 +23,9 @@ const name = ref<string>('')
 const lastname = ref<string>('')
 const nameErrors = ref<string[]>([])
 const lastnameErrors = ref<string[]>([])
-const termAndPolicyAccepted = ref(false)
 
 const isRegistrationDisabled = computed(() => {
-  return (
-    isDisabled.value ||
-    name.value.length === 0 ||
-    lastname.value.length === 0 ||
-    !termAndPolicyAccepted.value
-  )
+  return isDisabled.value || name.value.length === 0 || lastname.value.length === 0
 })
 
 function handleName({ value, isValid }: { value: string; isValid: boolean }): void {
