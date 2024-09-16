@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import ContainerView from '@/components/layout/ContainerView.vue'
+import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 </script>
 
 <template>
-  <div class="login">
-    <ContainerView> </ContainerView>
-  </div>
+  <ContainerWrapper>
+    <template #content>
+      <div class="">jelou</div>
+    </template>
+  </ContainerWrapper>
 </template>
 
 <style lang="scss" scoped></style>
