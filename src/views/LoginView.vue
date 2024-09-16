@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-
+import { useAuthForm } from '@/composables/views/LoginView.composable'
 import { AlertType } from '@/enum/components/base/BaseAlert.interface'
 import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
 import logo from '@/assets/brand/bakano-negro.png'
@@ -9,51 +8,15 @@ import BaseButton from '@/components/base/BaseButton.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 import EmailAndPasswordInput from '@/components/input/EmailAndPasswordInput.vue'
 
-const email = ref<string>('')
-const password = ref<string>('')
-const alertMessage = ref<string>('')
-const emailErrors = ref<string[]>([])
-const passwordErrors = ref<string[]>([])
-
-const displayAlert = computed(() => alertMessage.value.length > 0)
-const isDisabled = computed(() => {
-  return (
-    emailErrors.value.length > 0 ||
-    passwordErrors.value.length > 0 ||
-    email.value.length === 0 ||
-    password.value.length === 0
-  )
-})
-
-function handleEmailValidation({ value, isValid }: { value: string; isValid: boolean }) {
-  email.value = value
-  if (!isValid) {
-    emailErrors.value = ['El email ingresado no es válido']
-  } else {
-    emailErrors.value = []
-  }
-}
-
-function handlePasswordValidation({ value, isValid }: { value: string; isValid: boolean }) {
-  password.value = value
-  if (!isValid) {
-    passwordErrors.value = ['La contraseña ingresada no es válida']
-  } else {
-    passwordErrors.value = []
-  }
-}
-
-function closeAlert(): void {
-  alertMessage.value = ''
-}
-
-function login(): void {
-  if (emailErrors.value.length === 0 && passwordErrors.value.length === 0) {
-    console.log('Email:', email.value)
-    console.log('Password:', password.value)
-  }
-  alertMessage.value = 'Corrige los errores antes de continuar'
-}
+const {
+  alertMessage,
+  displayAlert,
+  isDisabled,
+  handleEmailValidation,
+  handlePasswordValidation,
+  closeAlert,
+  submitForm
+} = useAuthForm()
 </script>
 
 <template>
@@ -91,7 +54,7 @@ function login(): void {
           :isDisabled="isDisabled"
           :fullWidth="true"
           btnClass="btn-primary"
-          @click="login"
+          @click="submitForm"
         />
       </div>
     </template>
