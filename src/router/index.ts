@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const LoginView = () => import('@/views/LoginView.vue')
+const SignUpView = () => import('@/views/SignUpView.vue')
 
 const routes = [
   {
@@ -13,6 +14,14 @@ const routes = [
     component: LoginView,
     meta: {
       title: 'Inicia Sesión 🚀'
+    }
+  },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: SignUpView,
+    meta: {
+      title: 'Regístrate 🚀'
     }
   }
 ]
