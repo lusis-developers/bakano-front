@@ -97,33 +97,38 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
             inputType="password"
             @validation="handlePasswordValidation"
           />
-          <div class="form-check mb-3">
-            <input
-              v-model="termAndPolicyAccepted"
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-            />
-            <label class="form-check-label fs-8" for="flexCheckDefault">
-              Acepta nuestros
-              <a href="https://bakano.ec/terminos-y-condiciones-de-uso" target="_blank"
-                >Términos y condiciones</a
-              >
-              y
-              <a href="https://bakano.ec/politica-de-privacidad" target="_blank">
-                Políticas de privacidad
-              </a>
-            </label>
-          </div>
+          <p class="text-center">
+            ¿Tienes cuenta?
+            <router-link to="/login"> Inicia sesión </router-link>
+          </p>
         </form>
         <BaseButton
-          label="Inicia Sesión"
+          label="Regístrate"
           :isDisabled="isRegistrationDisabled"
           :fullWidth="true"
           btnClass="btn-primary"
           @click="submitForm"
         />
+        <hr class="border border-gray-400" />
+        <div class="text-secondary text-center">
+          <p class="form-check-label fs-8" for="flexCheckDefault">
+            Acepto
+            <a
+              href="https://bakano.ec/terminos-y-condiciones-de-uso"
+              target="_blank"
+              class="text-secondary"
+              >Términos y condiciones</a
+            >
+            y
+            <a
+              href="https://bakano.ec/politica-de-privacidad"
+              target="_blank"
+              class="text-secondary"
+            >
+              Políticas de privacidad
+            </a>
+          </p>
+        </div>
       </div>
     </template>
   </ContainerWrapper>
@@ -136,8 +141,8 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
   .logo {
     width: 80px;
   }
-  .fs-8 {
-    font-size: 0.75rem;
-  }
+}
+.fs-8 {
+  font-size: 0.5rem;
 }
 </style>
