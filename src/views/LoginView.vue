@@ -6,7 +6,7 @@ import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
-import EmailAndPasswordInput from '@/components/input/EmailAndPasswordInput.vue'
+import EmailAndPasswordInput from '@/components/input/FloatInput.vue'
 
 const {
   alertMessage,

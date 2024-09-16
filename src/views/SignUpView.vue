@@ -6,7 +6,7 @@ import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
-import EmailAndPasswordInput from '@/components/input/EmailAndPasswordInput.vue'
+import FloatInput from '@/components/input/FloatInput.vue'
 
 const {
   alertMessage,
@@ -14,6 +14,8 @@ const {
   isDisabled,
   handleEmailValidation,
   handlePasswordValidation,
+  handleName,
+  handleLastname,
   closeAlert,
   submitForm
 } = useAuthForm()
@@ -33,7 +35,21 @@ const {
           />
           <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4" />
           <p class="fs-3 text-center">Regístrate</p>
-          <EmailAndPasswordInput
+          <FloatInput
+            label="Nombre"
+            inputId="name"
+            placeholder="Luis"
+            inputType="text"
+            @validation="handleName"
+          />
+          <FloatInput
+            label="Apellido"
+            inputId="lastname"
+            placeholder="Reyes"
+            inputType="text"
+            @validation="handleLastname"
+          />
+          <FloatInput
             :validations="emailValidations"
             label="Correo electrónico"
             inputId="email"
@@ -41,7 +57,7 @@ const {
             inputType="email"
             @validation="handleEmailValidation"
           />
-          <EmailAndPasswordInput
+          <FloatInput
             :validations="passwordValidations"
             label="Contraseña"
             inputId="password"
