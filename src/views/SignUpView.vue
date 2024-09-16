@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-import { useAuthForm } from '@/composables/views/LoginView.composable'
+import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { AlertType } from '@/enum/components/base/BaseAlert.interface'
 import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
 import logo from '@/assets/brand/bakano-negro.png'
@@ -16,13 +16,41 @@ const {
   isDisabled,
   handleEmailValidation,
   handlePasswordValidation,
-  handleName,
-  handleLastname,
   closeAlert,
   submitForm
 } = useAuthForm()
-
+const name = ref<string>('')
+const lastname = ref<string>('')
+const nameErrors = ref<string[]>([])
+const lastnameErrors = ref<string[]>([])
 const termAndPolicyAccepted = ref(false)
+
+const isRegistrationDisabled = computed(() => {
+  return (
+    isDisabled.value ||
+    name.value.length === 0 ||
+    lastname.value.length === 0 ||
+    !termAndPolicyAccepted.value
+  )
+})
+
+function handleName({ value, isValid }: { value: string; isValid: boolean }): void {
+  name.value = value
+  if (!isValid) {
+    nameErrors.value = ['Campo obligatorio']
+  } else {
+    nameErrors.value = []
+  }
+}
+
+function handleLastname({ value, isValid }: { value: string; isValid: boolean }): void {
+  lastname.value = value
+  if (!isValid) {
+    lastnameErrors.value = ['Campo obligatorio']
+  } else {
+    lastnameErrors.value = []
+  }
+}
 </script>
 
 <template>
@@ -70,7 +98,13 @@ const termAndPolicyAccepted = ref(false)
             @validation="handlePasswordValidation"
           />
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+            <input
+              v-model="termAndPolicyAccepted"
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
             <label class="form-check-label fs-8" for="flexCheckDefault">
               Acepta nuestros
               <a href="https://bakano.ec/terminos-y-condiciones-de-uso" about="_blank"
@@ -85,7 +119,7 @@ const termAndPolicyAccepted = ref(false)
         </form>
         <BaseButton
           label="Inicia Sesión"
-          :isDisabled="isDisabled"
+          :isDisabled="isRegistrationDisabled"
           :fullWidth="true"
           btnClass="btn-primary"
           @click="submitForm"

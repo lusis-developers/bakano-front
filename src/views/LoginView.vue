@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAuthForm } from '@/composables/views/LoginView.composable'
+import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { AlertType } from '@/enum/components/base/BaseAlert.interface'
 import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
 import logo from '@/assets/brand/bakano-negro.png'
