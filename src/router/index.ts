@@ -17,8 +17,8 @@ const routes = [
     }
   },
   {
-    path: '/registration',
-    name: 'Registration',
+    path: '/sign-up',
+    name: 'SignUp',
     component: SignUpView,
     meta: {
       title: 'Regístrate 🚀'
