@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import { useAuthForm } from '@/composables/views/LoginView.composable'
 import { AlertType } from '@/enum/components/base/BaseAlert.interface'
 import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
@@ -19,6 +21,8 @@ const {
   closeAlert,
   submitForm
 } = useAuthForm()
+
+const termAndPolicyAccepted = ref(false)
 </script>
 
 <template>
@@ -65,6 +69,19 @@ const {
             inputType="password"
             @validation="handlePasswordValidation"
           />
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+            <label class="form-check-label fs-8" for="flexCheckDefault">
+              Acepta nuestros
+              <a href="https://bakano.ec/terminos-y-condiciones-de-uso" about="_blank"
+                >Términos y condiciones</a
+              >
+              y
+              <a href="https://bakano.ec/politica-de-privacidad" about="_blank">
+                Políticas de privacidad
+              </a>
+            </label>
+          </div>
         </form>
         <BaseButton
           label="Inicia Sesión"
@@ -84,6 +101,9 @@ const {
 
   .logo {
     width: 80px;
+  }
+  .fs-8 {
+    font-size: 0.75rem;
   }
 }
 </style>
