@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
+import { AlertType } from '@/enum/components/base/BaseAlert.interface'
 import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
-
 import logo from '@/assets/brand/bakano-negro.png'
+import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 import EmailAndPasswordInput from '@/components/input/EmailAndPasswordInput.vue'
 
 const email = ref<string>('')
 const password = ref<string>('')
+const alertMessage = ref<string>('')
 const emailErrors = ref<string[]>([])
 const passwordErrors = ref<string[]>([])
 
+const displayAlert = computed(() => alertMessage.value.length > 0)
 const isDisabled = computed(() => {
   return (
     emailErrors.value.length > 0 ||
@@ -40,14 +43,16 @@ function handlePasswordValidation({ value, isValid }: { value: string; isValid: 
   }
 }
 
+function closeAlert(): void {
+  alertMessage.value = ''
+}
+
 function login(): void {
   if (emailErrors.value.length === 0 && passwordErrors.value.length === 0) {
     console.log('Email:', email.value)
     console.log('Password:', password.value)
-    // Aquí se procede con la lógica de inicio de sesión, como enviar los datos al servidor
-  } else {
-    console.log('Corrige los errores antes de continuar')
   }
+  alertMessage.value = 'Corrige los errores antes de continuar'
 }
 </script>
 
@@ -56,6 +61,13 @@ function login(): void {
     <template #content>
       <div class="form-wraper w-100">
         <form>
+          <BaseAlert
+            :isVisible="displayAlert"
+            :message="alertMessage"
+            :isDismissable="true"
+            :type="AlertType.DANGER"
+            @close="closeAlert"
+          />
           <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4" />
           <EmailAndPasswordInput
             :validations="emailValidations"
