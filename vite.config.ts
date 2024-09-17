@@ -9,5 +9,14 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Remove warning from console, until bootstrap update package
+        // issue: https://github.com/element-plus/element-plus/issues/17487
+        quietDeps: true
+      }
+    }
   }
 })
