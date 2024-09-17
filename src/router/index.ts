@@ -23,6 +23,14 @@ const routes = [
     meta: {
       title: 'Regístrate 🚀'
     }
+  },
+  {
+    path: '/wizard',
+    name: 'Wizard',
+    component: () => import('@/views/wizard/Index.vue'),
+    meta: {
+      title: 'Primeros pasos 🚀'
+    }
   }
 ]
 
