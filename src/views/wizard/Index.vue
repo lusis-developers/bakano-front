@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 import Step1 from './components/FirstStep.vue'
+import Step2 from './components/SecondStep.vue'
 
 const currentStep = ref(1)
 
@@ -28,6 +29,9 @@ function prevStep(): void {
       <div class="wizard-content">
         <Step1 
           v-if="currentStep === 1"
+          @next="nextStep" />
+        <Step2
+          v-if="currentStep === 2"
           @next="nextStep" />
       </div>
     </div>
