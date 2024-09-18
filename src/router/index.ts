@@ -1,7 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import LayoutLogin from '@/layouts/LayoutLogin.vue'
+import {
+  createRouter,
+  createWebHistory,
+  type NavigationGuardNext,
+  type RouteLocationNormalized
+} from 'vue-router'
 
 const LoginView = () => import('@/views/LoginView.vue')
 const SignUpView = () => import('@/views/SignUpView.vue')
+
+function isLoggedIn(): boolean {
+  return true
+}
 
 const routes = [
   {
@@ -24,6 +34,21 @@ const routes = [
       title: 'Regístrate 🚀'
     }
   },
+  {
+    path: '/app',
+    component: LayoutLogin,
+    beforeEnter: (
+      to: RouteLocationNormalized,
+      from: RouteLocationNormalized,
+      next: NavigationGuardNext
+    ) => {
+      if (isLoggedIn()) {
+        next()
+      } else {
+        next('/login')
+      }
+    }
+  }
 ]
 
 const router = createRouter({

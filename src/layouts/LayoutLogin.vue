@@ -1,56 +1,57 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-const isSidebarExpanded = ref(false);
-const activeItemIndex = ref(0);
-
+const isSidebarExpanded = ref(false)
+const activeItemIndex = ref(0)
 
 function updateSidebarState(): void {
-  isSidebarExpanded.value = window.innerWidth >= 750; 
-};
+  isSidebarExpanded.value = window.innerWidth >= 750
+}
 const navItems = [
   { name: 'Resumen', icon: 'bi bi-journal-richtext', link: '/' },
   { name: 'Web', icon: 'bi bi-globe', link: '/' },
-  { name: 'Facebook', icon: 'bi bi-facebook', link: '/' },
-];
+  { name: 'Facebook', icon: 'bi bi-facebook', link: '/' }
+]
 
 onMounted(() => {
-  updateSidebarState();
-  window.addEventListener('resize', updateSidebarState);
-});
+  updateSidebarState()
+  window.addEventListener('resize', updateSidebarState)
+})
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', updateSidebarState);
-});
+  window.removeEventListener('resize', updateSidebarState)
+})
 </script>
 
 <template>
   <div class="d-flex">
     <aside
       class="bg-light vh-100 d-flex flex-column p-3 sidebar"
-      :class="{ 'sidebar-expanded': isSidebarExpanded }">
+      :class="{ 'sidebar-expanded': isSidebarExpanded }"
+    >
       <div class="d-flex align-items-center mb-3">
         <img
           src="../assets/brand/bakano-negro.png"
           alt="Logo"
           class="img-fluid"
-          style="max-height: 50px;"
-        >
+          style="max-height: 50px"
+        />
       </div>
       <ul class="mt-4 nav nav-pills flex-column">
-        <li 
-          v-for="(item, index) in navItems" 
-          :key="index"
-          class="nav-item fs-5">
+        <li v-for="(item, index) in navItems" :key="index" class="nav-item fs-5">
           <router-link
             :to="item.link"
-            :class="['nav-link', 'd-flex', 'align-items-center', { 'active': activeItemIndex === index }]" 
-            @click.prevent="activeItemIndex = index">
+            :class="[
+              'nav-link',
+              'd-flex',
+              'align-items-center',
+              { active: activeItemIndex === index }
+            ]"
+            @click.prevent="activeItemIndex = index"
+          >
             <i :class="item.icon" />
-            <span 
-              v-if="isSidebarExpanded"  
-              class="ms-2"> 
-              {{ item.name }} 
+            <span v-if="isSidebarExpanded" class="ms-2">
+              {{ item.name }}
             </span>
           </router-link>
         </li>
@@ -71,8 +72,8 @@ onBeforeUnmount(() => {
                 src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
                 alt="Profile picture"
                 class="rounded-circle"
-                style="width: 40px; height: 40px;"
-              >
+                style="width: 40px; height: 40px"
+              />
             </div>
           </div>
         </nav>
