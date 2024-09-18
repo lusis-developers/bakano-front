@@ -9,9 +9,9 @@ function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 750; 
 };
 const navItems = [
-  { name: 'Resumen', icon: 'bi bi-journal-richtext'},
-  { name: 'Web', icon: 'bi bi-globe'},
-  { name: 'Facebook', icon: 'bi bi-facebook'},
+  { name: 'Resumen', icon: 'bi bi-journal-richtext', link: '/' },
+  { name: 'Web', icon: 'bi bi-globe', link: '/' },
+  { name: 'Facebook', icon: 'bi bi-facebook', link: '/' },
 ];
 
 onMounted(() => {
@@ -43,8 +43,8 @@ onBeforeUnmount(() => {
           :key="index"
           class="nav-item fs-5">
           <router-link
+            :to="item.link"
             :class="['nav-link', 'd-flex', 'align-items-center', { 'active': activeItemIndex === index }]" 
-            to="/"
             @click.prevent="activeItemIndex = index">
             <i :class="item.icon" />
             <span 
