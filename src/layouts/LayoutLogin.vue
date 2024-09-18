@@ -2,10 +2,17 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const isSidebarExpanded = ref(false);
+const activeItemIndex = ref(0);
+
 
 function updateSidebarState(): void {
-  isSidebarExpanded.value = window.innerWidth >= 750; // 'lg' breakpoint in Bootstrap
+  isSidebarExpanded.value = window.innerWidth >= 750; 
 };
+const navItems = [
+  { name: 'Resumen', icon: 'bi bi-journal-richtext'},
+  { name: 'Web', icon: 'bi bi-globe'},
+  { name: 'Facebook', icon: 'bi bi-facebook'},
+];
 
 onMounted(() => {
   updateSidebarState();
@@ -19,12 +26,9 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="d-flex">
-    <!-- Sidebar -->
     <aside
       class="bg-light vh-100 d-flex flex-column p-3 sidebar"
-      :class="{ 'sidebar-expanded': isSidebarExpanded }"
-    >
-      <!-- Logo or Brand -->
+      :class="{ 'sidebar-expanded': isSidebarExpanded }">
       <div class="d-flex align-items-center mb-3">
         <img
           src="../assets/brand/bakano-negro.png"
@@ -33,36 +37,23 @@ onBeforeUnmount(() => {
           style="max-height: 50px;"
         >
       </div>
-      <!-- Menu -->
       <ul class="mt-4 nav nav-pills flex-column">
-        <li class="nav-item fs-5">
-          <a
-            class="nav-link active d-flex align-items-center"
-            href="#"
-          >
-            <i class="bi bi-journal-richtext"></i>
-            <span v-if="isSidebarExpanded" class="ms-2">Resumen</span>
-          </a>
+        <li 
+          v-for="(item, index) in navItems" 
+          :key="index"
+          class="nav-item fs-5">
+          <router-link
+            :class="['nav-link', 'd-flex', 'align-items-center', { 'active': activeItemIndex === index }]" 
+            to="/"
+            @click.prevent="activeItemIndex = index">
+            <i :class="item.icon" />
+            <span 
+              v-if="isSidebarExpanded"  
+              class="ms-2"> 
+              {{ item.name }} 
+            </span>
+          </router-link>
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link d-flex align-items-center"
-            href="#"
-          >
-            <i class="bi bi-globe"></i>
-            <span v-if="isSidebarExpanded" class="ms-2">Web</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link d-flex align-items-center"
-            href="#"
-          >
-            <i class="bi bi-facebook"></i>
-            <span v-if="isSidebarExpanded" class="ms-2">Facebook</span>
-          </a>
-        </li>
-        <!-- Add more menu items as needed -->
       </ul>
     </aside>
 
@@ -98,27 +89,37 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .sidebar {
   width: 80px;
   transition: width 0.3s;
+
+  &-expanded {
+    width: 250px;
+
+    .nav-link {
+      justify-content: flex-start;
+    }
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+
+    span {
+      display: none;
+    }
+  }
 }
-.sidebar-expanded {
-  width: 250px;
-}
-.sidebar .nav-link {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 1rem;
-}
-.sidebar-expanded .nav-link {
-  justify-content: flex-start;
-}
-.sidebar .nav-link span {
-  display: none;
-}
+
 .sidebar-expanded .nav-link span {
   display: inline;
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
 }
 </style>
