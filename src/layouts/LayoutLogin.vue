@@ -3,12 +3,8 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const isSidebarExpanded = ref(false);
 
-const updateSidebarState = () => {
+function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 750; // 'lg' breakpoint in Bootstrap
-};
-
-const toggleSidebar = () => {
-  isSidebarExpanded.value = !isSidebarExpanded.value;
 };
 
 onMounted(() => {
