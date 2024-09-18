@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import LayoutLogin from './layouts/LayoutLogin.vue';
 </script>
 
 <template>
+  <LayoutLogin>
+    
+  </LayoutLogin>
   <RouterView />
 </template>
 
