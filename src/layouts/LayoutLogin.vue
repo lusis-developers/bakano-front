@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+const isSidebarExpanded = ref(false);
+
+const updateSidebarState = () => {
+  isSidebarExpanded.value = window.innerWidth >= 750; // 'lg' breakpoint in Bootstrap
+};
+
+const toggleSidebar = () => {
+  isSidebarExpanded.value = !isSidebarExpanded.value;
+};
+
+onMounted(() => {
+  updateSidebarState();
+  window.addEventListener('resize', updateSidebarState);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateSidebarState);
+});
+</script>
+
 <template>
   <div class="d-flex">
     <!-- Sidebar -->
@@ -16,12 +39,12 @@
       </div>
       <!-- Menu -->
       <ul class="mt-4 nav nav-pills flex-column">
-        <li class="nav-item">
+        <li class="nav-item fs-5">
           <a
             class="nav-link active d-flex align-items-center"
             href="#"
           >
-            <i class="bi bi-house-door"></i>
+            <i class="bi bi-journal-richtext"></i>
             <span v-if="isSidebarExpanded" class="ms-2">Resumen</span>
           </a>
         </li>
@@ -53,14 +76,6 @@
       <header class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid d-flex justify-content-between align-items-center p-3">
-            <!-- Toggle button for small screens -->
-            <button
-              class="btn btn-light d-lg-none"
-              type="button"
-              @click="toggleSidebar"
-            >
-              <i class="bi bi-list"></i>
-            </button>
             <div>
               <slot name="header"></slot>
             </div>
@@ -86,31 +101,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      isSidebarExpanded: false,
-    };
-  },
-  mounted() {
-    this.updateSidebarState();
-    window.addEventListener('resize', this.updateSidebarState);
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.updateSidebarState);
-  },
-  methods: {
-    updateSidebarState() {
-      this.isSidebarExpanded = window.innerWidth >= 992; // 'lg' breakpoint in Bootstrap
-    },
-    toggleSidebar() {
-      this.isSidebarExpanded = !this.isSidebarExpanded;
-    },
-  },
-};
-</script>
 
 <style scoped>
 .sidebar {
