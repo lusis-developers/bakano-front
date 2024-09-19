@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
               <slot name="header"></slot>
             </div>
             <div class="d-flex align-items-center gap-3">
-              <div class="d-flex align-items-center gap-3 p-2 rounded-2 btn">
+              <div class="d-flex align-items-center gap-3 p-2 rounded-2 btn btn-light">
                 <img
                   src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
                   alt="Profile picture"
@@ -83,7 +83,7 @@ onBeforeUnmount(() => {
                   <i class="bi bi-chevron-compact-down p-2"></i>
                 </p>
               </div>
-              <button class="btn">
+              <button class="btn btn btn-light p-2 px-3">
                 <i class="bi bi-list"></i>
               </button>
             </div>
