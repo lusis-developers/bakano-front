@@ -1,29 +1,19 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+import { menuItems, sidebarItems } from '@/utils/menuItems.utils'
 import DropdownMenu from './DropdownMenu.vue'
 
 const isSidebarExpanded = ref(false)
 const activeItemIndex = ref(0)
-const navItems = [
-  { name: 'Resumen', icon: 'bi bi-card-checklist', link: '#' },
-  { name: 'Generar planificación', icon: 'bi bi-journal-richtext', link: '#' },
-  { name: 'Generar post específico', icon: 'bi bi-file-post', link: '#' }
-]
 
-const dropdownItems = [
-  { name: 'Perfil', icon: 'bi bi-person', link: '#' },
-  { name: 'Ajustes', icon: 'bi bi-gear', link: '#' },
-  { name: 'Cerrar sesión', icon: 'bi bi-box-arrow-right', link: '#' }
-]
-
-function getItemClasses(index: number) {
+function getItemClasses(index: number): { [key: string]: boolean } {
   return {
     'text-dark': activeItemIndex.value !== index,
     'text-white': activeItemIndex.value === index,
     'bg-primary': activeItemIndex.value === index
   }
 }
-
 function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 768
 }
@@ -32,7 +22,6 @@ onMounted(() => {
   updateSidebarState()
   window.addEventListener('resize', updateSidebarState)
 })
-
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateSidebarState)
 })
@@ -53,7 +42,7 @@ onBeforeUnmount(() => {
         />
       </div>
       <ul class="mt-4 nav nav-pills flex-column">
-        <li v-for="(item, index) in navItems" :key="index" class="nav-item fs-5">
+        <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item fs-5">
           <router-link
             :to="item.link"
             class="nav-link"
@@ -81,7 +70,7 @@ onBeforeUnmount(() => {
               <slot name="header"></slot>
             </div>
             <div class="d-flex align-items-center gap-3">
-              <DropdownMenu :items="dropdownItems">
+              <DropdownMenu :items="menuItems">
                 <template #button-content>
                   <img
                     src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"

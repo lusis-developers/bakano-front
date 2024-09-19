@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-interface MenuItem {
-  name: string
-  icon: string
-  link: string
-}
+import type { Navigation } from '@/interfaces/Layout/LinkTypes.interface'
 
 const props = defineProps({
   items: {
-    type: Array as () => MenuItem[],
+    type: Array as () => Navigation[],
     required: true
   }
 })
