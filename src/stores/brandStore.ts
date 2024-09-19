@@ -1,10 +1,9 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
-import type { Brand, socialMedia } from "@/interfaces/Layout/BrandsTypes.interface";
-
+import type { Brand, socialMedia } from '@/interfaces/Layout/BrandsTypes.interface'
 
 interface RootState {
-  brands: Brand[];
+  brands: Brand[]
 }
 
 export const useBrandStore = defineStore('brandStore', {
@@ -30,4 +29,4 @@ export const useBrandStore = defineStore('brandStore', {
   })
 })
 
-export default useBrandStore;
+export default useBrandStore
