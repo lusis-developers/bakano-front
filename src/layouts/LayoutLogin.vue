@@ -5,6 +5,9 @@ import { menuOptions, sidebarItems } from '@/utils/menuItems.utils'
 import { useBrandStore } from '@/stores/brandStore'
 import DropdownMenu from './DropdownMenu.vue'
 
+import type { Brand } from '@/interfaces/Layout/BrandsTypes.interface'
+import type { MenuDropdownItem } from '@/interfaces/Layout/MenuDropdownItems.interface'
+
 const isSidebarExpanded = ref(false)
 const activeItemIndex = ref(0)
 
@@ -19,6 +22,12 @@ function getItemClasses(index: number): { [key: string]: boolean } {
 }
 function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 768
+}
+function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
+  return brands.map((brand) => ({
+    ...brand,
+    link: '#'
+  }))
 }
 
 onMounted(() => {
@@ -73,7 +82,7 @@ onBeforeUnmount(() => {
               <slot name="header"></slot>
             </div>
             <div class="d-flex align-items-center gap-3">
-              <DropdownMenu :menuOptions="menuOptions" :menuItems="brandStore.brands">
+              <DropdownMenu :menuOptions="menuOptions" :menuItems="getMenuItems(brandStore.brands)">
                 <template #button-content>
                   <img
                     src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
