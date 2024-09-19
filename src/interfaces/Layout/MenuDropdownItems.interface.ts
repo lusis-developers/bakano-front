@@ -3,4 +3,5 @@ export interface MenuDropdownItem {
   icon?: string
   link: string
   logo?: string
+  action?: () => void
 }
