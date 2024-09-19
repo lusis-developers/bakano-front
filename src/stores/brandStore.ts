@@ -4,6 +4,7 @@ import type { Brand, socialMedia } from '@/interfaces/Layout/BrandsTypes.interfa
 
 interface RootState {
   brands: Brand[]
+  selectedBrand: Brand | null
 }
 
 export const useBrandStore = defineStore('brandStore', {
@@ -25,8 +26,15 @@ export const useBrandStore = defineStore('brandStore', {
         isLoading: false,
         error: null
       }
-    ]
-  })
+    ],
+    selectedBrand: null
+  }),
+  actions: {
+    setSelectedBrand(brand: Brand) {
+      this.selectedBrand = brand
+      console.log('selectedBrand', brand)
+    }
+  }
 })
 
 export default useBrandStore
