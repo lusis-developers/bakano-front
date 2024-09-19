@@ -36,9 +36,9 @@ function handleItemClick(item: MenuDropdownItem): void {
       class="btn btn-light d-flex align-items-center gap-2"
     >
       <slot name="button-content">
-        <i class="bi bi-list"></i>
+        <i class="bi bi-list" />
       </slot>
-      <i class="bi bi-chevron-down ms-2"></i>
+      <slot name="button-icon"> </slot>
     </button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
       <li v-for="(item, index) in props.menuOptions" :key="index">

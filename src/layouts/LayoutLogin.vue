@@ -107,6 +107,9 @@ onBeforeUnmount(() => {
                     {{ brandStore.selectedBrand?.name || 'Seleccionar marca' }}
                   </p>
                 </template>
+                <template #button-icon>
+                  <i class="bi bi-chevron-compact-down"></i>
+                </template>
               </DropdownMenu>
               <DropdownMenu :menuOptions="menuUserOptions"> </DropdownMenu>
             </div>
