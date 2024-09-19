@@ -1,22 +1,29 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import DropdownMenu from './DropdownMenu.vue'
 
 const isSidebarExpanded = ref(false)
 const activeItemIndex = ref(0)
 const navItems = [
   { name: 'Resumen', icon: 'bi bi-card-checklist', link: '#' },
   { name: 'Generar planificación', icon: 'bi bi-journal-richtext', link: '#' },
-  { name: 'Generar post específico', icon: 'bi bi-file-post', link: '#' },
+  { name: 'Generar post específico', icon: 'bi bi-file-post', link: '#' }
+]
+
+const dropdownItems = [
+  { name: 'Perfil', icon: 'bi bi-person', link: '#' },
+  { name: 'Ajustes', icon: 'bi bi-gear', link: '#' },
+  { name: 'Cerrar sesión', icon: 'bi bi-box-arrow-right', link: '#' }
 ]
 
 function getItemClasses(index: number) {
-  const classes: { [key: string]: boolean } = {
+  return {
     'text-dark': activeItemIndex.value !== index,
     'text-white': activeItemIndex.value === index,
-    'text-bg-primary': activeItemIndex.value === index
-  };
-  return classes;
+    'bg-primary': activeItemIndex.value === index
+  }
 }
+
 function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 768
 }
@@ -35,7 +42,8 @@ onBeforeUnmount(() => {
   <div class="d-flex">
     <aside
       class="bg-light vh-100 d-flex flex-column p-3"
-      :class="isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'" >
+      :class="isSidebarExpanded ? 'col-3' : 'col-1'"
+    >
       <div class="d-flex align-items-center mb-3">
         <img
           src="../assets/brand/bakano-negro.png"
@@ -48,14 +56,15 @@ onBeforeUnmount(() => {
         <li v-for="(item, index) in navItems" :key="index" class="nav-item fs-5">
           <router-link
             :to="item.link"
+            class="nav-link"
             :class="[
-              'nav-link',
               'd-flex',
               'align-items-center',
-              isSidebarExpanded ? 'justify-content-start' : 'justify-content-center',
+              isSidebarExpanded ? '' : 'justify-content-center',
               getItemClasses(index)
             ]"
-            @click.prevent="activeItemIndex = index">
+            @click.prevent="activeItemIndex = index"
+          >
             <i :class="item.icon" />
             <span v-if="isSidebarExpanded" class="ms-2">
               {{ item.name }}
@@ -64,7 +73,7 @@ onBeforeUnmount(() => {
         </li>
       </ul>
     </aside>
-    <div class="d-flex flex-column flex-grow-1 min-vh-100">
+    <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
       <header class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid d-flex justify-content-between align-items-center p-3">
@@ -72,17 +81,17 @@ onBeforeUnmount(() => {
               <slot name="header"></slot>
             </div>
             <div class="d-flex align-items-center gap-3">
-              <div class="d-flex align-items-center gap-3 p-2 rounded-2 btn btn-light">
-                <img
-                  src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
-                  alt="Profile picture"
-                  class="rounded-2"
-                  style="width: 40px; height: 40px" />
-                <p class="m-0 d-none d-md-inline">
-                  Boxitrip
-                  <i class="bi bi-chevron-compact-down p-2"></i>
-                </p>
-              </div>
+              <DropdownMenu :items="dropdownItems">
+                <template #button-content>
+                  <img
+                    src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
+                    alt="Profile picture"
+                    class="rounded-2"
+                    style="width: 40px; height: 40px"
+                  />
+                  <p class="m-0 d-none d-md-inline">Boxitrip</p>
+                </template>
+              </DropdownMenu>
               <button class="btn btn btn-light p-2 px-3">
                 <i class="bi bi-list"></i>
               </button>
@@ -99,14 +108,14 @@ onBeforeUnmount(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
-.sidebar-collapsed {
-  width: 80px;
+<style scoped>
+.col-1 {
   transition: width 0.3s;
+  width: 80px;
 }
 
-.sidebar-expanded {
-  width: 250px;
+.col-3 {
   transition: width 0.3s;
+  width: 250px;
 }
 </style>
