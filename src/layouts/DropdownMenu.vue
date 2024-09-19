@@ -18,7 +18,11 @@ const props = defineProps({
 const emits = defineEmits(['item-click'])
 
 function handleItemClick(item: MenuDropdownItem): void {
-  emits('item-click', item)
+  if (item.action) {
+    item.action()
+  } else {
+    emits('item-click', item)
+  }
 }
 </script>
 
@@ -39,7 +43,7 @@ function handleItemClick(item: MenuDropdownItem): void {
       <li v-for="(item, index) in props.menuOptions" :key="index">
         <router-link
           :to="item.link"
-          @click="emits('item-click', item)"
+          @click="handleItemClick(item)"
           class="dropdown-item d-flex align-items-center"
         >
           <i :class="item.icon" class="me-2" />
