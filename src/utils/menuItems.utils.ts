@@ -1,6 +1,6 @@
 import type { Navigation } from '@/interfaces/Layout/LinkTypes.interface'
 
-export const menuItems: Navigation[] = [
+export const menuOptions: Navigation[] = [
   {
     name: 'Agregar marca',
     link: '#',

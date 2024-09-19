@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import { menuItems, sidebarItems } from '@/utils/menuItems.utils'
+import { menuOptions, sidebarItems } from '@/utils/menuItems.utils'
+import { useBrandStore } from '@/stores/brandStore'
 import DropdownMenu from './DropdownMenu.vue'
 
 const isSidebarExpanded = ref(false)
 const activeItemIndex = ref(0)
+
+const brandStore = useBrandStore()
 
 function getItemClasses(index: number): { [key: string]: boolean } {
   return {
@@ -70,7 +73,7 @@ onBeforeUnmount(() => {
               <slot name="header"></slot>
             </div>
             <div class="d-flex align-items-center gap-3">
-              <DropdownMenu :items="menuItems">
+              <DropdownMenu :menuOptions="menuOptions" :menuItems="brandStore.brands">
                 <template #button-content>
                   <img
                     src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
