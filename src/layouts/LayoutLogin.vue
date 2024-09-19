@@ -70,13 +70,16 @@ onBeforeUnmount(() => {
             <div>
               <slot name="header"></slot>
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center gap-3">
               <img
                 src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
                 alt="Profile picture"
-                class="rounded-circle"
-                style="width: 40px; height: 40px"
-              />
+                class="rounded-2"
+                style="width: 40px; height: 40px" />
+              <p>
+                Boxitrip
+                <i class="bi bi-chevron-compact-down p-2"/>
+              </p>
             </div>
           </div>
         </nav>
