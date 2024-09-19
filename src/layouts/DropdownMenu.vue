@@ -16,6 +16,10 @@ const props = defineProps({
 })
 
 const emits = defineEmits(['item-click'])
+
+function handleItemClick(item: MenuDropdownItem): void {
+  emits('item-click', item)
+}
 </script>
 
 <template>
@@ -50,7 +54,7 @@ const emits = defineEmits(['item-click'])
       <li v-for="(item, index) in props.menuItems" :key="index">
         <router-link
           :to="item.link"
-          @click="emits('item-click', item)"
+          @click.prevent="handleItemClick(item)"
           class="dropdown-item d-flex align-items-center"
         >
           <img :src="item.logo" alt="Logo" class="me-2" style="width: 30px; height: 30px" />
