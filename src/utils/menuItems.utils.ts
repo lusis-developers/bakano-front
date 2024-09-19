@@ -4,7 +4,10 @@ export const menuOptions: Navigation[] = [
   {
     name: 'Agregar marca',
     link: '#',
-    icon: 'bi bi-plus-lg'
+    icon: 'bi bi-plus-lg',
+    action: () => {
+      alert('aquí saldrá el hover para agregar marca')
+    }
   }
 ]
 
