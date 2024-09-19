@@ -3,20 +3,23 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const isSidebarExpanded = ref(false)
 const activeItemIndex = ref(0)
-const itemClasses = (index: number) => ({
-  'text-dark': activeItemIndex.value !== index,
-  'text-white': activeItemIndex.value === index,
-  'text-bg-primary': activeItemIndex.value === index
-})
-
-function updateSidebarState(): void {
-  isSidebarExpanded.value = window.innerWidth >= 750
-}
 const navItems = [
   { name: 'Resumen', icon: 'bi bi-card-checklist', link: '#' },
   { name: 'Generar planificación', icon: 'bi bi-journal-richtext', link: '#' },
   { name: 'Generar post específico', icon: 'bi bi-file-post', link: '#' },
 ]
+
+function getItemClasses(index: number) {
+  const classes: { [key: string]: boolean } = {
+    'text-dark': activeItemIndex.value !== index,
+    'text-white': activeItemIndex.value === index,
+    'text-bg-primary': activeItemIndex.value === index
+  };
+  return classes;
+}
+function updateSidebarState(): void {
+  isSidebarExpanded.value = window.innerWidth >= 768
+}
 
 onMounted(() => {
   updateSidebarState()
@@ -32,8 +35,7 @@ onBeforeUnmount(() => {
   <div class="d-flex">
     <aside
       class="bg-light vh-100 d-flex flex-column p-3"
-      :class="isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'"
-    >
+      :class="isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'" >
       <div class="d-flex align-items-center mb-3">
         <img
           src="../assets/brand/bakano-negro.png"
@@ -51,10 +53,9 @@ onBeforeUnmount(() => {
               'd-flex',
               'align-items-center',
               isSidebarExpanded ? 'justify-content-start' : 'justify-content-center',
-              itemClasses(index)
+              getItemClasses(index)
             ]"
-            @click.prevent="activeItemIndex = index"
-          >
+            @click.prevent="activeItemIndex = index">
             <i :class="item.icon" />
             <span v-if="isSidebarExpanded" class="ms-2">
               {{ item.name }}
@@ -71,15 +72,20 @@ onBeforeUnmount(() => {
               <slot name="header"></slot>
             </div>
             <div class="d-flex align-items-center gap-3">
-              <img
-                src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
-                alt="Profile picture"
-                class="rounded-2"
-                style="width: 40px; height: 40px" />
-              <p>
-                Boxitrip
-                <i class="bi bi-chevron-compact-down p-2"/>
-              </p>
+              <div class="d-flex align-items-center gap-3 p-2 rounded-2 btn">
+                <img
+                  src="https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg"
+                  alt="Profile picture"
+                  class="rounded-2"
+                  style="width: 40px; height: 40px" />
+                <p class="m-0 d-none d-md-inline">
+                  Boxitrip
+                  <i class="bi bi-chevron-compact-down p-2"></i>
+                </p>
+              </div>
+              <button class="btn">
+                <i class="bi bi-list"></i>
+              </button>
             </div>
           </div>
         </nav>
