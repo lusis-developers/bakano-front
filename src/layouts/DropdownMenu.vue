@@ -20,24 +20,24 @@ const emits = defineEmits(['item-click'])
 <template>
   <div class="dropdown">
     <button
-      class="btn btn-light d-flex align-items-center gap-2"
       type="button"
       id="dropdownMenuButton"
       data-bs-toggle="dropdown"
       aria-expanded="false"
+      class="btn btn-light d-flex align-items-center gap-2"
     >
-      <!-- Slot para el contenido del botón -->
       <slot name="button-content">Menú</slot>
       <i class="bi bi-chevron-down ms-2"></i>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <li v-for="(item, index) in props.items" :key="index">
         <router-link
+          :to="item.link"
           @click="emits('item-click', item)"
           class="dropdown-item d-flex align-items-center"
-          :to="item.link"
         >
-          <i :class="item.icon" class="me-2"></i>{{ item.name }}
+          <i :class="item.icon" class="me-2" />
+          {{ item.name }}
         </router-link>
       </li>
     </ul>
