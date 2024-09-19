@@ -32,7 +32,6 @@ export const useBrandStore = defineStore('brandStore', {
   actions: {
     setSelectedBrand(brand: Brand) {
       this.selectedBrand = brand
-      console.log('selectedBrand', brand)
     }
   }
 })
