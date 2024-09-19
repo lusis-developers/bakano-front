@@ -2,7 +2,7 @@
 import { defineProps, defineEmits } from 'vue'
 
 import type { Navigation } from '@/interfaces/Layout/LinkTypes.interface'
-import type { MenuDropdownItem } from '@/interfaces/Layout/MenuDropdownItems.interface';
+import type { MenuDropdownItem } from '@/interfaces/Layout/MenuDropdownItems.interface'
 
 const props = defineProps({
   menuOptions: {
@@ -11,7 +11,7 @@ const props = defineProps({
   },
   menuItems: {
     type: Array as () => MenuDropdownItem[],
-    required: false,
+    required: false
   }
 })
 
@@ -44,7 +44,7 @@ const emits = defineEmits(['item-click'])
       </li>
 
       <!-- Separador visual -->
-      <li><hr class="dropdown-divider"></li>
+      <li><hr class="dropdown-divider" /></li>
 
       <!-- Items de marcas (menuItems) -->
       <li v-for="(item, index) in props.menuItems" :key="index">
