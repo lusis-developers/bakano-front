@@ -20,7 +20,7 @@ export const useBrandStore = defineStore('brandStore', {
       },
       {
         id: 2,
-        name: 'boxitrip',
+        name: 'yeyo tienda',
         logo: 'https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg',
         socialMedia: [] as socialMedia[],
         isLoading: false,
