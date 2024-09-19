@@ -35,11 +35,12 @@ function handleItemClick(item: MenuDropdownItem): void {
       aria-expanded="false"
       class="btn btn-light d-flex align-items-center gap-2"
     >
-      <slot name="button-content">Menú</slot>
+      <slot name="button-content">
+        <i class="bi bi-list"></i>
+      </slot>
       <i class="bi bi-chevron-down ms-2"></i>
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <!-- Menu options generales -->
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
       <li v-for="(item, index) in props.menuOptions" :key="index">
         <router-link
           :to="item.link"
@@ -50,11 +51,7 @@ function handleItemClick(item: MenuDropdownItem): void {
           {{ item.name }}
         </router-link>
       </li>
-
-      <!-- Separador visual -->
       <li><hr class="dropdown-divider" /></li>
-
-      <!-- Items de marcas (menuItems) -->
       <li v-for="(item, index) in props.menuItems" :key="index">
         <router-link
           :to="item.link"

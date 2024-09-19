@@ -11,6 +11,22 @@ export const menuOptions: Navigation[] = [
   }
 ]
 
+export const menuUserOptions: Navigation[] = [
+  {
+    name: 'Términos y condiciones',
+    link: 'https://bakano.ec/terminos-y-condiciones-de-uso',
+    icon: 'bi bi-book'
+  },
+  {
+    name: 'Cerrar sesión',
+    icon: 'bi bi-box-arrow-left',
+    link: '',
+    action: () => {
+      alert('cerrando sesion mi friend')
+    }
+  }
+]
+
 export const sidebarItems: Navigation[] = [
   { name: 'Resumen', icon: 'bi bi-card-checklist', link: '#' },
   { name: 'Generar planificación', icon: 'bi bi-journal-richtext', link: '#' },

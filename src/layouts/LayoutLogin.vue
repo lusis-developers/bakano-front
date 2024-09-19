@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import { menuOptions, sidebarItems } from '@/utils/menuItems.utils'
+import { menuOptions, sidebarItems, menuUserOptions } from '@/utils/menuItems.utils'
 import { useBrandStore } from '@/stores/brandStore'
 import DropdownMenu from './DropdownMenu.vue'
 
@@ -108,9 +108,7 @@ onBeforeUnmount(() => {
                   </p>
                 </template>
               </DropdownMenu>
-              <button class="btn btn btn-light p-2 px-3">
-                <i class="bi bi-list"></i>
-              </button>
+              <DropdownMenu :menuOptions="menuUserOptions"> </DropdownMenu>
             </div>
           </div>
         </nav>
