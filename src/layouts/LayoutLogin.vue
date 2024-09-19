@@ -3,14 +3,19 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const isSidebarExpanded = ref(false)
 const activeItemIndex = ref(0)
+const itemClasses = (index: number) => ({
+  'text-dark': activeItemIndex.value !== index,
+  'text-white': activeItemIndex.value === index,
+  'text-bg-primary': activeItemIndex.value === index
+})
 
 function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 750
 }
 const navItems = [
-  { name: 'Resumen', icon: 'bi bi-journal-richtext', link: '/' },
-  { name: 'Web', icon: 'bi bi-globe', link: '/' },
-  { name: 'Facebook', icon: 'bi bi-facebook', link: '/' }
+  { name: 'Resumen', icon: 'bi bi-card-checklist', link: '#' },
+  { name: 'Generar planificación', icon: 'bi bi-journal-richtext', link: '#' },
+  { name: 'Generar post específico', icon: 'bi bi-file-post', link: '#' },
 ]
 
 onMounted(() => {
@@ -26,8 +31,8 @@ onBeforeUnmount(() => {
 <template>
   <div class="d-flex">
     <aside
-      class="bg-light vh-100 d-flex flex-column p-3 sidebar"
-      :class="{ 'sidebar-expanded': isSidebarExpanded }"
+      class="bg-light vh-100 d-flex flex-column p-3"
+      :class="isSidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'"
     >
       <div class="d-flex align-items-center mb-3">
         <img
@@ -45,7 +50,8 @@ onBeforeUnmount(() => {
               'nav-link',
               'd-flex',
               'align-items-center',
-              { active: activeItemIndex === index }
+              isSidebarExpanded ? 'justify-content-start' : 'justify-content-center',
+              itemClasses(index)
             ]"
             @click.prevent="activeItemIndex = index"
           >
@@ -57,10 +63,7 @@ onBeforeUnmount(() => {
         </li>
       </ul>
     </aside>
-
-    <!-- Main Content -->
     <div class="d-flex flex-column flex-grow-1 min-vh-100">
-      <!-- Header -->
       <header class="bg-light">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid d-flex justify-content-between align-items-center p-3">
@@ -78,11 +81,8 @@ onBeforeUnmount(() => {
           </div>
         </nav>
       </header>
-
-      <!-- Main -->
       <main class="flex-grow-1">
         <div class="container py-4">
-          <!-- Main content -->
           <slot></slot>
         </div>
       </main>
@@ -91,36 +91,13 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped lang="scss">
-.sidebar {
+.sidebar-collapsed {
   width: 80px;
   transition: width 0.3s;
-
-  &-expanded {
-    width: 250px;
-
-    .nav-link {
-      justify-content: flex-start;
-    }
-  }
-
-  .nav-link {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1rem;
-
-    span {
-      display: none;
-    }
-  }
 }
 
-.sidebar-expanded .nav-link span {
-  display: inline;
-}
-
-.nav-link.active {
-  background-color: #007bff;
-  color: white;
+.sidebar-expanded {
+  width: 250px;
+  transition: width 0.3s;
 }
 </style>
