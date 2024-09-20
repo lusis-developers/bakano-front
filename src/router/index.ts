@@ -5,8 +5,8 @@ import {
   type RouteLocationNormalized
 } from 'vue-router'
 
-const LoginView = () => import('@/views/LoginView.vue')
-const SignUpView = () => import('@/views/SignUpView.vue')
+const loginView = () => import('@/views/LoginView.vue')
+const signUpView = () => import('@/views/SignUpView.vue')
 const userView = () => import('@/views/User/UserView.vue')
 
 function isLoggedIn(): boolean {
@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: LoginView,
+    component: loginView,
     meta: {
       title: 'Inicia Sesión 🚀'
     }
@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/sign-up',
     name: 'SignUp',
-    component: SignUpView,
+    component: signUpView,
     meta: {
       title: 'Regístrate 🚀'
     }
