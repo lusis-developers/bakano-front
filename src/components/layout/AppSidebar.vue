@@ -48,7 +48,6 @@ onBeforeUnmount(() => {
       <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item fs-6">
         <router-link
           :to="item.link"
-          class="nav-link"
           :class="[
             'd-flex',
             'align-items-center',
@@ -57,6 +56,7 @@ onBeforeUnmount(() => {
             getItemClasses(index)
           ]"
           @click.prevent="activeItemIndex = index"
+          class="nav-link"
         >
           <i :class="item.icon" />
           <span v-if="isSidebarExpanded" class="ms-2">
