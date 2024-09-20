@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
         />
       </div>
       <ul class="mt-4 nav nav-pills flex-column">
-        <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item fs-5">
+        <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item fs-6">
           <router-link
             :to="item.link"
             class="nav-link"
