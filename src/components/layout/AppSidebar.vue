@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 
 import logoImage from '@/assets/brand/bakano-blanco.png'
 
-import type { Navigation } from '@/interfaces/Layout/LinkTypes.interface'
+import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
 
 defineProps({
   sidebarItems: {

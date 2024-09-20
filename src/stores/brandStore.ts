@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import type { Brand, socialMedia } from '@/interfaces/Layout/BrandsTypes.interface'
+import type { Brand, socialMedia } from '@/interfaces/components/Layout/BrandsTypes.interface'
 
 interface RootState {
   brands: Brand[]

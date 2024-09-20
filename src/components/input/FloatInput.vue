@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, type PropType } from 'vue'
 
-import type { Validation } from '@/interfaces/input/EmailAndPassword.interface'
+import type { Validation } from '@/interfaces/components/input/EmailAndPassword.interface'
 
 const emit = defineEmits(['validation'])
 const props = defineProps({

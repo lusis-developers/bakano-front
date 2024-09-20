@@ -3,8 +3,8 @@ import { useBrandStore } from '@/stores/brandStore'
 import { menuOptions, menuUserOptions } from '@/utils/menuItems.utils'
 import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 
-import type { Brand } from '@/interfaces/Layout/BrandsTypes.interface'
-import type { MenuDropdownItem } from '@/interfaces/Layout/MenuDropdownItems.interface'
+import type { Brand } from '@/interfaces/components/Layout/BrandsTypes.interface'
+import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
 
 const brandStore = useBrandStore()
 
