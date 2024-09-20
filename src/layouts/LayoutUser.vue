@@ -44,7 +44,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="d-flex">
     <aside
-      class="bg-light vh-100 d-flex flex-column p-3 border-right"
+      class="bg-light vh-100 d-flex flex-column p-3 border-end"
       :class="isSidebarExpanded ? 'col-3' : 'col-1'"
     >
       <div class="d-flex align-items-center mb-3">
@@ -133,11 +133,5 @@ onBeforeUnmount(() => {
 .col-3 {
   transition: width 0.3s;
   width: 250px;
-}
-.border-right {
-  border-right: 1px solid #ddd; /* Actualiza este color según tus necesidades */
-}
-.border-bottom {
-  border-bottom: 1px solid #ddd; /* Actualiza este color según tus necesidades */
 }
 </style>
