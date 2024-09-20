@@ -44,12 +44,12 @@ onBeforeUnmount(() => {
 <template>
   <div class="d-flex">
     <aside
-      class="bg-dark vh-100 d-flex flex-column p-3"
+      class="bg-light vh-100 d-flex flex-column p-3 border-right"
       :class="isSidebarExpanded ? 'col-3' : 'col-1'"
     >
       <div class="d-flex align-items-center mb-3">
         <img
-          src="../assets/brand/bakano-blanco.png"
+          src="../assets/brand/bakano-negro.png"
           alt="Logo"
           class="img-fluid"
           style="max-height: 50px"
@@ -63,7 +63,7 @@ onBeforeUnmount(() => {
             :class="[
               'd-flex',
               'align-items-center',
-              'text-white',
+              'text-dark',
               isSidebarExpanded ? '' : 'justify-content-center',
               getItemClasses(index)
             ]"
@@ -78,7 +78,7 @@ onBeforeUnmount(() => {
       </ul>
     </aside>
     <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
-      <header class="bg-light">
+      <header class="bg-light border-bottom">
         <nav class="navbar navbar-expand-lg navbar-light">
           <div class="container-fluid d-flex justify-content-between align-items-center p-3">
             <div>
@@ -133,5 +133,11 @@ onBeforeUnmount(() => {
 .col-3 {
   transition: width 0.3s;
   width: 250px;
+}
+.border-right {
+  border-right: 1px solid #ddd; /* Actualiza este color según tus necesidades */
+}
+.border-bottom {
+  border-bottom: 1px solid #ddd; /* Actualiza este color según tus necesidades */
 }
 </style>
