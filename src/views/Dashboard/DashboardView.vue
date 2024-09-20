@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import LayoutUser from '@/layouts/LayoutUser.vue'
+// import UserLayout from '@/layouts/UserLayout.vue'
 </script>
 
-<template>
-  <LayoutUser>
+<!-- <template>
+  <UserLayout>
     <template #header>
       <button class="btn">
         <i class="bi bi-bar-chart-line d-block"></i>
         <span>Tendencias</span>
       </button>
     </template>
-  </LayoutUser>
-</template>
-
-<!-- <template>
-  <div>hola</div>
+  </UserLayout>
 </template> -->
+
+<template>
+  <div>hola</div>
+</template>

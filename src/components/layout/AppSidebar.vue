@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-import logoImage from '@/assets/brand/bakano-negro.png'
+import logoImage from '@/assets/brand/bakano-blanco.png'
 
 import type { Navigation } from '@/interfaces/Layout/LinkTypes.interface'
 
@@ -38,7 +38,7 @@ onBeforeUnmount(() => {
 
 <template>
   <aside
-    class="bg-light vh-100 d-flex flex-column p-3 border-end"
+    class="bg-dark vh-100 d-flex flex-column p-3 border-end"
     :class="isSidebarExpanded ? 'col-3' : 'col-1'"
   >
     <div class="d-flex align-items-center mb-3">
@@ -52,7 +52,7 @@ onBeforeUnmount(() => {
           :class="[
             'd-flex',
             'align-items-center',
-            'text-dark',
+            'text-white',
             isSidebarExpanded ? '' : 'justify-content-center',
             getItemClasses(index)
           ]"

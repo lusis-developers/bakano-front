@@ -7,7 +7,12 @@ import {
 
 const loginView = () => import('@/views/LoginView.vue')
 const signUpView = () => import('@/views/SignUpView.vue')
-const userView = () => import('@/views/User/UserView.vue')
+
+// App layouts
+const userLayout = () => import('@/layouts/UserLayout.vue')
+
+// App views
+const dashboardView = () => import('@/views/Dashboard/DashboardView.vue')
 
 function isLoggedIn(): boolean {
   return true
@@ -36,7 +41,7 @@ const routes = [
   },
   {
     path: '/app',
-    component: userView,
+    component: userLayout,
     beforeEnter: (
       _to: RouteLocationNormalized,
       _from: RouteLocationNormalized,
@@ -49,8 +54,21 @@ const routes = [
       }
     },
     meta: {
-      title: 'Bakano 🚀'
-    }
+      title: 'Tu agencia digital 🚀'
+    },
+    children: [
+      {
+        path: '',
+        redirect: '/app/dashboard'
+      },
+      {
+        path: 'dashboard',
+        component: dashboardView,
+        meta: {
+          title: 'Bakano 🚀'
+        }
+      }
+    ]
   }
 ]
 

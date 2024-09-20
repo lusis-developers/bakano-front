@@ -33,7 +33,7 @@ export const menuUserOptions: Navigation[] = [
 ]
 
 export const sidebarItems: Navigation[] = [
-  { name: 'Resumen', icon: 'bi bi-card-checklist', link: '#' },
-  { name: 'Generar planificación', icon: 'bi bi-journal-richtext', link: '#' },
-  { name: 'Generar post específico', icon: 'bi bi-file-post', link: '#' }
+  { name: 'Dashboard', icon: 'bi bi-speedometer', link: '#' },
+  { name: 'Planificar', icon: 'bi bi-journal-richtext', link: '#' },
+  { name: 'Post', icon: 'bi bi-file-post', link: '#' }
 ]
