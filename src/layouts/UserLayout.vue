@@ -12,8 +12,10 @@ import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
       <AppHeader>
         <template #header>
           <button class="btn">
-            <i class="bi bi-bar-chart-line d-block"></i>
-            <router-link to="tendencias">Tendencias</router-link>
+            <router-link to="tendencias" class="text-decoration-none text-dark">
+              <i class="bi bi-bar-chart-line d-block"></i>
+              <span> Tendencias </span>
+            </router-link>
           </button>
         </template>
       </AppHeader>
