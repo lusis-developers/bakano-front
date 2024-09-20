@@ -80,7 +80,7 @@ onBeforeUnmount(() => {
     <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
       <header class="bg-light border-bottom">
         <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="container-fluid d-flex justify-content-between align-items-center p-3">
+          <div class="container-fluid d-flex justify-content-between align-items-center">
             <div>
               <slot name="header"></slot>
             </div>
