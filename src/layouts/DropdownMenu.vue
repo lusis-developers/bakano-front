@@ -24,6 +24,9 @@ function handleItemClick(item: MenuDropdownItem): void {
     emits('item-click', item)
   }
 }
+function isExternalLink(link: string): boolean {
+  return link.startsWith('http')
+}
 </script>
 
 <template>
@@ -43,6 +46,7 @@ function handleItemClick(item: MenuDropdownItem): void {
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
       <li v-for="(item, index) in props.menuOptions" :key="index">
         <router-link
+          v-if="!isExternalLink(item.link)"
           :to="item.link"
           @click="handleItemClick(item)"
           class="dropdown-item d-flex align-items-center"
@@ -50,12 +54,23 @@ function handleItemClick(item: MenuDropdownItem): void {
           <i :class="item.icon" class="me-2" />
           {{ item.name }}
         </router-link>
+        <a
+          v-else
+          :href="item.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="dropdown-item d-flex align-items-center"
+        >
+          <i :class="item.icon" class="me-2" />
+          {{ item.name }}
+        </a>
       </li>
       <li v-if="menuOptions.length && menuItems?.length">
         <hr class="dropdown-divider" />
       </li>
       <li v-for="(item, index) in props.menuItems" :key="index">
         <router-link
+          v-if="!isExternalLink(item.link)"
           :to="item.link"
           @click.prevent="handleItemClick(item)"
           class="dropdown-item d-flex align-items-center"
@@ -63,6 +78,16 @@ function handleItemClick(item: MenuDropdownItem): void {
           <img :src="item.logo" alt="Logo" class="me-2" style="width: 30px; height: 30px" />
           {{ item.name }}
         </router-link>
+        <a
+          v-else
+          :href="item.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="dropdown-item d-flex align-items-center"
+        >
+          <img :src="item.logo" alt="Logo" class="me-2" style="width: 30px; height: 30px" />
+          {{ item.name }}
+        </a>
       </li>
     </ul>
   </div>
