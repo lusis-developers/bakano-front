@@ -1,6 +1,0 @@
-export interface Navigation {
-  name: string
-  link: string
-  icon?: string
-  action?: () => void
-}
