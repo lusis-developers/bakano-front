@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 import logoImage from '@/assets/brand/bakano-blanco.png'
 
@@ -12,28 +13,37 @@ defineProps({
   }
 })
 
-const activeItemIndex = ref(0)
-const isSidebarExpanded = ref(false)
+const route = useRoute()
 
-function getItemClasses(index: number): { [key: string]: boolean } {
+const isSidebarExpanded = ref(false)
+const activeItemLink = ref('')
+
+function getItemClasses(link: string): { [key: string]: boolean } {
   return {
-    'text-white': activeItemIndex.value === index,
-    'bg-primary': activeItemIndex.value === index
+    'text-white': activeItemLink.value === link,
+    'bg-primary': activeItemLink.value === link
   }
 }
 
 function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 768
 }
+function updateActiveItemLink(): void {
+  const currentRoute = route.path.replace('/app/', '')
+  activeItemLink.value = currentRoute
+}
 
 onMounted(() => {
   updateSidebarState()
+  updateActiveItemLink()
   window.addEventListener('resize', updateSidebarState)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateSidebarState)
 })
+
+watch(() => route.path, updateActiveItemLink)
 </script>
 
 <template>
@@ -53,9 +63,8 @@ onBeforeUnmount(() => {
             'align-items-center',
             'text-white',
             isSidebarExpanded ? '' : 'justify-content-center',
-            getItemClasses(index)
+            getItemClasses(item.link)
           ]"
-          @click.prevent="activeItemIndex = index"
           class="nav-link"
         >
           <i :class="item.icon" />

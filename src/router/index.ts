@@ -81,6 +81,13 @@ const routes = [
         meta: {
           title: 'Bakano 🚀'
         }
+      },
+      {
+        path: 'tendencias',
+        component: dashboardView,
+        meta: {
+          title: 'Bakano 🚀'
+        }
       }
     ]
   }
