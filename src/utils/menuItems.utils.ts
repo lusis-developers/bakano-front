@@ -1,4 +1,4 @@
-import type { Navigation } from '@/interfaces/Layout/LinkTypes.interface'
+import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
 
 export const menuOptions: Navigation[] = [
   {
