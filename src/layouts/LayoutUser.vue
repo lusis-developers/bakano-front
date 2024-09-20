@@ -15,7 +15,6 @@ const brandStore = useBrandStore()
 
 function getItemClasses(index: number): { [key: string]: boolean } {
   return {
-    'text-dark': activeItemIndex.value !== index,
     'text-white': activeItemIndex.value === index,
     'bg-primary': activeItemIndex.value === index
   }
@@ -45,12 +44,12 @@ onBeforeUnmount(() => {
 <template>
   <div class="d-flex">
     <aside
-      class="bg-light vh-100 d-flex flex-column p-3"
+      class="bg-dark vh-100 d-flex flex-column p-3"
       :class="isSidebarExpanded ? 'col-3' : 'col-1'"
     >
       <div class="d-flex align-items-center mb-3">
         <img
-          src="../assets/brand/bakano-negro.png"
+          src="../assets/brand/bakano-blanco.png"
           alt="Logo"
           class="img-fluid"
           style="max-height: 50px"
@@ -64,6 +63,7 @@ onBeforeUnmount(() => {
             :class="[
               'd-flex',
               'align-items-center',
+              'text-white',
               isSidebarExpanded ? '' : 'justify-content-center',
               getItemClasses(index)
             ]"
