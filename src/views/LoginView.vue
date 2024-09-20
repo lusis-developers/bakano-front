@@ -22,8 +22,10 @@ const {
 <template>
   <ContainerWrapper>
     <template #content>
-      <div class="form-wraper w-100">
-        <form>
+      <div
+        class="form-wraper w-100 min-vh-100 d-flex flex-column justify-content-center align-items-center"
+      >
+        <form class="w-100">
           <BaseAlert
             :isVisible="displayAlert"
             :message="alertMessage"
