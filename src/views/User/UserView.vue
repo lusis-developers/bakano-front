@@ -12,3 +12,7 @@ import LayoutUser from '@/layouts/LayoutUser.vue'
     </template>
   </LayoutUser>
 </template>
+
+<!-- <template>
+  <div>hola</div>
+</template> -->
