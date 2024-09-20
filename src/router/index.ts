@@ -1,4 +1,3 @@
-import LayoutLogin from '@/layouts/LayoutLogin.vue'
 import {
   createRouter,
   createWebHistory,
@@ -8,6 +7,7 @@ import {
 
 const LoginView = () => import('@/views/LoginView.vue')
 const SignUpView = () => import('@/views/SignUpView.vue')
+const userView = () => import('@/views/User/index.vue');
 
 function isLoggedIn(): boolean {
   return true
@@ -36,10 +36,10 @@ const routes = [
   },
   {
     path: '/app',
-    component: LayoutLogin,
+    component: userView,
     beforeEnter: (
-      to: RouteLocationNormalized,
-      from: RouteLocationNormalized,
+      _to: RouteLocationNormalized,
+      _from: RouteLocationNormalized,
       next: NavigationGuardNext
     ) => {
       if (isLoggedIn()) {
