@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import LayoutLogin from '@/layouts/LayoutLogin.vue';
-
+import LayoutUser from '@/layouts/LayoutUser.vue'
 </script>
 
 <template>
-  <LayoutLogin>
+  <LayoutUser>
     <template #header>
       <button class="btn">
         <i class="bi bi-bar-chart-line"></i>
-        <p>
-          Tendencias
-        </p>
+        <p>Tendencias</p>
       </button>
     </template>
-  </LayoutLogin>
+  </LayoutUser>
 </template>

@@ -7,7 +7,7 @@ import {
 
 const LoginView = () => import('@/views/LoginView.vue')
 const SignUpView = () => import('@/views/SignUpView.vue')
-const userView = () => import('@/views/User/index.vue');
+const userView = () => import('@/views/User/UserView.vue')
 
 function isLoggedIn(): boolean {
   return true
