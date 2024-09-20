@@ -111,7 +111,7 @@ onBeforeUnmount(() => {
                   <i class="bi bi-chevron-compact-down"></i>
                 </template>
               </DropdownMenu>
-              <DropdownMenu :menuOptions="menuUserOptions"> </DropdownMenu>
+              <DropdownMenu :menuOptions="menuUserOptions" />
             </div>
           </div>
         </nav>

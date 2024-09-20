@@ -40,8 +40,12 @@ function handleItemClick(item: MenuDropdownItem): void {
       </slot>
       <slot name="button-icon"> </slot>
     </button>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-      <li v-for="(item, index) in props.menuOptions" :key="index">
+    <ul 
+      class="dropdown-menu dropdown-menu-end" 
+      aria-labelledby="dropdownMenuButton">
+      <li 
+        v-for="(item, index) in props.menuOptions" 
+        :key="index">
         <router-link
           :to="item.link"
           @click="handleItemClick(item)"
@@ -51,14 +55,24 @@ function handleItemClick(item: MenuDropdownItem): void {
           {{ item.name }}
         </router-link>
       </li>
-      <li><hr class="dropdown-divider" /></li>
-      <li v-for="(item, index) in props.menuItems" :key="index">
+      <li 
+        v-if="menuOptions.length 
+        && menuItems?.length">
+        <hr class="dropdown-divider" />
+      </li>
+      <li 
+        v-for="(item, index) in props.menuItems" 
+        :key="index">
         <router-link
           :to="item.link"
           @click.prevent="handleItemClick(item)"
           class="dropdown-item d-flex align-items-center"
         >
-          <img :src="item.logo" alt="Logo" class="me-2" style="width: 30px; height: 30px" />
+          <img 
+            :src="item.logo" 
+            alt="Logo" 
+            class="me-2" 
+            style="width: 30px; height: 30px" />
           {{ item.name }}
         </router-link>
       </li>
