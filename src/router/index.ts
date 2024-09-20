@@ -47,6 +47,9 @@ const routes = [
       } else {
         next('/login')
       }
+    },
+    meta: {
+      title: 'Bakano 🚀'
     }
   }
 ]
