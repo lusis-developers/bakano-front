@@ -13,6 +13,11 @@ export const menuOptions: Navigation[] = [
 
 export const menuUserOptions: Navigation[] = [
   {
+    name: 'Perfil',
+    icon: 'bi bi-person',
+    link: '#'
+  },
+  {
     name: 'Términos y condiciones',
     link: 'https://bakano.ec/terminos-y-condiciones-de-uso',
     icon: 'bi bi-book'
