@@ -2,12 +2,12 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-const route = useRoute()
-
 import { sidebarItems } from '@/utils/menuItems.utils'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+
+const route = useRoute()
 
 const isScreenSmall = ref(window.innerWidth < 1023)
 
