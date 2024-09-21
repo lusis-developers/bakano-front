@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 
-defineProps({
-  form: {
-    type: Object,
-    required: true
-  }
-})
+import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+
+
+defineProps<{ form: ProfileForm }>()
 </script>
 
 <template>

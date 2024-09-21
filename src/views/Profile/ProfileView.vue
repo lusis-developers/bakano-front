@@ -7,7 +7,9 @@ import NotificationPreferences from '@/views/Profile/components/NotificationPref
 import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
 import GenderInfo from '@/views/Profile/components/GenderInformationEdit.vue'
 
-const form = reactive({
+import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+
+const form = reactive<ProfileForm>({
   email: '',
   name: '',
   lastname: '',
@@ -35,10 +37,7 @@ const form = reactive({
   }
 })
 
-provide('form', form)
-
-const submitForm = () => {
-  // Aquí puedes manejar el envío del formulario
+function submitForm (): void {
   console.log('Formulario enviado', form)
 }
 </script>

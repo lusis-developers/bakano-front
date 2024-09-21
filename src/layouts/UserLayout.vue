@@ -28,7 +28,7 @@ onUnmounted(() => {
   <div class="d-flex">
     <AppSidebar :sidebarItems="sidebarItems" />
     <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
-      <AppHeader v-if="route.path !== '/app/trends'" />
+      <AppHeader v-if="route.path !== '/app/trends' && route.path !== '/app/profile'" />
       <main class="flex-grow-1">
         <ContainerWrapper>
           <template #content>
