@@ -3,7 +3,6 @@ import { defineProps } from 'vue'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
-
 defineProps<{ form: ProfileForm }>()
 </script>
 

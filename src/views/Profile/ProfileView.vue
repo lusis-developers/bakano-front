@@ -37,7 +37,7 @@ const form = reactive<ProfileForm>({
   }
 })
 
-function submitForm (): void {
+function submitForm(): void {
   console.log('Formulario enviado', form)
 }
 </script>
