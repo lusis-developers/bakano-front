@@ -13,6 +13,7 @@ const userLayout = () => import('@/layouts/UserLayout.vue')
 
 // App views
 const dashboardView = () => import('@/views/Dashboard/DashboardView.vue')
+const userView = () => import('@/views/Profile/ProfileView.vue')
 
 function isLoggedIn(): boolean {
   return true
@@ -90,10 +91,10 @@ const routes = [
         }
       },
       {
-        path: 'locuras',
-        component: dashboardView,
+        path: 'profile',
+        component: userView,
         meta: {
-          title: 'Bakano 🚀'
+          title: 'Bakano 🚀 | Perfil'
         }
       }
     ]
