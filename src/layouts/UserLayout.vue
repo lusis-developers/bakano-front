@@ -1,28 +1,34 @@
 <script setup lang="ts">
-import { headerOptions, sidebarItems } from '@/utils/menuItems.utils'
-import AppSidebar from '@/components/layout/AppSidebar.vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+import { sidebarItems } from '@/utils/menuItems.utils'
 import AppHeader from '@/components/layout/AppHeader.vue'
+import AppSidebar from '@/components/layout/AppSidebar.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+
+const isScreenSmall = ref(window.innerWidth < 1023)
+
+function handleResize() {
+  isScreenSmall.value = window.innerWidth > 1023
+}
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <template>
   <div class="d-flex">
     <AppSidebar :sidebarItems="sidebarItems" />
     <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
-      <AppHeader>
-        <template #header>
-          <router-link
-            v-for="(item, index) in headerOptions"
-            :key="index"
-            :to="item.link"
-            class="btn text-decoration-none text-dark"
-            active-class="bg-primary text-white"
-          >
-            <i :class="[item.icon, 'd-block']" />
-            <span> {{ item.name }}</span>
-          </router-link>
-        </template>
-      </AppHeader>
+      <AppHeader v-if="route.path !== '/app/trends'" />
       <main class="flex-grow-1">
         <ContainerWrapper>
           <template #content>

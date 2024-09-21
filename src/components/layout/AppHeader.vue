@@ -54,7 +54,6 @@ function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
               <i class="bi bi-chevron-compact-down"></i>
             </template>
           </DropdownMenu>
-          <DropdownMenu :menuOptions="menuUserOptions" />
         </div>
       </div>
     </nav>
