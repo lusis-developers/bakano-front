@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, provide, reactive } from 'vue'
 import PersonalInfo from '@/views/Profile/components/PersonalEdit.vue'
-import LocationInfo from '@/views/Profile/components/LocationEdit.vue'
+import LocationEdit from '@/views/Profile/components/LocationEdit.vue'
 import JobInfo from '@/views/Profile/components/JobInformationEdit.vue'
 import NotificationPreferences from '@/views/Profile/components/NotificationPreferencesEdit.vue'
 import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
@@ -91,7 +91,7 @@ function submitForm (): void {
             aria-labelledby="headingLocation"
             data-bs-parent="#profileAccordion"
           >
-            <LocationInfo :form="form" />
+            <LocationEdit :form="form" />
           </div>
         </div>
 
