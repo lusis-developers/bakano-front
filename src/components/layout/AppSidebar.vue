@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 import logoImage from '@/assets/brand/bakano-blanco.png'
 
@@ -13,37 +12,19 @@ defineProps({
   }
 })
 
-const route = useRoute()
-
 const isSidebarExpanded = ref(false)
-const activeItemLink = ref('')
-
-function getItemClasses(link: string): { [key: string]: boolean } {
-  return {
-    'text-white': activeItemLink.value === link,
-    'bg-primary': activeItemLink.value === link
-  }
-}
 
 function updateSidebarState(): void {
   isSidebarExpanded.value = window.innerWidth >= 768
 }
-function updateActiveItemLink(): void {
-  const currentRoute = route.path.replace('/app/', '')
-  activeItemLink.value = currentRoute
-}
-
 onMounted(() => {
   updateSidebarState()
-  updateActiveItemLink()
   window.addEventListener('resize', updateSidebarState)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateSidebarState)
 })
-
-watch(() => route.path, updateActiveItemLink)
 </script>
 
 <template>
@@ -62,9 +43,9 @@ watch(() => route.path, updateActiveItemLink)
             'd-flex',
             'align-items-center',
             'text-white',
-            isSidebarExpanded ? '' : 'justify-content-center',
-            getItemClasses(item.link)
+            isSidebarExpanded ? '' : 'justify-content-center'
           ]"
+          active-class="bg-primary"
           class="nav-link"
         >
           <i :class="item.icon" />

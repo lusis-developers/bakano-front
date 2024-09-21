@@ -37,3 +37,8 @@ export const sidebarItems: Navigation[] = [
   { name: 'Planificar', icon: 'bi bi-journal-richtext', link: 'planning' },
   { name: 'Post', icon: 'bi bi-file-post', link: 'post' }
 ]
+
+export const headerOptions: Navigation[] = [
+  { name: 'Tendencias', icon: 'bi bi-bar-chart-line', link: 'trends' },
+  { name: 'Locuras', icon: 'bi bi-bar-chart-line', link: 'locuras' }
+]

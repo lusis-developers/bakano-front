@@ -83,7 +83,14 @@ const routes = [
         }
       },
       {
-        path: 'tendencias',
+        path: 'trends',
+        component: dashboardView,
+        meta: {
+          title: 'Bakano 🚀'
+        }
+      },
+      {
+        path: 'locuras',
         component: dashboardView,
         meta: {
           title: 'Bakano 🚀'
