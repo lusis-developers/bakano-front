@@ -29,32 +29,40 @@ onBeforeUnmount(() => {
 
 <template>
   <aside
-    class="bg-dark vh-100 d-flex flex-column p-3 border-end"
+    class="bg-dark vh-100 d-flex flex-column p-3 border-end justify-content-between"
     :class="isSidebarExpanded ? 'col-3' : 'col-1'"
   >
-    <div class="d-flex align-items-center mb-3">
-      <img :src="logoImage" alt="Logo" class="img-fluid" style="max-height: 50px" />
+    <div>
+      <div class="d-flex align-items-center mb-3">
+        <img :src="logoImage" alt="Logo" class="img-fluid" style="max-height: 50px" />
+      </div>
+      <ul class="mt-4 nav nav-pills flex-column">
+        <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item fs-6">
+          <router-link
+            :to="item.link"
+            :class="[
+              'd-flex',
+              'align-items-center',
+              'text-white',
+              isSidebarExpanded ? '' : 'justify-content-center'
+            ]"
+            active-class="bg-primary"
+            class="nav-link"
+          >
+            <i :class="item.icon" />
+            <span v-if="isSidebarExpanded" class="ms-2">
+              {{ item.name }}
+            </span>
+          </router-link>
+        </li>
+      </ul>
     </div>
-    <ul class="mt-4 nav nav-pills flex-column">
-      <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item fs-6">
-        <router-link
-          :to="item.link"
-          :class="[
-            'd-flex',
-            'align-items-center',
-            'text-white',
-            isSidebarExpanded ? '' : 'justify-content-center'
-          ]"
-          active-class="bg-primary"
-          class="nav-link"
-        >
-          <i :class="item.icon" />
-          <span v-if="isSidebarExpanded" class="ms-2">
-            {{ item.name }}
-          </span>
-        </router-link>
-      </li>
-    </ul>
+    <div class="d-flex align-items-center justify-content-center mt-4">
+      <button class="btn btn-dark d-flex align-items-center">
+        <i class="bi bi-person" style="font-size: 1.5rem;"></i>
+        <span v-if="isSidebarExpanded" class="ms-2 text-white">Perfil</span>
+      </button>
+    </div>
   </aside>
 </template>
 
