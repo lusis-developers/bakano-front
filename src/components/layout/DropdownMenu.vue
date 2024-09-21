@@ -12,6 +12,11 @@ const props = defineProps({
   menuItems: {
     type: Array as () => MenuDropdownItem[],
     required: false
+  },
+  isDarkMode: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -37,9 +42,10 @@ function isExternalLink(link: string): boolean {
       data-bs-toggle="dropdown"
       aria-expanded="false"
       class="btn btn-light d-flex align-items-center gap-2"
+      :class="['btn', isDarkMode ? 'btn-dark' : 'btn-light']"
     >
       <slot name="button-content">
-        <i class="bi bi-list" />
+        <i class="bi bi-gear" />
       </slot>
       <slot name="button-icon"> </slot>
     </button>

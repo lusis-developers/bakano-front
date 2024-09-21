@@ -13,11 +13,6 @@ export const menuOptions: Navigation[] = [
 
 export const menuUserOptions: Navigation[] = [
   {
-    name: 'Perfil',
-    icon: 'bi bi-person',
-    link: '#'
-  },
-  {
     name: 'Términos y condiciones',
     link: 'https://bakano.ec/terminos-y-condiciones-de-uso',
     icon: 'bi bi-book'
@@ -35,5 +30,7 @@ export const menuUserOptions: Navigation[] = [
 export const sidebarItems: Navigation[] = [
   { name: 'Dashboard', icon: 'bi bi-speedometer', link: 'dashboard' },
   { name: 'Planificar', icon: 'bi bi-journal-richtext', link: 'planning' },
-  { name: 'Post', icon: 'bi bi-file-post', link: 'post' }
+  { name: 'Post', icon: 'bi bi-file-post', link: 'post' },
+  { name: 'Tendencias', icon: 'bi bi-bar-chart-line', link: 'trends' },
+  { name: 'Perfil', icon: 'bi bi-person', link: 'perfil' }
 ]

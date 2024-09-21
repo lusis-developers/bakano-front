@@ -81,6 +81,20 @@ const routes = [
         meta: {
           title: 'Bakano 🚀'
         }
+      },
+      {
+        path: 'trends',
+        component: dashboardView,
+        meta: {
+          title: 'Bakano 🚀'
+        }
+      },
+      {
+        path: 'locuras',
+        component: dashboardView,
+        meta: {
+          title: 'Bakano 🚀'
+        }
       }
     ]
   }
