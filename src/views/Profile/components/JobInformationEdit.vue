@@ -8,16 +8,25 @@ const emit = defineEmits(['update:form'])
 
 const localForm = ref({ ...props.form })
 
-watch(localForm, (newForm) => {
-  emit('update:form', newForm)
-}, { deep: true })
+watch(
+  localForm,
+  (newForm) => {
+    emit('update:form', newForm)
+  },
+  { deep: true }
+)
 </script>
 
 <template>
   <div class="accordion-body">
     <div class="mb-3">
       <label for="jobDescription" class="form-label">Descripción del Trabajo</label>
-      <input type="text" class="form-control" id="jobDescription" v-model="localForm.jobDescription" />
+      <input
+        type="text"
+        class="form-control"
+        id="jobDescription"
+        v-model="localForm.jobDescription"
+      />
     </div>
     <div class="mb-3">
       <label for="occupation" class="form-label">Ocupación</label>

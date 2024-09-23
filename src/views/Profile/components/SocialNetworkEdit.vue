@@ -8,9 +8,13 @@ const emit = defineEmits(['update:form'])
 
 const localSocialMediaLinks = ref({ ...props.form.socialMediaLinks })
 
-watch(localSocialMediaLinks, (newLinks) => {
-  emit('update:form', { ...props.form, socialMediaLinks: newLinks })
-}, { deep: true })
+watch(
+  localSocialMediaLinks,
+  (newLinks) => {
+    emit('update:form', { ...props.form, socialMediaLinks: newLinks })
+  },
+  { deep: true }
+)
 </script>
 
 <template>

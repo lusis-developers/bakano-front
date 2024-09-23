@@ -8,9 +8,13 @@ const emit = defineEmits(['update:form'])
 
 const localNotificationPreferences = ref({ ...props.form.notificationPreferences })
 
-watch(localNotificationPreferences, (newPreferences) => {
-  emit('update:form', { ...props.form, notificationPreferences: newPreferences })
-}, { deep: true })
+watch(
+  localNotificationPreferences,
+  (newPreferences) => {
+    emit('update:form', { ...props.form, notificationPreferences: newPreferences })
+  },
+  { deep: true }
+)
 </script>
 
 <template>

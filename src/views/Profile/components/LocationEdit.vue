@@ -10,8 +10,6 @@ const emit = defineEmits(['update:form'])
 const selectedCountry = ref('')
 const localRegion = ref(props.form.location.region)
 
-console.log('allCountries: ', allCountries)
-
 const regions = computed(() => {
   const country = allCountries.find((c) => c[0] === selectedCountry.value)
   return country ? country[2] : []

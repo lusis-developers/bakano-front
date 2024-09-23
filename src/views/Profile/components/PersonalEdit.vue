@@ -17,9 +17,13 @@ function onFileSelected(file: File) {
   reader.readAsDataURL(file)
 }
 
-watch(localForm, (newForm) => {
-  emit('update:form', newForm)
-}, { deep: true })
+watch(
+  localForm,
+  (newForm) => {
+    emit('update:form', newForm)
+  },
+  { deep: true }
+)
 </script>
 
 <template>

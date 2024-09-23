@@ -56,11 +56,11 @@ function submitForm(): void {
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingPersonalInfo">
             <button
-              class="accordion-button"
+              class="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapsePersonalInfo"
-              aria-expanded="true"
+              aria-expanded="false"
               aria-controls="collapsePersonalInfo"
             >
               Información Personal
@@ -68,7 +68,7 @@ function submitForm(): void {
           </h2>
           <div
             id="collapsePersonalInfo"
-            class="accordion-collapse collapse show"
+            class="accordion-collapse collapse"
             aria-labelledby="headingPersonalInfo"
             data-bs-parent="#profileAccordion"
           >
