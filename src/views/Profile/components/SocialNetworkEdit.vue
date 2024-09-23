@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, defineEmits, ref, watch } from 'vue'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
-defineProps<{ form: ProfileForm }>()
+const props = defineProps<{ form: ProfileForm }>()
+const emit = defineEmits(['update:form'])
+
+const localSocialMediaLinks = ref({ ...props.form.socialMediaLinks })
+
+watch(localSocialMediaLinks, (newLinks) => {
+  emit('update:form', { ...props.form, socialMediaLinks: newLinks })
+}, { deep: true })
 </script>
 
 <template>
@@ -14,7 +21,7 @@ defineProps<{ form: ProfileForm }>()
         type="text"
         class="form-control"
         id="linkedin"
-        v-model="form.socialMediaLinks.linkedin"
+        v-model="localSocialMediaLinks.linkedin"
       />
     </div>
     <div class="mb-3">
@@ -23,7 +30,7 @@ defineProps<{ form: ProfileForm }>()
         type="text"
         class="form-control"
         id="twitter"
-        v-model="form.socialMediaLinks.twitter"
+        v-model="localSocialMediaLinks.twitter"
       />
     </div>
     <div class="mb-3">
@@ -32,7 +39,7 @@ defineProps<{ form: ProfileForm }>()
         type="text"
         class="form-control"
         id="instagram"
-        v-model="form.socialMediaLinks.instagram"
+        v-model="localSocialMediaLinks.instagram"
       />
     </div>
     <div class="mb-3">
@@ -41,7 +48,7 @@ defineProps<{ form: ProfileForm }>()
         type="text"
         class="form-control"
         id="website"
-        v-model="form.socialMediaLinks.website"
+        v-model="localSocialMediaLinks.website"
       />
     </div>
   </div>

@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref, provide, reactive } from 'vue'
+import { reactive } from 'vue'
+
 import PersonalInfo from '@/views/Profile/components/PersonalEdit.vue'
 import LocationEdit from '@/views/Profile/components/LocationEdit.vue'
 import JobInfo from '@/views/Profile/components/JobInformationEdit.vue'
-import NotificationPreferences from '@/views/Profile/components/NotificationPreferencesEdit.vue'
-import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
 import GenderInfo from '@/views/Profile/components/GenderInformationEdit.vue'
+import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
+import NotificationPreferences from '@/views/Profile/components/NotificationPreferencesEdit.vue'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
@@ -17,7 +18,7 @@ const form = reactive<ProfileForm>({
   profilePictureUrl: '',
   dateOfBirth: '',
   location: {
-    city: '',
+    region: '',
     country: ''
   },
   jobDescription: '',
@@ -36,6 +37,10 @@ const form = reactive<ProfileForm>({
     website: ''
   }
 })
+
+function updateForm(newForm: Partial<ProfileForm>): void {
+  Object.assign(form, newForm)
+}
 
 function submitForm(): void {
   console.log('Formulario enviado', form)
@@ -67,7 +72,7 @@ function submitForm(): void {
             aria-labelledby="headingPersonalInfo"
             data-bs-parent="#profileAccordion"
           >
-            <PersonalInfo :form="form" />
+            <PersonalInfo :form="form" @update:form="updateForm" />
           </div>
         </div>
 
@@ -91,7 +96,7 @@ function submitForm(): void {
             aria-labelledby="headingLocation"
             data-bs-parent="#profileAccordion"
           >
-            <LocationEdit :form="form" />
+            <LocationEdit :form="form" @update:form="updateForm" />
           </div>
         </div>
 
@@ -115,7 +120,7 @@ function submitForm(): void {
             aria-labelledby="headingJobInfo"
             data-bs-parent="#profileAccordion"
           >
-            <JobInfo :form="form" />
+            <JobInfo :form="form" @update:form="updateForm" />
           </div>
         </div>
 
@@ -139,7 +144,7 @@ function submitForm(): void {
             aria-labelledby="headingNotificationPreferences"
             data-bs-parent="#profileAccordion"
           >
-            <NotificationPreferences :form="form" />
+            <NotificationPreferences :form="form" @update:form="updateForm" />
           </div>
         </div>
 
@@ -163,7 +168,7 @@ function submitForm(): void {
             aria-labelledby="headingSocialMedia"
             data-bs-parent="#profileAccordion"
           >
-            <SocialMediaLinks :form="form" />
+            <SocialMediaLinks :form="form" @update:form="updateForm" />
           </div>
         </div>
 
@@ -187,7 +192,7 @@ function submitForm(): void {
             aria-labelledby="headingGender"
             data-bs-parent="#profileAccordion"
           >
-            <GenderInfo :form="form" />
+            <GenderInfo :form="form" @update:form="updateForm" />
           </div>
         </div>
       </div>

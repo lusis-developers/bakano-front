@@ -1,41 +1,52 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, defineEmits, ref, watch } from 'vue'
+import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
-defineProps<{ form: ProfileForm }>()
+const props = defineProps<{ form: ProfileForm }>()
+const emit = defineEmits(['update:form'])
+
+const localForm = ref({ ...props.form })
+
+function onFileSelected(file: File) {
+  const reader = new FileReader()
+  reader.onload = function (e) {
+    localForm.value.profilePictureUrl = e.target?.result as string
+  }
+  reader.readAsDataURL(file)
+}
+
+watch(localForm, (newForm) => {
+  emit('update:form', newForm)
+}, { deep: true })
 </script>
 
 <template>
   <div class="accordion-body">
     <div class="mb-3">
       <label for="email" class="form-label">Correo Electrónico</label>
-      <input type="email" class="form-control" id="email" v-model="form.email" />
+      <input type="email" class="form-control" id="email" v-model="localForm.email" />
     </div>
     <div class="mb-3">
       <label for="name" class="form-label">Nombre</label>
-      <input type="text" class="form-control" id="name" v-model="form.name" />
+      <input type="text" class="form-control" id="name" v-model="localForm.name" />
     </div>
     <div class="mb-3">
       <label for="lastname" class="form-label">Apellido</label>
-      <input type="text" class="form-control" id="lastname" v-model="form.lastname" />
+      <input type="text" class="form-control" id="lastname" v-model="localForm.lastname" />
     </div>
     <div class="mb-3">
       <label for="phoneNumber" class="form-label">Número de Teléfono</label>
-      <input type="text" class="form-control" id="phoneNumber" v-model="form.phoneNumber" />
+      <input type="text" class="form-control" id="phoneNumber" v-model="localForm.phoneNumber" />
     </div>
     <div class="mb-3">
-      <label for="profilePictureUrl" class="form-label">URL de la Foto de Perfil</label>
-      <input
-        type="text"
-        class="form-control"
-        id="profilePictureUrl"
-        v-model="form.profilePictureUrl"
-      />
+      <label for="profilePictureUrl" class="form-label">Subir una foto de perfil</label>
+      <BaseFileUpload @file-selected="onFileSelected" />
     </div>
     <div class="mb-3">
       <label for="dateOfBirth" class="form-label">Fecha de Nacimiento</label>
-      <input type="date" class="form-control" id="dateOfBirth" v-model="form.dateOfBirth" />
+      <input type="date" class="form-control" id="dateOfBirth" v-model="localForm.dateOfBirth" />
     </div>
   </div>
 </template>
