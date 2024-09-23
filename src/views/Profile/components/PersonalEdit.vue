@@ -2,13 +2,13 @@
 import { defineProps, defineEmits, ref, watch, computed } from 'vue'
 
 import { listCountryCodes } from '@/utils/listPhoneCodeArea'
-import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 import {
   validateField,
   emailValidation,
   wordValidation,
   phoneNumberValidation
 } from '@/validation/components/ProfileSettings'
+import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 

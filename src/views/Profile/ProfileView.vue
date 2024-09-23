@@ -46,10 +46,6 @@ const form = reactive<ProfileForm>({
   }
 })
 
-function updateForm(newForm: Partial<ProfileForm>): void {
-  Object.assign(form, newForm)
-}
-
 const hasErrors = computed(() => {
   const socialMediaErrors = Object.values(form.socialMediaLinks).some((link) => {
     const errors = validateUrl(link)
@@ -67,6 +63,10 @@ const hasErrors = computed(() => {
   return socialMediaErrors || personalInfoErrors
 })
 
+function updateForm(newForm: Partial<ProfileForm>): void {
+  Object.assign(form, newForm)
+}
+
 function submitForm(): void {
   if (hasErrors.value) {
     alert('Por favor, corrige los errores antes de enviar el formulario.')
@@ -81,7 +81,6 @@ function submitForm(): void {
     <h2>Editar Perfil</h2>
     <form @submit.prevent="submitForm">
       <div class="accordion" id="profileAccordion">
-        <!-- Información Personal -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingPersonalInfo">
             <button
@@ -104,8 +103,6 @@ function submitForm(): void {
             <PersonalInfo :form="form" @update:form="updateForm" />
           </div>
         </div>
-
-        <!-- Ubicación -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingLocation">
             <button
@@ -128,8 +125,6 @@ function submitForm(): void {
             <LocationEdit :form="form" @update:form="updateForm" />
           </div>
         </div>
-
-        <!-- Información Laboral -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingJobInfo">
             <button
@@ -152,8 +147,6 @@ function submitForm(): void {
             <JobInfo :form="form" @update:form="updateForm" />
           </div>
         </div>
-
-        <!-- Preferencias de Notificación -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingNotificationPreferences">
             <button
