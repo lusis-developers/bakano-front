@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, computed } from 'vue'
+import { reactive, computed, ref, watch } from 'vue'
 
 import {
   validateUrl,
@@ -46,6 +46,16 @@ const form = reactive<ProfileForm>({
   }
 })
 
+const isDirty = ref(false)
+
+watch(
+  form,
+  () => {
+    isDirty.value = true
+  },
+  { deep: true }
+)
+
 const hasErrors = computed(() => {
   const socialMediaErrors = Object.values(form.socialMediaLinks).some((link) => {
     const errors = validateUrl(link)
@@ -65,6 +75,7 @@ const hasErrors = computed(() => {
 
 function updateForm(newForm: Partial<ProfileForm>): void {
   Object.assign(form, newForm)
+  isDirty.value = true
 }
 
 function submitForm(): void {
@@ -73,6 +84,7 @@ function submitForm(): void {
     return
   }
   console.log('Formulario enviado', form)
+  isDirty.value = false
 }
 </script>
 
@@ -218,7 +230,7 @@ function submitForm(): void {
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3" :disabled="hasErrors">
+      <button type="submit" class="btn btn-primary mt-3" :disabled="hasErrors || !isDirty">
         Guardar Cambios
       </button>
     </form>

@@ -5,8 +5,8 @@ import { validateUrl } from '@/validation/components/ProfileSettings'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
-const props = defineProps<{ form: ProfileForm }>()
 const emit = defineEmits(['update:form'])
+const props = defineProps<{ form: ProfileForm }>()
 
 const localSocialMediaLinks = ref({ ...props.form.socialMediaLinks })
 

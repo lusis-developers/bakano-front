@@ -4,8 +4,8 @@ import { allCountries } from 'country-region-data'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
-const props = defineProps<{ form: ProfileForm }>()
 const emit = defineEmits(['update:form'])
+const props = defineProps<{ form: ProfileForm }>()
 
 const selectedCountry = ref('')
 const localRegion = ref(props.form.location.region)

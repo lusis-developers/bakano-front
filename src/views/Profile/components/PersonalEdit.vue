@@ -12,8 +12,8 @@ import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
-const props = defineProps<{ form: ProfileForm }>()
 const emit = defineEmits(['update:form'])
+const props = defineProps<{ form: ProfileForm }>()
 
 const localForm = ref({ ...props.form })
 const countryCodes = ref(listCountryCodes())
@@ -49,13 +49,14 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="email" class="form-label">Correo Electrónico</label>
       <input
-        type="email"
-        class="form-control"
-        id="email"
         v-model="localForm.email"
         :class="{
           'is-invalid': localForm.email && validationErrors.email.length > 0
         }"
+        type="email"
+        id="email"
+        placeholder="Ingresa tu correo"
+        class="form-control"
       />
       <span v-if="localForm.email && validationErrors.email.length > 0" class="text-danger">
         {{ validationErrors.email[0] }}
@@ -64,13 +65,14 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="name" class="form-label">Nombre</label>
       <input
-        type="text"
-        class="form-control"
-        id="name"
-        v-model="localForm.name"
+      v-model="localForm.name"
         :class="{
           'is-invalid': localForm.name && validationErrors.name.length > 0
         }"
+        type="text"
+        id="name"
+        placeholder="Ingresa tu nombre"
+        class="form-control"
       />
       <span v-if="localForm.name && validationErrors.name.length > 0" class="text-danger">
         {{ validationErrors.name[0] }}
@@ -79,13 +81,14 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="lastname" class="form-label">Apellido</label>
       <input
-        type="text"
-        class="form-control"
-        id="lastname"
         v-model="localForm.lastname"
         :class="{
           'is-invalid': localForm.lastname && validationErrors.lastname.length > 0
         }"
+        type="text"
+        id="lastname"
+        class="form-control"
+        placeholder="Ingresa tu apellido"
       />
       <span v-if="localForm.lastname && validationErrors.lastname.length > 0" class="text-danger">
         {{ validationErrors.lastname[0] }}
@@ -100,13 +103,14 @@ const validationErrors = computed(() => {
           </option>
         </select>
         <input
-          type="text"
-          class="form-control w-75"
-          id="phoneNumber"
           v-model="localForm.phoneNumber"
           :class="{
             'is-invalid': localForm.phoneNumber && validationErrors.phoneNumber.length > 0
           }"
+          type="text"
+          id="phoneNumber"
+          class="form-control w-75"
+          placeholder="Ingresa tu número telefónico"
         />
       </div>
       <span
@@ -122,7 +126,12 @@ const validationErrors = computed(() => {
     </div>
     <div class="mb-3">
       <label for="dateOfBirth" class="form-label">Fecha de Nacimiento</label>
-      <input type="date" class="form-control" id="dateOfBirth" v-model="localForm.dateOfBirth" />
+      <input 
+        v-model="localForm.dateOfBirth" 
+        type="date" 
+        id="dateOfBirth" 
+        class="form-control" 
+        />
     </div>
   </div>
 </template>
