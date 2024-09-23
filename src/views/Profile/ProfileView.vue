@@ -46,12 +46,12 @@ const form = reactive<ProfileForm>({
   }
 })
 
-const isDirty = ref(false)
+const hasUnsavedChanges = ref(false)
 
 watch(
   form,
   () => {
-    isDirty.value = true
+    hasUnsavedChanges.value = true
   },
   { deep: true }
 )
@@ -75,7 +75,7 @@ const hasErrors = computed(() => {
 
 function updateForm(newForm: Partial<ProfileForm>): void {
   Object.assign(form, newForm)
-  isDirty.value = true
+  hasUnsavedChanges.value = true
 }
 
 function submitForm(): void {
@@ -84,7 +84,7 @@ function submitForm(): void {
     return
   }
   console.log('Formulario enviado', form)
-  isDirty.value = false
+  hasUnsavedChanges.value = false
 }
 </script>
 
@@ -230,7 +230,11 @@ function submitForm(): void {
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3" :disabled="hasErrors || !isDirty">
+      <button
+        type="submit"
+        class="btn btn-primary mt-3"
+        :disabled="hasErrors || !hasUnsavedChanges"
+      >
         Guardar Cambios
       </button>
     </form>
