@@ -30,4 +30,5 @@ export interface ProfileForm {
   gender: string
   notificationPreferences: NotificationPreferences
   socialMediaLinks: SocialMediaLinks
+  phoneCode: string
 }

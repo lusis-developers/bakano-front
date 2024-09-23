@@ -26,10 +26,6 @@ const validationErrors = computed(() => {
     website: validateUrl(localSocialMediaLinks.value.website)
   }
 })
-
-const hasErrors = computed(() => {
-  return Object.values(validationErrors.value).some((errors) => errors.length > 0)
-})
 </script>
 
 <template>

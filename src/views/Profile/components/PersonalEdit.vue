@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, watch } from 'vue'
+
+import { listCountryCodes } from '@/utils/listPhoneCodeArea'
 import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
@@ -8,6 +10,7 @@ const props = defineProps<{ form: ProfileForm }>()
 const emit = defineEmits(['update:form'])
 
 const localForm = ref({ ...props.form })
+const countryCodes = ref(listCountryCodes())
 
 function onFileSelected(file: File) {
   const reader = new FileReader()
@@ -42,7 +45,14 @@ watch(
     </div>
     <div class="mb-3">
       <label for="phoneNumber" class="form-label">Número de Teléfono</label>
-      <input type="text" class="form-control" id="phoneNumber" v-model="localForm.phoneNumber" />
+      <div class="input-group">
+        <select class="form-select" v-model="localForm.phoneCode">
+          <option v-for="code in countryCodes" :key="code.country" :value="code.callingCode">
+            {{ code.country }} (+{{ code.callingCode }})
+          </option>
+        </select>
+        <input type="text" class="form-control" id="phoneNumber" v-model="localForm.phoneNumber" />
+      </div>
     </div>
     <div class="mb-3">
       <label for="profilePictureUrl" class="form-label">Subir una foto de perfil</label>

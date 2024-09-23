@@ -17,6 +17,7 @@ const form = reactive<ProfileForm>({
   lastname: '',
   phoneNumber: '',
   profilePictureUrl: '',
+  phoneCode: '',
   dateOfBirth: '',
   location: {
     region: '',
