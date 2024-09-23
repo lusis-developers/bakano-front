@@ -65,7 +65,7 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="name" class="form-label">Nombre</label>
       <input
-      v-model="localForm.name"
+        v-model="localForm.name"
         :class="{
           'is-invalid': localForm.name && validationErrors.name.length > 0
         }"
@@ -126,12 +126,7 @@ const validationErrors = computed(() => {
     </div>
     <div class="mb-3">
       <label for="dateOfBirth" class="form-label">Fecha de Nacimiento</label>
-      <input 
-        v-model="localForm.dateOfBirth" 
-        type="date" 
-        id="dateOfBirth" 
-        class="form-control" 
-        />
+      <input v-model="localForm.dateOfBirth" type="date" id="dateOfBirth" class="form-control" />
     </div>
   </div>
 </template>
