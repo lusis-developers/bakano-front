@@ -17,6 +17,9 @@ import NotificationPreferences from '@/views/Profile/components/NotificationPref
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
+//TODO - DEFAULT VALUE WILL BE THE USER INFORMATION
+//TOOD - FUNCTION TO DETECT ANY CHANGE AND COULD SAVE CHANGES
+
 const form = reactive<ProfileForm>({
   email: '',
   name: '',
