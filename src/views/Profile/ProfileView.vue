@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { reactive, computed } from 'vue'
 
-import { validateUrl } from '@/validation/components/ProfileSettings'
+import {
+  validateUrl,
+  validateField,
+  emailValidation,
+  wordValidation,
+  phoneNumberValidation
+} from '@/validation/components/ProfileSettings'
 import PersonalInfo from '@/views/Profile/components/PersonalEdit.vue'
 import LocationEdit from '@/views/Profile/components/LocationEdit.vue'
 import JobInfo from '@/views/Profile/components/JobInformationEdit.vue'
@@ -45,10 +51,20 @@ function updateForm(newForm: Partial<ProfileForm>): void {
 }
 
 const hasErrors = computed(() => {
-  return Object.values(form.socialMediaLinks).some((link) => {
+  const socialMediaErrors = Object.values(form.socialMediaLinks).some((link) => {
     const errors = validateUrl(link)
     return link && errors.length > 0
   })
+
+  const personalInfoErrors =
+    [
+      ...validateField(form.email, emailValidation),
+      ...validateField(form.name, wordValidation),
+      ...validateField(form.lastname, wordValidation),
+      ...validateField(form.phoneNumber, phoneNumberValidation)
+    ].length > 0
+
+  return socialMediaErrors || personalInfoErrors
 })
 
 function submitForm(): void {
