@@ -184,8 +184,6 @@ function submitForm(): void {
             <NotificationPreferences :form="form" @update:form="updateForm" />
           </div>
         </div>
-
-        <!-- Redes Sociales -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingSocialMedia">
             <button
@@ -208,8 +206,6 @@ function submitForm(): void {
             <SocialMediaLinks :form="form" @update:form="updateForm" />
           </div>
         </div>
-
-        <!-- Género -->
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingGender">
             <button
