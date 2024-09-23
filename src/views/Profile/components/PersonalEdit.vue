@@ -46,12 +46,18 @@ watch(
     <div class="mb-3">
       <label for="phoneNumber" class="form-label">Número de Teléfono</label>
       <div class="input-group">
-        <select class="form-select" v-model="localForm.phoneCode">
+        <select class="form-select w-25" v-model="localForm.phoneCode">
           <option v-for="code in countryCodes" :key="code.country" :value="code.callingCode">
             {{ code.country }} (+{{ code.callingCode }})
           </option>
         </select>
-        <input type="text" class="form-control" id="phoneNumber" v-model="localForm.phoneNumber" />
+        <input
+          type="text"
+          class="form-control w-75"
+          id="phoneNumber"
+          v-model="localForm.phoneNumber"
+          style="flex: 1 1 auto"
+        />
       </div>
     </div>
     <div class="mb-3">
