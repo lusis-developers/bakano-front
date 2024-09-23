@@ -33,13 +33,14 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="linkedin" class="form-label">LinkedIn</label>
       <input
-        type="text"
-        class="form-control"
-        id="linkedin"
         v-model="localSocialMediaLinks.linkedin"
         :class="{
           'is-invalid': localSocialMediaLinks.linkedin && validationErrors.linkedin.length > 0
         }"
+        type="text"
+        class="form-control"
+        id="linkedin"
+        placeholder="Link de tu perfil"
       />
       <span
         v-if="localSocialMediaLinks.linkedin && validationErrors.linkedin.length > 0"
@@ -51,13 +52,14 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="twitter" class="form-label">Twitter</label>
       <input
-        type="text"
-        class="form-control"
-        id="twitter"
         v-model="localSocialMediaLinks.twitter"
         :class="{
           'is-invalid': localSocialMediaLinks.twitter && validationErrors.twitter.length > 0
         }"
+        type="text"
+        id="twitter"
+        placeholder="Link de tu perfil"
+        class="form-control"
       />
       <span
         v-if="localSocialMediaLinks.twitter && validationErrors.twitter.length > 0"
@@ -69,13 +71,14 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="instagram" class="form-label">Instagram</label>
       <input
-        type="text"
-        class="form-control"
-        id="instagram"
         v-model="localSocialMediaLinks.instagram"
         :class="{
           'is-invalid': localSocialMediaLinks.instagram && validationErrors.instagram.length > 0
         }"
+        type="text"
+        id="instagram"
+        placeholder="Link de tu perfil"
+        class="form-control"
       />
       <span
         v-if="localSocialMediaLinks.instagram && validationErrors.instagram.length > 0"
@@ -87,13 +90,14 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="website" class="form-label">Sitio Web</label>
       <input
-        type="text"
-        class="form-control"
-        id="website"
         v-model="localSocialMediaLinks.website"
         :class="{
           'is-invalid': localSocialMediaLinks.website && validationErrors.website.length > 0
         }"
+        type="text"
+        id="website"
+        placeholder="Link de tu website"
+        class="form-control"
       />
       <span
         v-if="localSocialMediaLinks.website && validationErrors.website.length > 0"
