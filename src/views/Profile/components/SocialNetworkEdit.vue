@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, watch } from 'vue'
+import { defineProps, defineEmits, ref, watch, computed } from 'vue'
+
+import { validateUrl } from '@/validation/components/ProfileSettings'
 
 import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
 
@@ -15,6 +17,19 @@ watch(
   },
   { deep: true }
 )
+
+const validationErrors = computed(() => {
+  return {
+    linkedin: validateUrl(localSocialMediaLinks.value.linkedin),
+    twitter: validateUrl(localSocialMediaLinks.value.twitter),
+    instagram: validateUrl(localSocialMediaLinks.value.instagram),
+    website: validateUrl(localSocialMediaLinks.value.website)
+  }
+})
+
+const hasErrors = computed(() => {
+  return Object.values(validationErrors.value).some((errors) => errors.length > 0)
+})
 </script>
 
 <template>
@@ -26,7 +41,16 @@ watch(
         class="form-control"
         id="linkedin"
         v-model="localSocialMediaLinks.linkedin"
+        :class="{
+          'is-invalid': localSocialMediaLinks.linkedin && validationErrors.linkedin.length > 0
+        }"
       />
+      <span
+        v-if="localSocialMediaLinks.linkedin && validationErrors.linkedin.length > 0"
+        class="text-danger"
+      >
+        {{ validationErrors.linkedin[0] }}
+      </span>
     </div>
     <div class="mb-3">
       <label for="twitter" class="form-label">Twitter</label>
@@ -35,7 +59,16 @@ watch(
         class="form-control"
         id="twitter"
         v-model="localSocialMediaLinks.twitter"
+        :class="{
+          'is-invalid': localSocialMediaLinks.twitter && validationErrors.twitter.length > 0
+        }"
       />
+      <span
+        v-if="localSocialMediaLinks.twitter && validationErrors.twitter.length > 0"
+        class="text-danger"
+      >
+        {{ validationErrors.twitter[0] }}
+      </span>
     </div>
     <div class="mb-3">
       <label for="instagram" class="form-label">Instagram</label>
@@ -44,7 +77,16 @@ watch(
         class="form-control"
         id="instagram"
         v-model="localSocialMediaLinks.instagram"
+        :class="{
+          'is-invalid': localSocialMediaLinks.instagram && validationErrors.instagram.length > 0
+        }"
       />
+      <span
+        v-if="localSocialMediaLinks.instagram && validationErrors.instagram.length > 0"
+        class="text-danger"
+      >
+        {{ validationErrors.instagram[0] }}
+      </span>
     </div>
     <div class="mb-3">
       <label for="website" class="form-label">Sitio Web</label>
@@ -53,7 +95,16 @@ watch(
         class="form-control"
         id="website"
         v-model="localSocialMediaLinks.website"
+        :class="{
+          'is-invalid': localSocialMediaLinks.website && validationErrors.website.length > 0
+        }"
       />
+      <span
+        v-if="localSocialMediaLinks.website && validationErrors.website.length > 0"
+        class="text-danger"
+      >
+        {{ validationErrors.website[0] }}
+      </span>
     </div>
   </div>
 </template>

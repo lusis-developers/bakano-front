@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 
+import { validateUrl } from '@/validation/components/ProfileSettings'
 import PersonalInfo from '@/views/Profile/components/PersonalEdit.vue'
 import LocationEdit from '@/views/Profile/components/LocationEdit.vue'
 import JobInfo from '@/views/Profile/components/JobInformationEdit.vue'
@@ -42,7 +43,18 @@ function updateForm(newForm: Partial<ProfileForm>): void {
   Object.assign(form, newForm)
 }
 
+const hasErrors = computed(() => {
+  return Object.values(form.socialMediaLinks).some((link) => {
+    const errors = validateUrl(link)
+    return link && errors.length > 0
+  })
+})
+
 function submitForm(): void {
+  if (hasErrors.value) {
+    alert('Por favor, corrige los errores antes de enviar el formulario.')
+    return
+  }
   console.log('Formulario enviado', form)
 }
 </script>
@@ -196,7 +208,9 @@ function submitForm(): void {
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-3">Guardar Cambios</button>
+      <button type="submit" class="btn btn-primary mt-3" :disabled="hasErrors">
+        Guardar Cambios
+      </button>
     </form>
   </div>
 </template>
