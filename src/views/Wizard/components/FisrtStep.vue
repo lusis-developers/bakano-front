@@ -1,22 +1,46 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { BakanoUsageCount, BakanoUsageType, FoundUsBy } from '@/enum/user.enum'
 const emit = defineEmits(['next', 'prev'])
+const props = defineProps({
+  usageCount: String,
+  usageType: String,
+  foundUsBy: String
+})
 
-const usageCount = ref<BakanoUsageCount | ''>('')
-const usageType = ref<BakanoUsageType | ''>('')
-const foundUsBy = ref<FoundUsBy | ''>('')
+const usageCount = ref(props.usageCount || '')
+const usageType = ref(props.usageType || '')
+const foundUsBy = ref(props.foundUsBy || '')
+
+const isFormValid = computed(() => {
+  return usageCount.value !== '' && usageType.value !== '' && foundUsBy.value !== ''
+})
 
 function submitForm(): void {
-  emit('next', {
-    usageCount: usageCount.value,
-    usageType: usageType.value,
-    foundUsBy: foundUsBy.value
-  })
+  if (isFormValid.value) {
+    emit('next', {
+      usageCount: usageCount.value,
+      usageType: usageType.value,
+      foundUsBy: foundUsBy.value
+    })
+  }
 }
 function goBack(): void {
   emit('prev')
 }
+
+watch(
+  () => props.usageCount,
+  (newVal) => (usageCount.value = newVal!)
+)
+watch(
+  () => props.usageType,
+  (newVal) => (usageType.value = newVal!)
+)
+watch(
+  () => props.foundUsBy,
+  (newVal) => (foundUsBy.value = newVal!)
+)
 </script>
 
 <template>
@@ -48,7 +72,7 @@ function goBack(): void {
     </div>
     <div class="d-flex justify-content-between">
       <button class="btn btn-secondary" @click="goBack">Atrás</button>
-      <button class="btn btn-primary" @click="submitForm">Adelante</button>
+      <button class="btn btn-primary" @click="submitForm" :disabled="!isFormValid">Adelante</button>
     </div>
   </div>
 </template>

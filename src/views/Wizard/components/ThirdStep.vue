@@ -1,13 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { UserGender } from '@/enum/user.enum'
-const emit = defineEmits(['next'])
 
-const gender = ref<UserGender | ''>('')
+const emit = defineEmits(['next', 'prev'])
+const props = defineProps({
+  gender: String
+})
+
+const gender = ref(props.gender || '')
+
+const isFormValid = computed(() => {
+  return gender.value !== ''
+})
 
 function submitForm(): void {
-  emit('next', { gender: gender.value })
+  if (isFormValid.value) {
+    emit('next', { gender: gender.value })
+  }
 }
+function goBack(): void {
+  emit('prev')
+}
+
+watch(
+  () => props.gender,
+  (newVal) => (gender.value = newVal!)
+)
 </script>
 
 <template>
@@ -21,8 +39,9 @@ function submitForm(): void {
         <option :value="UserGender.PREFER_NOT_SAY">Prefiero no decir</option>
       </select>
     </div>
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-primary" @click="submitForm">Adelante</button>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-secondary" @click="goBack">Atrás</button>
+      <button class="btn btn-primary" @click="submitForm" :disabled="!isFormValid">Enviar</button>
     </div>
   </div>
 </template>
