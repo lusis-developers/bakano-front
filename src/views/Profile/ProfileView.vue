@@ -15,26 +15,25 @@ import GenderInfo from '@/views/Profile/components/GenderInformationEdit.vue'
 import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
 import NotificationPreferences from '@/views/Profile/components/NotificationPreferencesEdit.vue'
 
-import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+import type { IUser } from '@/interfaces/user.interface'
+import { SubscriptionPlan, UserStatus } from '@/enum/user.enum'
 
 //TODO - DEFAULT VALUE WILL BE THE USER INFORMATION
-//TOOD - FUNCTION TO DETECT ANY CHANGE AND COULD SAVE CHANGES
+//TOOD - FUNCTION TO DETECT ANY CHANGE Y COULD SAVE CHANGES
 
-const form = reactive<ProfileForm>({
+const form = reactive<IUser>({
   email: '',
   name: '',
   lastname: '',
   phoneNumber: '',
   profilePictureUrl: '',
-  phoneCode: '',
-  dateOfBirth: '',
+  dateOfBirth: undefined,
   location: {
-    region: '',
+    city: '',
     country: ''
   },
-  jobDescription: '',
+  jobDescription: null,
   occupation: '',
-  company: '',
   gender: '',
   notificationPreferences: {
     email: false,
@@ -46,7 +45,21 @@ const form = reactive<ProfileForm>({
     twitter: '',
     instagram: '',
     website: ''
-  }
+  },
+  magicLinkToken: '',
+  magicLinkTokenExpires: new Date(),
+  subscription: {
+    isActive: false,
+    plan: SubscriptionPlan.FREE,
+    startDate: new Date(),
+    endDate: new Date()
+  },
+  status: UserStatus.ACTIVE,
+  brands: null,
+  usageCount: null,
+  usageType: null,
+  foundUsBy: null,
+  countryCode: ''
 })
 
 const hasUnsavedChanges = ref(false)
@@ -76,7 +89,7 @@ const hasErrors = computed(() => {
   return socialMediaErrors || personalInfoErrors
 })
 
-function updateForm(newForm: Partial<ProfileForm>): void {
+function updateForm(newForm: Partial<IUser>): void {
   Object.assign(form, newForm)
   hasUnsavedChanges.value = true
 }

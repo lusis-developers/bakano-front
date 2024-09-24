@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, watch } from 'vue'
 
-import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
-const props = defineProps<{ form: ProfileForm }>()
+const props = defineProps<{ form: IUser }>()
 
 const localForm = ref({ ...props.form })
 
@@ -37,16 +37,6 @@ watch(
         class="form-control"
         id="occupation"
         placeholder="Community manager"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="company" class="form-label">Compañía</label>
-      <input
-        v-model="localForm.company"
-        type="text"
-        class="form-control"
-        id="company"
-        placeholder="Refrescos yeyo"
       />
     </div>
   </div>
