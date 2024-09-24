@@ -70,8 +70,7 @@ watch(
         <option :value="FoundUsBy.WORD_OF_MOUTH">WOM (Amigo, compañero, hijo)</option>
       </select>
     </div>
-    <div class="d-flex justify-content-between">
-      <button @click="goBack" class="btn btn-secondary">Atrás</button>
+    <div class="d-flex justify-content-end">
       <button @click="submitForm" :disabled="!isFormValid" class="btn btn-primary">Adelante</button>
     </div>
   </div>
