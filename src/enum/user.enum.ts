@@ -31,7 +31,8 @@ export enum FoundUsBy {
   TIK_TOK = 'tik_tok',
   FACEBOOK = 'facebook',
   INSTAGRAM = 'instagram',
-  GOOGLE = 'google'
+  GOOGLE = 'google',
+  WORD_OF_MOUTH = 'word_of_mouth'
 }
 
 export enum UserGender {
