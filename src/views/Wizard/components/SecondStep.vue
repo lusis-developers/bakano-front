@@ -32,7 +32,7 @@ watch(
     <h2>Segundo Paso</h2>
     <div class="mb-3">
       <label for="jobDescription" class="form-label">Descripción del Trabajo</label>
-      <select id="jobDescription" v-model="jobDescription" class="form-select">
+      <select v-model="jobDescription" id="jobDescription" class="form-select">
         <option :value="JobDescription.FREELANCER">Freelancer</option>
         <option :value="JobDescription.MARKETING_AGENCY">Agencia de Marketing</option>
         <option :value="JobDescription.COMPANY">Empresa</option>

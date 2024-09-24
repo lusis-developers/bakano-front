@@ -48,21 +48,21 @@ watch(
     <h2>Primer Paso</h2>
     <div class="mb-3">
       <label for="usageCount" class="form-label">Uso de Bakano</label>
-      <select id="usageCount" v-model="usageCount" class="form-select">
+      <select v-model="usageCount" id="usageCount" class="form-select">
         <option :value="BakanoUsageCount.INDIVIDUAL">Individual</option>
         <option :value="BakanoUsageCount.GROUP">Grupo</option>
       </select>
     </div>
     <div class="mb-3">
       <label for="usageType" class="form-label">Tipo de Uso</label>
-      <select id="usageType" v-model="usageType" class="form-select">
+      <select v-model="usageType" id="usageType" class="form-select">
         <option :value="BakanoUsageType.SCHEDULE_POSTS">Programar Publicaciones</option>
         <option :value="BakanoUsageType.CONTENT_CREATION">Creación de Contenido</option>
       </select>
     </div>
     <div class="mb-3">
       <label for="foundUsBy" class="form-label">¿Cómo nos encontraste?</label>
-      <select id="foundUsBy" v-model="foundUsBy" class="form-select">
+      <select v-model="foundUsBy" id="foundUsBy" class="form-select">
         <option :value="FoundUsBy.TIK_TOK">TikTok</option>
         <option :value="FoundUsBy.FACEBOOK">Facebook</option>
         <option :value="FoundUsBy.INSTAGRAM">Instagram</option>
@@ -71,8 +71,8 @@ watch(
       </select>
     </div>
     <div class="d-flex justify-content-between">
-      <button class="btn btn-secondary" @click="goBack">Atrás</button>
-      <button class="btn btn-primary" @click="submitForm" :disabled="!isFormValid">Adelante</button>
+      <button @click="goBack" class="btn btn-secondary">Atrás</button>
+      <button @click="submitForm" :disabled="!isFormValid" class="btn btn-primary">Adelante</button>
     </div>
   </div>
 </template>
