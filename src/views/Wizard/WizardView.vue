@@ -7,7 +7,6 @@ import ThirdStep from './components/ThirdStep.vue'
 
 const currentStep = ref(1)
 
-// Estados compartidos
 const usageCount = ref('')
 const usageType = ref('')
 const foundUsBy = ref('')
@@ -15,22 +14,35 @@ const jobDescription = ref('')
 const gender = ref('')
 
 function nextStep(data: any): void {
+  if (data) {
+    usageCount.value = data.usageCount || usageCount.value
+    usageType.value = data.usageType || usageType.value
+    foundUsBy.value = data.foundUsBy || foundUsBy.value
+    jobDescription.value = data.jobDescription || jobDescription.value
+    gender.value = data.gender || gender.value
+  }
+
   if (currentStep.value < 3) {
-    // Actualizar estados compartidos
-    if (data) {
-      usageCount.value = data.usageCount || usageCount.value
-      usageType.value = data.usageType || usageType.value
-      foundUsBy.value = data.foundUsBy || foundUsBy.value
-      jobDescription.value = data.jobDescription || jobDescription.value
-      gender.value = data.gender || gender.value
-    }
     currentStep.value++
+  } else {
+    sendData()
   }
 }
 function prevStep(): void {
   if (currentStep.value > 1) {
     currentStep.value--
   }
+}
+
+function sendData(): void {
+  const data = {
+    usageCount: usageCount.value,
+    usageType: usageType.value,
+    foundUsBy: foundUsBy.value,
+    jobDescription: jobDescription.value,
+    gender: gender.value
+  }
+  console.log('Enviando datos:', data)
 }
 </script>
 
