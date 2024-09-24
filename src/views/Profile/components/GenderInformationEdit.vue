@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, watch } from 'vue'
 
-import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
-const props = defineProps<{ form: ProfileForm }>()
+const props = defineProps<{ form: IUser }>()
 
 const localGender = ref(props.form.gender)
 

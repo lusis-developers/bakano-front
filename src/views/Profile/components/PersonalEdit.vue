@@ -10,10 +10,10 @@ import {
 } from '@/validation/components/ProfileSettings'
 import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
-import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
-const props = defineProps<{ form: ProfileForm }>()
+const props = defineProps<{ form: IUser }>()
 
 const localForm = ref({ ...props.form })
 const countryCodes = ref(listCountryCodes())
@@ -97,7 +97,7 @@ const validationErrors = computed(() => {
     <div class="mb-3">
       <label for="phoneNumber" class="form-label">Número de Teléfono</label>
       <div class="input-group">
-        <select class="form-select w-25" v-model="localForm.phoneCode">
+        <select class="form-select w-25" v-model="localForm.countryCode">
           <option v-for="code in countryCodes" :key="code.country" :value="code.callingCode">
             {{ code.country }} (+{{ code.callingCode }})
           </option>

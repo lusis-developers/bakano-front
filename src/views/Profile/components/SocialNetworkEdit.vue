@@ -3,10 +3,10 @@ import { defineProps, defineEmits, ref, watch, computed } from 'vue'
 
 import { validateUrl } from '@/validation/components/ProfileSettings'
 
-import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
-const props = defineProps<{ form: ProfileForm }>()
+const props = defineProps<{ form: IUser }>()
 
 const localSocialMediaLinks = ref({ ...props.form.socialMediaLinks })
 
@@ -20,10 +20,10 @@ watch(
 
 const validationErrors = computed(() => {
   return {
-    linkedin: validateUrl(localSocialMediaLinks.value.linkedin),
-    twitter: validateUrl(localSocialMediaLinks.value.twitter),
-    instagram: validateUrl(localSocialMediaLinks.value.instagram),
-    website: validateUrl(localSocialMediaLinks.value.website)
+    linkedin: validateUrl(localSocialMediaLinks.value.linkedin!),
+    twitter: validateUrl(localSocialMediaLinks.value.twitter!),
+    instagram: validateUrl(localSocialMediaLinks.value.instagram!),
+    website: validateUrl(localSocialMediaLinks.value.website!)
   }
 })
 </script>
