@@ -2,20 +2,20 @@
 import { computed, defineProps, defineEmits, ref, watch } from 'vue'
 import { allCountries } from 'country-region-data'
 
-import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
-const props = defineProps<{ form: ProfileForm }>()
+const props = defineProps<{ form: IUser }>()
 
 const selectedCountry = ref('')
-const localRegion = ref(props.form.location.region)
+const localProvince = ref(props.form.location.province)
 
 const regions = computed(() => {
   const country = allCountries.find((c) => c[0] === selectedCountry.value)
   return country ? country[2] : []
 })
 
-watch(localRegion, (newRegion) => {
+watch(localProvince, (newRegion) => {
   emit('update:form', { ...props.form, location: { ...props.form.location, region: newRegion } })
 })
 </script>
@@ -32,7 +32,7 @@ watch(localRegion, (newRegion) => {
     </div>
     <div class="mb-3" v-if="regions.length">
       <label for="region" class="form-label">Región</label>
-      <select class="form-select" id="region" v-model="localRegion">
+      <select class="form-select" id="region" v-model="localProvince">
         <option v-for="(region, index) in regions" :key="index" :value="region[0]">
           {{ region[0] }}
         </option>

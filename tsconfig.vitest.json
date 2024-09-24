@@ -9,6 +9,8 @@
     "types": ["node", "jsdom"]
   },
   "include": [
-    "src/utils/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "src/types/**/*.d.ts"
   ]
 }

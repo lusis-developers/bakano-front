@@ -29,7 +29,7 @@ const form = reactive<IUser>({
   profilePictureUrl: '',
   dateOfBirth: undefined,
   location: {
-    city: '',
+    province: '',
     country: ''
   },
   jobDescription: null,

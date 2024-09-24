@@ -30,7 +30,7 @@ export interface IUser {
   profilePictureUrl: string
   dateOfBirth?: Date
   location: {
-    city: string
+    province: string
     country: string
   }
   occupation: string
