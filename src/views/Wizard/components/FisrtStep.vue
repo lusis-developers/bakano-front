@@ -25,9 +25,6 @@ function submitForm(): void {
     })
   }
 }
-function goBack(): void {
-  emit('prev')
-}
 
 watch(
   () => props.usageCount,
