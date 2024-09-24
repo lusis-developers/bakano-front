@@ -20,6 +20,7 @@ export interface IUser {
     endDate: Date
   }
   status: UserStatus
+  // TODO INTERFACE BRAND
   brands?: any
   jobDescription: JobDescription | null
   usageCount: BakanoUsageCount | null
@@ -30,7 +31,7 @@ export interface IUser {
   profilePictureUrl: string
   dateOfBirth?: Date
   location: {
-    city: string
+    province: string
     country: string
   }
   occupation: string
