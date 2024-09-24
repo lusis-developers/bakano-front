@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+
 import { BakanoUsageCount, BakanoUsageType, FoundUsBy } from '@/enum/user.enum'
+
 const emit = defineEmits(['next', 'prev'])
+
 const props = defineProps({
   usageCount: String,
   usageType: String,
