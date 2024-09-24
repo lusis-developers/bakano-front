@@ -14,6 +14,7 @@ const userLayout = () => import('@/layouts/UserLayout.vue')
 // App views
 const dashboardView = () => import('@/views/Dashboard/DashboardView.vue')
 const profileView = () => import('@/views/Profile/ProfileView.vue')
+const wizardView = () => import('@/views/Wizard/WizardView.vue')
 
 function isLoggedIn(): boolean {
   return true
@@ -38,6 +39,14 @@ const routes = [
     component: signUpView,
     meta: {
       title: 'Regístrate 🚀'
+    }
+  },
+  {
+    path: '/wizard',
+    name: 'Wizard',
+    component: wizardView,
+    meta: {
+      title: 'Wizard 🚀'
     }
   },
   {
