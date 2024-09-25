@@ -14,7 +14,8 @@ export enum JobDescription {
   FREELANCER = 'freelancer',
   MARKETING_AGENCY = 'marketing_agency',
   COMPANY = 'company',
-  CONTENT_CREATOR = 'content_creator'
+  CONTENT_CREATOR = 'content_creator',
+  OTHER = 'other'
 }
 
 export enum BakanoUsageCount {
