@@ -47,21 +47,27 @@ watch(
   <div class="container">
     <h2>Primer Paso</h2>
     <div class="mb-3">
-      <label for="usageCount" class="form-label">Uso de Bakano</label>
+      <label for="usageCount" class="form-label">
+        <i class="bi bi-people-fill" /> Uso de Bakano
+      </label>
       <select v-model="usageCount" id="usageCount" class="form-select">
         <option :value="BakanoUsageCount.INDIVIDUAL">Individual</option>
         <option :value="BakanoUsageCount.GROUP">Grupo</option>
       </select>
     </div>
     <div class="mb-3">
-      <label for="usageType" class="form-label">Tipo de Uso</label>
+      <label for="usageType" class="form-label">
+        <i class="bi bi-gear-fill" /> Tipo de Uso
+      </label>
       <select v-model="usageType" id="usageType" class="form-select">
         <option :value="BakanoUsageType.SCHEDULE_POSTS">Programar Publicaciones</option>
         <option :value="BakanoUsageType.CONTENT_CREATION">Creación de Contenido</option>
       </select>
     </div>
     <div class="mb-3">
-      <label for="foundUsBy" class="form-label">¿Cómo nos encontraste?</label>
+      <label for="foundUsBy" class="form-label">
+        <i class="bi bi-search" /> ¿Cómo nos encontraste?
+      </label>
       <select v-model="foundUsBy" id="foundUsBy" class="form-select">
         <option :value="FoundUsBy.TIK_TOK">TikTok</option>
         <option :value="FoundUsBy.FACEBOOK">Facebook</option>

@@ -40,7 +40,9 @@ watch(
     <div v-if="!isSubmitting" class="container">
       <h2>Tercer Paso</h2>
       <div class="mb-3">
-        <label for="gender" class="form-label">Género</label>
+        <label for="gender" class="form-label">
+          <i class="bi bi-gender-ambiguous" /> Género
+        </label>
         <select id="gender" v-model="gender" class="form-select">
           <option :value="UserGender.MALE">Masculino</option>
           <option :value="UserGender.FEMALE">Femenino</option>

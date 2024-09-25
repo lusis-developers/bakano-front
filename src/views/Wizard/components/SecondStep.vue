@@ -31,12 +31,15 @@ watch(
   <div class="container">
     <h2>Segundo Paso</h2>
     <div class="mb-3">
-      <label for="jobDescription" class="form-label">Descripción del Trabajo</label>
+      <label for="jobDescription" class="form-label">
+        <i class="bi bi-briefcase-fill" /> Descripción de tu industria
+      </label>
       <select v-model="jobDescription" id="jobDescription" class="form-select">
         <option :value="JobDescription.FREELANCER">Freelancer</option>
         <option :value="JobDescription.MARKETING_AGENCY">Agencia de Marketing</option>
         <option :value="JobDescription.COMPANY">Empresa</option>
         <option :value="JobDescription.CONTENT_CREATOR">Creador de Contenido</option>
+        <option :value="JobDescription.OTHER">Otro</option>
       </select>
     </div>
     <div class="d-flex justify-content-between">
