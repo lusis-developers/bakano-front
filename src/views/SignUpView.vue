@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-import { AlertType } from '@/enum/components/base/baseAlert.interface'
+// import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
 import logo from '@/assets/brand/bakano-negro.png'
@@ -9,9 +9,18 @@ import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+import type { IUser } from '@/interfaces/services/userRequest.interface'
 
-const { alertMessage, displayAlert, isDisabled, handleEmailValidation, closeAlert, submitForm } =
-  useAuthForm()
+const {
+  alertMessage,
+  displayAlert,
+  alertType,
+  isDisabled,
+  handleEmailValidation,
+  closeAlert,
+  submitForm,
+  email
+} = useAuthForm()
 const name = ref<string>('')
 const lastname = ref<string>('')
 const nameErrors = ref<string[]>([])
@@ -38,6 +47,17 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
     lastnameErrors.value = []
   }
 }
+
+function submit(): void {
+  const user: IUser = {
+    body: {
+      email: email.value,
+      name: name.value,
+      lastname: lastname.value
+    }
+  }
+  submitForm(user)
+}
 </script>
 
 <template>
@@ -51,7 +71,7 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
             :isVisible="displayAlert"
             :message="alertMessage"
             :isDismissable="true"
-            :type="AlertType.DANGER"
+            :type="alertType"
             @close="closeAlert"
           />
           <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4" />
@@ -88,7 +108,7 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
           :isDisabled="isRegistrationDisabled"
           :fullWidth="true"
           btnClass="btn-primary"
-          @click="submitForm"
+          @click="submit"
         />
         <hr class="border border-gray-400" />
         <div class="text-secondary text-center">

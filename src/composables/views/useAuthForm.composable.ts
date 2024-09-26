@@ -1,11 +1,25 @@
 import { ref, computed } from 'vue'
 
+import useAuthStore from '@/stores/auth.store'
+import { AlertType } from '@/enum/components/base/baseAlert.interface'
+import type { IUser } from '@/interfaces/services/userRequest.interface'
+
 export function useAuthForm() {
+  const authStore = useAuthStore()
+
   const email = ref<string>('')
   const alertMessage = ref<string>('')
   const emailErrors = ref<string[]>([])
 
   const displayAlert = computed(() => alertMessage.value.length > 0)
+  const alertType = computed(() => {
+    if (authStore.error) {
+      return AlertType.DANGER
+    } else if (authStore.successMessage) {
+      return AlertType.SUCCESS
+    }
+    return AlertType.DANGER
+  })
   const isDisabled = computed(() => {
     return emailErrors.value.length > 0 || email.value.length === 0
   })
@@ -23,17 +37,32 @@ export function useAuthForm() {
     alertMessage.value = ''
   }
 
-  function submitForm(): void {
-    if (emailErrors.value.length === 0) {
-      console.log('Email:', email.value)
+  function submitForm(user?: IUser): void {
+    const noEmailErrors = emailErrors.value.length === 0
+
+    if (noEmailErrors) {
+      if (user) {
+        console.log('signUP with user:', user)
+        authStore.signUp(user)
+      } else {
+        console.log('login with email:', email.value)
+        const user = {
+          body: {
+            email: email.value
+          }
+        }
+        authStore.signUp(user)
+      }
+      const isThereMessage = authStore.error || authStore.successMessage
+      alertMessage.value = isThereMessage ?? ''
     }
-    alertMessage.value = 'Corrige los errores antes de continuar'
   }
 
   return {
     email,
     alertMessage,
     emailErrors,
+    alertType,
     displayAlert,
     isDisabled,
     handleEmailValidation,
