@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { UserGender } from '@/enum/user.enum'
+import SelectInput from '@/components/input/SelectInput.vue'
 
 import type { IUser } from '@/interfaces/user.interface'
 
@@ -25,12 +26,13 @@ watch(localGender, (newGender) => {
 <template>
   <div class="accordion-body">
     <div class="mb-3">
-      <label for="gender" class="form-label">Género</label>
-      <select v-model="localGender" class="form-select" id="gender">
-        <option v-for="option in genderOptions" :key="option.value" :value="option.value">
-          {{ option.label }}
-        </option>
-      </select>
+      <SelectInput
+        :label="'Género'"
+        :inputId="'gender'"
+        :options="genderOptions"
+        :validationErrors="[]"
+        v-model="localGender"
+      />
     </div>
   </div>
 </template>
