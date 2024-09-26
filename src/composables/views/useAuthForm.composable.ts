@@ -37,21 +37,19 @@ export function useAuthForm() {
     alertMessage.value = ''
   }
 
-  function submitForm(user?: IUser): void {
+  async function submitForm(user?: IUser): Promise<void> {
     const noEmailErrors = emailErrors.value.length === 0
 
     if (noEmailErrors) {
       if (user) {
-        console.log('signUP with user:', user)
-        authStore.signUp(user)
+        await authStore.signUp(user)
       } else {
-        console.log('login with email:', email.value)
         const user = {
           body: {
             email: email.value.toLowerCase()
           }
         }
-        authStore.signUp(user)
+        await authStore.signUp(user)
       }
       const isThereMessage = authStore.error || authStore.successMessage
       alertMessage.value = isThereMessage ?? ''

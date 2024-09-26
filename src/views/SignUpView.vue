@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-// import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
+import useAuthStore from '@/stores/auth.store'
 import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
@@ -21,6 +21,9 @@ const {
   submitForm,
   email
 } = useAuthForm()
+
+const authStore = useAuthStore()
+
 const name = ref<string>('')
 const lastname = ref<string>('')
 const nameErrors = ref<string[]>([])
@@ -105,6 +108,7 @@ function submit(): void {
         </form>
         <BaseButton
           label="Regístrate"
+          :isLoading="authStore.isLoading"
           :isDisabled="isRegistrationDisabled"
           :fullWidth="true"
           btnClass="btn-primary"

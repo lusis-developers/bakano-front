@@ -2,6 +2,7 @@
 import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
+import useAuthStore from '@/stores/auth.store'
 import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
@@ -10,6 +11,8 @@ import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 
 const { alertMessage, displayAlert, isDisabled, handleEmailValidation, closeAlert, submitForm } =
   useAuthForm()
+
+const authStore = useAuthStore()
 </script>
 
 <template>
@@ -43,6 +46,7 @@ const { alertMessage, displayAlert, isDisabled, handleEmailValidation, closeAler
         </form>
         <BaseButton
           label="Inicia Sesión"
+          :isLoading="authStore.isLoading"
           :isDisabled="isDisabled"
           :fullWidth="true"
           btnClass="btn-primary"
