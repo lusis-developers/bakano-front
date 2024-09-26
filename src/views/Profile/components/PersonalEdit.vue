@@ -20,10 +20,6 @@ const props = defineProps<{ form: IUser }>()
 const localForm = ref({ ...props.form })
 const countryCodes = ref(listCountryCodes())
 const selectedCountryCode = ref<string>('')
-const handleUpdate = (value: string) => {
-  selectedCountryCode.value = value
-  console.log('País seleccionado:', value)
-}
 
 const countryOptions = computed(() =>
   countryCodes.value.map((code) => ({
@@ -32,12 +28,20 @@ const countryOptions = computed(() =>
   }))
 )
 
+function handleUpdate(value: string) {
+  selectedCountryCode.value = value
+  console.log('País seleccionado:', value)
+}
+
 function onFileSelected(file: File) {
   const reader = new FileReader()
   reader.onload = function (e) {
     localForm.value.profilePictureUrl = e.target?.result as string
   }
   reader.readAsDataURL(file)
+}
+function handleValidation(field: keyof IUser, payload: { value: string; isValid: boolean }) {
+  localForm.value[field] = payload.value
 }
 
 watch(
@@ -47,10 +51,6 @@ watch(
   },
   { deep: true }
 )
-
-function handleValidation(field: keyof IUser, payload: { value: string; isValid: boolean }) {
-  localForm.value[field] = payload.value
-}
 </script>
 
 <template>
