@@ -17,6 +17,7 @@ import NotificationPreferences from '@/views/Profile/components/NotificationPref
 
 import type { IUser } from '@/interfaces/user.interface'
 import { SubscriptionPlan, UserStatus } from '@/enum/user.enum'
+import BaseAccordion from '@/components/base/BaseAccordion.vue'
 
 //TODO - DEFAULT VALUE WILL BE THE USER INFORMATION
 //TOOD - FUNCTION TO DETECT ANY CHANGE Y COULD SAVE CHANGES
@@ -63,14 +64,14 @@ const form = reactive<IUser>({
 })
 
 const hasUnsavedChanges = ref(false)
-
-watch(
-  form,
-  () => {
-    hasUnsavedChanges.value = true
-  },
-  { deep: true }
-)
+const accordionItems = [
+  { title: 'Información Personal', component: PersonalInfo },
+  { title: 'Ubicación', component: LocationEdit },
+  { title: 'Información Laboral', component: JobInfo },
+  { title: 'Preferencias de Notificación', component: NotificationPreferences },
+  { title: 'Redes Sociales', component: SocialMediaLinks },
+  { title: 'Género', component: GenderInfo }
+]
 
 const hasErrors = computed(() => {
   const socialMediaErrors = Object.values(form.socialMediaLinks).some((link) => {
@@ -102,152 +103,37 @@ function submitForm(): void {
   console.log('Formulario enviado', form)
   hasUnsavedChanges.value = false
 }
+
+watch(
+  form,
+  () => {
+    hasUnsavedChanges.value = true
+  },
+  { deep: true }
+)
 </script>
 
 <template>
   <div class="container mt-5">
-    <h2>Editar Perfil</h2>
+    <h2>Editar perfil</h2>
     <form @submit.prevent="submitForm">
-      <div class="accordion" id="profileAccordion">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingPersonalInfo">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapsePersonalInfo"
-              aria-expanded="false"
-              aria-controls="collapsePersonalInfo"
-            >
-              Información Personal
-            </button>
-          </h2>
-          <div
-            id="collapsePersonalInfo"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingPersonalInfo"
-            data-bs-parent="#profileAccordion"
-          >
-            <PersonalInfo :form="form" @update:form="updateForm" />
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingLocation">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseLocation"
-              aria-expanded="false"
-              aria-controls="collapseLocation"
-            >
-              Ubicación
-            </button>
-          </h2>
-          <div
-            id="collapseLocation"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingLocation"
-            data-bs-parent="#profileAccordion"
-          >
-            <LocationEdit :form="form" @update:form="updateForm" />
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingJobInfo">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseJobInfo"
-              aria-expanded="false"
-              aria-controls="collapseJobInfo"
-            >
-              Información Laboral
-            </button>
-          </h2>
-          <div
-            id="collapseJobInfo"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingJobInfo"
-            data-bs-parent="#profileAccordion"
-          >
-            <JobInfo :form="form" @update:form="updateForm" />
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingNotificationPreferences">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseNotificationPreferences"
-              aria-expanded="false"
-              aria-controls="collapseNotificationPreferences"
-            >
-              Preferencias de Notificación
-            </button>
-          </h2>
-          <div
-            id="collapseNotificationPreferences"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingNotificationPreferences"
-            data-bs-parent="#profileAccordion"
-          >
-            <NotificationPreferences :form="form" @update:form="updateForm" />
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingSocialMedia">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseSocialMedia"
-              aria-expanded="false"
-              aria-controls="collapseSocialMedia"
-            >
-              Redes Sociales
-            </button>
-          </h2>
-          <div
-            id="collapseSocialMedia"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingSocialMedia"
-            data-bs-parent="#profileAccordion"
-          >
-            <SocialMediaLinks :form="form" @update:form="updateForm" />
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingGender">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseGender"
-              aria-expanded="false"
-              aria-controls="collapseGender"
-            >
-              Género
-            </button>
-          </h2>
-          <div
-            id="collapseGender"
-            class="accordion-collapse collapse"
-            aria-labelledby="headingGender"
-            data-bs-parent="#profileAccordion"
-          >
-            <GenderInfo :form="form" @update:form="updateForm" />
-          </div>
-        </div>
+      <div id="profileAccordion" class="accordion">
+        <BaseAccordion
+          v-for="(item, index) in accordionItems"
+          :key="index"
+          :title="item.title"
+          :index="index"
+          parent-id="#profileAccordion"
+        >
+          <component :is="item.component" :form="form" @update:form="updateForm" />
+        </BaseAccordion>
       </div>
       <button
         type="submit"
         class="btn btn-primary mt-3"
         :disabled="hasErrors || !hasUnsavedChanges"
       >
-        Guardar Cambios
+        Guardar cambios
       </button>
     </form>
   </div>
