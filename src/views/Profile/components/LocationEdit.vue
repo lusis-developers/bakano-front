@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, type PropType } from 'vue'
 import { allCountries } from 'country-region-data'
 
 import SelectInput from '@/components/input/SelectInput.vue'
@@ -8,7 +8,12 @@ import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
 
-const props = defineProps<{ form: IUser }>()
+const props = defineProps({
+  form: {
+    type: Object as PropType<IUser>,
+    required: true
+  }
+})
 
 const selectedCountry = ref(props.form.location.country)
 

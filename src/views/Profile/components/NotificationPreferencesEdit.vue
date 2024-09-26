@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, type PropType } from 'vue'
 
 import CheckboxInput from '@/components/input/CheckboxInput.vue'
 
@@ -9,7 +9,12 @@ type NotificationPreferenceKey = keyof IUser['notificationPreferences']
 
 const emit = defineEmits(['update:form'])
 
-const props = defineProps<{ form: IUser }>()
+const props = defineProps({
+  form: {
+    type: Object as PropType<IUser>,
+    required: true
+  }
+})
 
 const notificationOptions: { label: string; option: NotificationPreferenceKey }[] = [
   { label: 'Correo electrónico', option: 'email' },

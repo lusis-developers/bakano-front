@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, type PropType } from 'vue'
+
 import { UserGender } from '@/enum/user.enum'
 import SelectInput from '@/components/input/SelectInput.vue'
 
@@ -7,7 +8,12 @@ import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
 
-const props = defineProps<{ form: IUser }>()
+const props = defineProps({
+  form: {
+    type: Object as PropType<IUser>,
+    required: true
+  }
+})
 
 const localGender = ref<UserGender | ''>(props.form.gender as UserGender | '')
 

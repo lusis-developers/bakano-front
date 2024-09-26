@@ -9,14 +9,13 @@ import {
   phoneNumberValidation
 } from '@/validation/components/ProfileSettings'
 import { SubscriptionPlan, UserStatus } from '@/enum/user.enum'
+import BaseAccordion from '@/components/base/BaseAccordion.vue'
 import PersonalInfo from '@/views/Profile/components/PersonalEdit.vue'
 import LocationEdit from '@/views/Profile/components/LocationEdit.vue'
 import JobInfo from '@/views/Profile/components/JobInformationEdit.vue'
 import GenderInfo from '@/views/Profile/components/GenderInformationEdit.vue'
 import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
 import NotificationPreferences from '@/views/Profile/components/NotificationPreferencesEdit.vue'
-
-import BaseAccordion from '@/components/base/BaseAccordion.vue'
 
 import type { IUser } from '@/interfaces/user.interface'
 import type { AccordionItem } from '@/interfaces/components/accordion/AccordionItem.interface'

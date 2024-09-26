@@ -1,9 +1,18 @@
 <script setup lang="ts">
-const props = defineProps<{
-  title: string
-  index: number
-  parentId: string
-}>()
+const props = defineProps({
+  title: {
+    type: String,
+    required: false
+  },
+  index: {
+    type: Number,
+    required: false,
+  },
+  parentId: {
+    type: String,
+    requiered: false
+  }
+})
 
 const headerId = `heading${props.index}`
 const collapseId = `collapse${props.index}`

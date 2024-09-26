@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, type PropType } from 'vue'
 import { listCountryCodes } from '@/utils/listPhoneCodeArea'
 
 import {
@@ -15,7 +15,12 @@ import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
 
-const props = defineProps<{ form: IUser }>()
+const props = defineProps({
+  form: {
+    type: Object as PropType<IUser>,
+    required: true
+  }
+})
 
 const localForm = ref({ ...props.form })
 const countryCodes = ref(listCountryCodes())
