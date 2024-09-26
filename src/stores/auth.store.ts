@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('authStore', {
     successMessage: null
   }),
   actions: {
-    async signUp(user: IUser): Promise<void> {
+    async signUp(user: Partial<IUser>): Promise<void> {
       this.isLoading = true
       try {
         await authService.signUp(user)

@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 
 import useAuthStore from '@/stores/auth.store'
 import { AlertType } from '@/enum/components/base/baseAlert.interface'
-import type { IUser } from '@/interfaces/services/userRequest.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 export function useAuthForm() {
   const authStore = useAuthStore()
@@ -37,19 +37,18 @@ export function useAuthForm() {
     alertMessage.value = ''
   }
 
-  async function submitForm(user?: IUser): Promise<void> {
+  async function submitForm(user?: Partial<IUser>): Promise<void> {
     const noEmailErrors = emailErrors.value.length === 0
 
     if (noEmailErrors) {
       if (user) {
         await authStore.signUp(user)
       } else {
-        const user = {
-          body: {
-            email: email.value.toLowerCase()
-          }
-        }
-        await authStore.signUp(user)
+        // TODO: login action
+        // const user = {
+        //   email: email.value.toLowerCase()
+        // }
+        // await authStore.login(user)
       }
       const isThereMessage = authStore.error || authStore.successMessage
       alertMessage.value = isThereMessage ?? ''
