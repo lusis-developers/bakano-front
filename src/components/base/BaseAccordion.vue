@@ -6,7 +6,7 @@ const props = defineProps({
   },
   index: {
     type: Number,
-    required: false,
+    required: false
   },
   parentId: {
     type: String,
