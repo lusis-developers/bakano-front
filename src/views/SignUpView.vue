@@ -3,22 +3,15 @@ import { ref, computed } from 'vue'
 
 import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
-import { emailValidations, passwordValidations } from '@/validation/components/emailAndPassword'
+import { emailValidations } from '@/validation/components/emailAndPassword'
 import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 
-const {
-  alertMessage,
-  displayAlert,
-  isDisabled,
-  handleEmailValidation,
-  handlePasswordValidation,
-  closeAlert,
-  submitForm
-} = useAuthForm()
+const { alertMessage, displayAlert, isDisabled, handleEmailValidation, closeAlert, submitForm } =
+  useAuthForm()
 const name = ref<string>('')
 const lastname = ref<string>('')
 const nameErrors = ref<string[]>([])
@@ -84,14 +77,6 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
             placeholder="Ingresa tu correo"
             inputType="email"
             @validation="handleEmailValidation"
-          />
-          <FloatInput
-            :validations="passwordValidations"
-            label="Contraseña"
-            inputId="password"
-            placeholder="Ingresa tu contraseña"
-            inputType="password"
-            @validation="handlePasswordValidation"
           />
           <p class="text-center">
             ¿Tienes cuenta?
