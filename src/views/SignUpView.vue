@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 
 import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
-import { emailValidations } from '@/validation/components/emailAndPassword'
+import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
 import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'

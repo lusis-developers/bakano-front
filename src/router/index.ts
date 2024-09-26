@@ -90,7 +90,7 @@ const routes = [
         }
       },
       {
-        path: 'locuras',
+        path: 'profile',
         component: dashboardView,
         meta: {
           title: 'Bakano 🚀'
