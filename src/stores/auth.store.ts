@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 
 import APIAuth from '@/services/auth/auth'
 import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
-import type { IUser } from '@/interfaces/services/userRequest.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 interface RootState {
   isLoading: boolean

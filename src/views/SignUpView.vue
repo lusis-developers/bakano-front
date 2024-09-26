@@ -9,7 +9,7 @@ import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
-import type { IUser } from '@/interfaces/services/userRequest.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 const {
   alertMessage,
@@ -52,12 +52,10 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
 }
 
 function submit(): void {
-  const user: IUser = {
-    body: {
-      email: email.value.toLowerCase(),
-      name: name.value.toLowerCase(),
-      lastname: lastname.value.toLowerCase()
-    }
+  const user: Partial<IUser> = {
+    email: email.value.toLowerCase(),
+    name: name.value.toLowerCase(),
+    lastname: lastname.value.toLowerCase()
   }
   submitForm(user)
 }
