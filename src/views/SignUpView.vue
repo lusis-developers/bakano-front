@@ -51,9 +51,9 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
 function submit(): void {
   const user: IUser = {
     body: {
-      email: email.value,
-      name: name.value,
-      lastname: lastname.value
+      email: email.value.toLowerCase(),
+      name: name.value.toLowerCase(),
+      lastname: lastname.value.toLowerCase()
     }
   }
   submitForm(user)

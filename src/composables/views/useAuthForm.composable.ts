@@ -48,7 +48,7 @@ export function useAuthForm() {
         console.log('login with email:', email.value)
         const user = {
           body: {
-            email: email.value
+            email: email.value.toLowerCase()
           }
         }
         authStore.signUp(user)
