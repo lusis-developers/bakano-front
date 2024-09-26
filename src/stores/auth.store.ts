@@ -1,0 +1,36 @@
+import { defineStore } from 'pinia'
+
+import APIAuth from '@/services/auth/auth'
+import type { IUser } from '@/interfaces/services/userRequest.interface'
+import { AxiosError } from 'axios'
+
+interface RootState {
+  isLoading: boolean
+  error: string | null
+  successMessage: string | null
+}
+
+const authService = new APIAuth()
+
+export const useAuthStore = defineStore('authStore', {
+  state: (): RootState => ({
+    isLoading: false,
+    error: null,
+    successMessage: null
+  }),
+  actions: {
+    async signUp(user: IUser): Promise<void> {
+      this.isLoading = true
+      try {
+        await authService.signUp(user)
+        this.successMessage = 'Un link fue enviado tu bandeja, revisa en spam si no lo encuentras'
+      } catch (error: unknown) {
+        this.error = error instanceof AxiosError ? error.message : 'Oops algo ocurrió'
+      } finally {
+        this.isLoading = false
+      }
+    }
+  }
+})
+
+export default useAuthStore
