@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
-import { emailValidations, passwordValidations } from '@/validation/components/emailAndPassword'
+import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
 import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
