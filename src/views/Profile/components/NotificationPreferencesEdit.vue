@@ -2,10 +2,19 @@
 import { ref, watch } from 'vue'
 
 import type { IUser } from '@/interfaces/user.interface'
+import CheckboxInput from '@/components/input/CheckboxInput.vue'
+
+type NotificationPreferenceKey = keyof IUser['notificationPreferences']
 
 const emit = defineEmits(['update:form'])
+
 const props = defineProps<{ form: IUser }>()
 
+const notificationOptions: { label: string; option: NotificationPreferenceKey }[] = [
+  { label: 'Correo electrónico', option: 'email' },
+  { label: 'SMS', option: 'sms' },
+  { label: 'Push', option: 'push' }
+]
 const localNotificationPreferences = ref({ ...props.form.notificationPreferences })
 
 watch(
@@ -19,32 +28,12 @@ watch(
 
 <template>
   <div class="accordion-body">
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="emailNotifications"
-        v-model="localNotificationPreferences.email"
-      />
-      <label class="form-check-label" for="emailNotifications">Correo Electrónico</label>
-    </div>
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="smsNotifications"
-        v-model="localNotificationPreferences.sms"
-      />
-      <label class="form-check-label" for="smsNotifications">SMS</label>
-    </div>
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="pushNotifications"
-        v-model="localNotificationPreferences.push"
-      />
-      <label class="form-check-label" for="pushNotifications">Push</label>
-    </div>
+    <CheckboxInput
+      v-for="(option, index) in notificationOptions"
+      :key="index"
+      :label="option.label"
+      :id="option.option"
+      v-model:model-value="localNotificationPreferences[option.option]"
+    />
   </div>
 </template>
