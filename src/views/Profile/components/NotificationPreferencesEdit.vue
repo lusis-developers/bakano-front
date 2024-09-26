@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-import type { IUser } from '@/interfaces/user.interface'
 import CheckboxInput from '@/components/input/CheckboxInput.vue'
+
+import type { IUser } from '@/interfaces/user.interface'
 
 type NotificationPreferenceKey = keyof IUser['notificationPreferences']
 
