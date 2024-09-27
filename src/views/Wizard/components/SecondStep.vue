@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import { JobDescription } from '@/enum/user.enum'
+
+import { jobDescriptionOptions } from '@/utils/wizardSelections.utils'
+import SelectInput from '@/components/input/SelectInput.vue'
+
 const emit = defineEmits(['next', 'prev'])
+
 const props = defineProps({
-  jobDescription: String
+  jobDescription: {
+    type: String,
+    required: false
+  }
 })
 
 const jobDescription = ref(props.jobDescription || '')
@@ -31,16 +38,12 @@ watch(
   <div class="container">
     <h2>Segundo Paso</h2>
     <div class="mb-3">
-      <label for="jobDescription" class="form-label">
-        <i class="bi bi-briefcase-fill" /> Descripción de tu industria
-      </label>
-      <select v-model="jobDescription" id="jobDescription" class="form-select">
-        <option :value="JobDescription.FREELANCER">Freelancer</option>
-        <option :value="JobDescription.MARKETING_AGENCY">Agencia de Marketing</option>
-        <option :value="JobDescription.COMPANY">Empresa</option>
-        <option :value="JobDescription.CONTENT_CREATOR">Creador de Contenido</option>
-        <option :value="JobDescription.OTHER">Otro</option>
-      </select>
+      <SelectInput
+        label="Descripción de tu industria"
+        icon="bi bi-briefcase-fill"
+        :options="jobDescriptionOptions"
+        v-model="jobDescription"
+      />
     </div>
     <div class="d-flex justify-content-between">
       <button class="btn btn-secondary" @click="goBack">Atrás</button>
