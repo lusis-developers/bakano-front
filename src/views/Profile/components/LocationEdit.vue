@@ -1,42 +1,66 @@
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, ref, watch } from 'vue'
+import { computed, ref, watch, type PropType } from 'vue'
 import { allCountries } from 'country-region-data'
 
-import type { ProfileForm } from '@/interfaces/components/Profile/UserProfile.interface'
+import SelectInput from '@/components/input/SelectInput.vue'
+
+import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
-const props = defineProps<{ form: ProfileForm }>()
 
-const selectedCountry = ref('')
-const localRegion = ref(props.form.location.region)
+const props = defineProps({
+  form: {
+    type: Object as PropType<IUser>,
+    required: true
+  }
+})
+
+const selectedCountry = ref(props.form.location.country)
+
+const localProvince = ref(props.form.location.province)
 
 const regions = computed(() => {
   const country = allCountries.find((c) => c[0] === selectedCountry.value)
   return country ? country[2] : []
 })
 
-watch(localRegion, (newRegion) => {
-  emit('update:form', { ...props.form, location: { ...props.form.location, region: newRegion } })
+const countryOptions = computed(() => {
+  return allCountries.map((c) => ({ value: c[0], label: c[0] }))
+})
+
+const regionOptions = computed(() => {
+  return regions.value.map((r) => ({ value: r[0], label: r[0] }))
+})
+
+watch(selectedCountry, (newCountry) => {
+  emit('update:form', { ...props.form, location: { country: newCountry, province: '' } })
+})
+
+watch(localProvince, (newProvince) => {
+  emit('update:form', {
+    ...props.form,
+    location: { ...props.form.location, province: newProvince }
+  })
 })
 </script>
 
 <template>
   <div class="accordion-body">
     <div class="mb-3">
-      <label for="country" class="form-label">País</label>
-      <select class="form-select" id="country" v-model="selectedCountry">
-        <option v-for="(country, index) in allCountries" :key="index" :value="country[0]">
-          {{ country[0] }}
-        </option>
-      </select>
+      <SelectInput
+        inputId="country"
+        label="País"
+        :options="countryOptions"
+        v-model="selectedCountry"
+      />
     </div>
     <div class="mb-3" v-if="regions.length">
-      <label for="region" class="form-label">Región</label>
-      <select class="form-select" id="region" v-model="localRegion">
-        <option v-for="(region, index) in regions" :key="index" :value="region[0]">
-          {{ region[0] }}
-        </option>
-      </select>
+      <SelectInput
+        inputId="region"
+        label="Región"
+        :options="regionOptions"
+        v-model="localProvince"
+      />
     </div>
   </div>
 </template>

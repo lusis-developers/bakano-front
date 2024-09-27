@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { defineEmits } from 'vue'
 
 const emit = defineEmits(['file-selected'])
+
 const fileName = ref('')
 const filePreview = ref('')
 

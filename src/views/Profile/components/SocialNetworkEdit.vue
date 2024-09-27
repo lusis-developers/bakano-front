@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, watch, computed } from 'vue'
+import { ref, watch, computed, type PropType } from 'vue'
 
 import { validateUrl } from '@/validation/components/ProfileSettings'
 
 import type { IUser } from '@/interfaces/user.interface'
 
 const emit = defineEmits(['update:form'])
-const props = defineProps<{ form: IUser }>()
+
+const props = defineProps({
+  form: {
+    type: Object as PropType<IUser>,
+    required: true
+  }
+})
 
 const localSocialMediaLinks = ref({ ...props.form.socialMediaLinks })
 
