@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { UserGender } from '@/enum/user.enum'
+
+import { genderOptions } from '@/utils/wizardSelections.utils';
+import SelectInput from '@/components/input/SelectInput.vue';
 
 const emit = defineEmits(['next', 'prev'])
+
 const props = defineProps({
   gender: String
 })
@@ -40,19 +43,17 @@ watch(
     <div v-if="!isSubmitting" class="container">
       <h2>Tercer Paso</h2>
       <div class="mb-3">
-        <label for="gender" class="form-label">
-          <i class="bi bi-gender-ambiguous" /> Género
-        </label>
-        <select id="gender" v-model="gender" class="form-select">
-          <option :value="UserGender.MALE">Masculino</option>
-          <option :value="UserGender.FEMALE">Femenino</option>
-          <option :value="UserGender.PREFER_NOT_SAY">Prefiero no decir</option>
-        </select>
+        <SelectInput
+          icon="bi bi-gender-ambiguous"
+          label="Preferencias"
+          :options="genderOptions"
+          v-model="gender"
+        />
       </div>
       <div class="d-flex justify-content-between">
         <button class="btn btn-secondary" @click="goBack">Atrás</button>
         <button class="btn btn-primary" @click="submitForm" :disabled="!isFormValid">Enviar</button>
-      </div>
+      </div> 
     </div>
   </transition>
   <transition name="fade">
