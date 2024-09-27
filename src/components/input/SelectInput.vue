@@ -7,6 +7,10 @@ interface Option {
 }
 
 const props = defineProps({
+  icon: {
+    type: String,
+    required: false
+  },
   label: {
     type: String,
     required: false
@@ -40,7 +44,10 @@ const emitChange = () => {
 
 <template>
   <div class="mb-3">
-    <label :for="inputId" class="form-label">{{ label }}</label>
+    <label :for="inputId" class="form-label">
+      <i v-if="icon" :class="icon" />
+      {{ label }}
+    </label>
     <select
       :class="{ 'is-invalid': validationErrors && validationErrors.length > 0 }"
       class="form-select"
