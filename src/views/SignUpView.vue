@@ -1,24 +1,29 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
-import { emailValidations, passwordValidations } from '@/validation/components/EmailAndPassword'
+import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
+import useAuthStore from '@/stores/auth.store'
 import logo from '@/assets/brand/bakano-negro.png'
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+import type { IUser } from '@/interfaces/user.interface'
 
 const {
   alertMessage,
   displayAlert,
+  alertType,
   isDisabled,
   handleEmailValidation,
-  handlePasswordValidation,
   closeAlert,
-  submitForm
+  submitForm,
+  email
 } = useAuthForm()
+
+const authStore = useAuthStore()
+
 const name = ref<string>('')
 const lastname = ref<string>('')
 const nameErrors = ref<string[]>([])
@@ -45,6 +50,15 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
     lastnameErrors.value = []
   }
 }
+
+function submit(): void {
+  const user: Partial<IUser> = {
+    email: email.value.toLowerCase(),
+    name: name.value.toLowerCase(),
+    lastname: lastname.value.toLowerCase()
+  }
+  submitForm(user)
+}
 </script>
 
 <template>
@@ -58,7 +72,7 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
             :isVisible="displayAlert"
             :message="alertMessage"
             :isDismissable="true"
-            :type="AlertType.DANGER"
+            :type="alertType"
             @close="closeAlert"
           />
           <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4" />
@@ -85,14 +99,6 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
             inputType="email"
             @validation="handleEmailValidation"
           />
-          <FloatInput
-            :validations="passwordValidations"
-            label="Contraseña"
-            inputId="password"
-            placeholder="Ingresa tu contraseña"
-            inputType="password"
-            @validation="handlePasswordValidation"
-          />
           <p class="text-center">
             ¿Tienes cuenta?
             <router-link to="/login"> Inicia sesión </router-link>
@@ -100,10 +106,11 @@ function handleLastname({ value, isValid }: { value: string; isValid: boolean })
         </form>
         <BaseButton
           label="Regístrate"
+          :isLoading="authStore.isLoading"
           :isDisabled="isRegistrationDisabled"
           :fullWidth="true"
           btnClass="btn-primary"
-          @click="submitForm"
+          @click="submit"
         />
         <hr class="border border-gray-400" />
         <div class="text-secondary text-center">

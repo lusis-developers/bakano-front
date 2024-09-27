@@ -1,20 +1,27 @@
 import { ref, computed } from 'vue'
 
+import useAuthStore from '@/stores/auth.store'
+import { AlertType } from '@/enum/components/base/baseAlert.interface'
+import type { IUser } from '@/interfaces/user.interface'
+
 export function useAuthForm() {
+  const authStore = useAuthStore()
+
   const email = ref<string>('')
-  const password = ref<string>('')
   const alertMessage = ref<string>('')
   const emailErrors = ref<string[]>([])
-  const passwordErrors = ref<string[]>([])
 
   const displayAlert = computed(() => alertMessage.value.length > 0)
+  const alertType = computed(() => {
+    if (authStore.error) {
+      return AlertType.DANGER
+    } else if (authStore.successMessage) {
+      return AlertType.SUCCESS
+    }
+    return AlertType.DANGER
+  })
   const isDisabled = computed(() => {
-    return (
-      emailErrors.value.length > 0 ||
-      passwordErrors.value.length > 0 ||
-      email.value.length === 0 ||
-      password.value.length === 0
-    )
+    return emailErrors.value.length > 0 || email.value.length === 0
   })
 
   function handleEmailValidation({ value, isValid }: { value: string; isValid: boolean }) {
@@ -26,37 +33,36 @@ export function useAuthForm() {
     }
   }
 
-  function handlePasswordValidation({ value, isValid }: { value: string; isValid: boolean }) {
-    password.value = value
-    if (!isValid) {
-      passwordErrors.value = ['La contraseña ingresada no es válida']
-    } else {
-      passwordErrors.value = []
-    }
-  }
-
   function closeAlert(): void {
     alertMessage.value = ''
   }
 
-  function submitForm(): void {
-    if (emailErrors.value.length === 0 && passwordErrors.value.length === 0) {
-      console.log('Email:', email.value)
-      console.log('Password:', password.value)
+  async function submitForm(user?: Partial<IUser>): Promise<void> {
+    const noEmailErrors = emailErrors.value.length === 0
+
+    if (noEmailErrors) {
+      if (user) {
+        await authStore.signUp(user)
+      } else {
+        // TODO: login action
+        // const user = {
+        //   email: email.value.toLowerCase()
+        // }
+        // await authStore.login(user)
+      }
+      const isThereMessage = authStore.error || authStore.successMessage
+      alertMessage.value = isThereMessage ?? ''
     }
-    alertMessage.value = 'Corrige los errores antes de continuar'
   }
 
   return {
     email,
-    password,
     alertMessage,
     emailErrors,
-    passwordErrors,
+    alertType,
     displayAlert,
     isDisabled,
     handleEmailValidation,
-    handlePasswordValidation,
     closeAlert,
     submitForm
   }

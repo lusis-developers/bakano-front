@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useBrandStore } from '@/stores/brandStore'
+import { useBrandStore } from '@/stores/brand.store'
 import { menuOptions } from '@/utils/menuItems.utils'
 import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 
