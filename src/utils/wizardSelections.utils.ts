@@ -1,4 +1,10 @@
-import { BakanoUsageCount, BakanoUsageType, FoundUsBy, JobDescription, UserGender } from '@/enum/user.enum'
+import {
+  BakanoUsageCount,
+  BakanoUsageType,
+  FoundUsBy,
+  JobDescription,
+  UserGender
+} from '@/enum/user.enum'
 
 import type { SelectOption } from '@/interfaces/components/input/SelectInput.interface'
 
@@ -42,15 +48,19 @@ export const jobDescriptionOptions: SelectOption[] = [
 
 export const genderOptions: SelectOption[] = [
   {
-    value: '', label: 'Seleccione',
+    value: '',
+    label: 'Seleccione'
   },
   {
-    value: UserGender.MALE, label: 'Masculino',
+    value: UserGender.MALE,
+    label: 'Masculino'
   },
   {
-    value: UserGender.FEMALE, label: 'Femenino'
+    value: UserGender.FEMALE,
+    label: 'Femenino'
   },
   {
-    value: UserGender.PREFER_NOT_SAY, label: 'Prefiero no decirlo'
+    value: UserGender.PREFER_NOT_SAY,
+    label: 'Prefiero no decirlo'
   }
 ]

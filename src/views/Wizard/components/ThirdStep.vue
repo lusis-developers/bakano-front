@@ -2,8 +2,9 @@
 import { ref, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { genderOptions } from '@/utils/wizardSelections.utils';
-import SelectInput from '@/components/input/SelectInput.vue';
+import { genderOptions } from '@/utils/wizardSelections.utils'
+
+import SelectInput from '@/components/input/SelectInput.vue'
 
 const emit = defineEmits(['next', 'prev'])
 
@@ -53,7 +54,7 @@ watch(
       <div class="d-flex justify-content-between">
         <button class="btn btn-secondary" @click="goBack">Atrás</button>
         <button class="btn btn-primary" @click="submitForm" :disabled="!isFormValid">Enviar</button>
-      </div> 
+      </div>
     </div>
   </transition>
   <transition name="fade">
