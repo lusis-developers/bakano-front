@@ -14,7 +14,8 @@ export enum JobDescription {
   FREELANCER = 'freelancer',
   MARKETING_AGENCY = 'marketing_agency',
   COMPANY = 'company',
-  CONTENT_CREATOR = 'content_creator'
+  CONTENT_CREATOR = 'content_creator',
+  OTHER = 'other'
 }
 
 export enum BakanoUsageCount {
@@ -31,7 +32,8 @@ export enum FoundUsBy {
   TIK_TOK = 'tik_tok',
   FACEBOOK = 'facebook',
   INSTAGRAM = 'instagram',
-  GOOGLE = 'google'
+  GOOGLE = 'google',
+  WORD_OF_MOUTH = 'word_of_mouth'
 }
 
 export enum UserGender {
