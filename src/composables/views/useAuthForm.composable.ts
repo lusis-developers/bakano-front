@@ -44,11 +44,10 @@ export function useAuthForm() {
       if (user) {
         await authStore.signUp(user)
       } else {
-        // TODO: login action
-        // const user = {
-        //   email: email.value.toLowerCase()
-        // }
-        // await authStore.login(user)
+        const user = {
+          email: email.value.toLowerCase()
+        }
+        await authStore.sendMagicLink(user)
       }
       const isThereMessage = authStore.error || authStore.successMessage
       alertMessage.value = isThereMessage ?? ''

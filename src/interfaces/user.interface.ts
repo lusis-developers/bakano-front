@@ -13,6 +13,7 @@ export interface IUser {
   email: string
   magicLinkToken: string
   magicLinkTokenExpires: Date
+  longTermTokenExpires: Date
   subscription: {
     isActive: boolean
     plan: SubscriptionPlan

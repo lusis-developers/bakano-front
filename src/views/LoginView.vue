@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
 import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
 import useAuthStore from '@/stores/auth.store'
@@ -9,8 +8,15 @@ import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 
-const { alertMessage, displayAlert, isDisabled, handleEmailValidation, closeAlert, submitForm } =
-  useAuthForm()
+const {
+  alertMessage,
+  displayAlert,
+  isDisabled,
+  handleEmailValidation,
+  closeAlert,
+  submitForm,
+  alertType
+} = useAuthForm()
 
 const authStore = useAuthStore()
 </script>
@@ -26,7 +32,7 @@ const authStore = useAuthStore()
             :isVisible="displayAlert"
             :message="alertMessage"
             :isDismissable="true"
-            :type="AlertType.DANGER"
+            :type="alertType"
             @close="closeAlert"
           />
           <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4" />
