@@ -65,7 +65,7 @@ function submit(): void {
   <ContainerWrapper>
     <template #content>
       <div
-        class="form-wraper w-100 min-vh-100 d-flex flex-column justify-content-center align-items-center"
+        class="form-wraper w-100 mt-5 d-flex flex-column justify-content-center align-items-center"
       >
         <form class="w-100">
           <BaseAlert
@@ -75,7 +75,7 @@ function submit(): void {
             :type="alertType"
             @close="closeAlert"
           />
-          <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4" />
+          <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4 mt-5" />
           <p class="fs-3 text-center">Regístrate</p>
           <FloatInput
             label="Nombre"
