@@ -49,3 +49,8 @@ export interface IUser {
   }
   gender: string
 }
+
+export interface LoginResponse {
+  user: IUser
+  token: string
+}

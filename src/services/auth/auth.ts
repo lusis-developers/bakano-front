@@ -1,7 +1,7 @@
 import APIBase from '../BaseHttp'
-
 import type { AxiosResponse } from 'axios'
-import type { IUser } from '@/interfaces/user.interface'
+
+import type { IUser, LoginResponse } from '@/interfaces/user.interface'
 
 class APIAuth extends APIBase {
   async signUp(user: Partial<IUser>): Promise<AxiosResponse> {
@@ -12,8 +12,8 @@ class APIAuth extends APIBase {
     return await this.post('send-magic-link', user)
   }
 
-  async login(user: Partial<IUser>): Promise<AxiosResponse<IUser>> {
-    return await this.post('login', user)
+  async login(token: string): Promise<AxiosResponse<LoginResponse>> {
+    return await this.post('login', { token })
   }
 }
 

@@ -43,13 +43,17 @@ export const useAuthStore = defineStore('authStore', {
         this.isLoading = false
       }
     },
-    async login(user: Partial<IUser>): Promise<void> {
+    async login(token: string): Promise<IUser | null> {
       this.isLoading = true
       try {
-        const response = await authService.login(user)
-        console.log('response', response)
+        const response = await authService.login(token)
+        const longTermToken = response.data.token
+        localStorage.setItem('auth', longTermToken)
+        console.log('response', response.data.token)
+        return response.data.user
       } catch (error: unknown) {
         this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        return null
       } finally {
         this.isLoading = false
       }

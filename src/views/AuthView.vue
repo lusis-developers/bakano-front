@@ -1,0 +1,53 @@
+<script setup lang="ts">
+import { computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+
+import useAuthStore from '@/stores/auth.store'
+import logo from '@/assets/brand/bakano-negro.png'
+import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+
+const route = useRoute()
+
+const authStore = useAuthStore()
+
+const token = computed(() => route.query.token)
+
+onMounted(() => {
+  if (token.value) {
+    // const user = authStore.login(token.value as string)
+    console.log(token.value)
+  }
+})
+</script>
+
+<template>
+  <ContainerWrapper>
+    <template #content>
+      <div class="auth mt-5 pt-5">
+        <div class="auth-loading"></div>
+        <div class="auth-no-auth d-flex flex-column justify-content-center gap-4 mt-5 pt-5">
+          <img :src="logo" alt="bakano logo" />
+          <h1 class="text-center">No estás autenticado...</h1>
+          <router-link class="text-center text-success text-decoration-underline fs-5" to="/login">
+            Ir a Inicio de sesión</router-link
+          >
+        </div>
+      </div>
+    </template>
+  </ContainerWrapper>
+</template>
+
+<style lang="scss" scoped>
+.auth {
+  &-no-auth {
+    width: 100%;
+    max-width: 380px;
+    img {
+      width: 100px;
+      margin: auto;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+}
+</style>
