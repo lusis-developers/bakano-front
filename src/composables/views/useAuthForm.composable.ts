@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 
+import { AlertType } from '@/enum/components/base/baseAlert.enum'
 import useAuthStore from '@/stores/auth.store'
-import { AlertType } from '@/enum/components/base/baseAlert.interface'
 import type { IUser } from '@/interfaces/user.interface'
 
 export function useAuthForm() {
