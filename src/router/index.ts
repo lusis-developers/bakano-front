@@ -1,9 +1,4 @@
-import {
-  createRouter,
-  createWebHistory,
-  type NavigationGuardNext,
-  type RouteLocationNormalized
-} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { checkTokenValidity } from './utils/checkToken'
 
 const loginView = () => import('@/views/LoginView.vue')
@@ -17,10 +12,6 @@ const dashboardView = () => import('@/views/Dashboard/DashboardView.vue')
 const profileView = () => import('@/views/Profile/ProfileView.vue')
 const wizardView = () => import('@/views/Wizard/WizardView.vue')
 const authView = () => import('@/views/AuthView.vue')
-
-function isLoggedIn(): boolean {
-  return true
-}
 
 const routes = [
   {

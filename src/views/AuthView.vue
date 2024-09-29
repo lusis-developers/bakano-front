@@ -2,11 +2,11 @@
 import { computed, onBeforeMount, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+import { SpinnerSize } from '@/enum/components/shared/SpinnerLoader.enum'
 import useAuthStore from '@/stores/auth.store'
 import logo from '@/assets/brand/bakano-negro.png'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 import SpinnerLoader from '@/components/shared/SpinnerLoader.vue'
-import { SpinnerSize } from '@/enum/components/shared/SpinnerLoader.enum'
 
 const route = useRoute()
 const router = useRouter()
