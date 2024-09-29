@@ -52,5 +52,5 @@ export interface IUser {
 
 export interface LoginResponse {
   user: IUser
-  token: string
+  longTermToken: string
 }

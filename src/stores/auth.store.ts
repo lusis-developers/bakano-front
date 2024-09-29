@@ -47,9 +47,9 @@ export const useAuthStore = defineStore('authStore', {
       this.isLoading = true
       try {
         const response = await authService.login(token)
-        const longTermToken = response.data.token
-        localStorage.setItem('auth', longTermToken)
-        console.log('response', response.data.token)
+        const longTermToken = response.data.longTermToken
+        localStorage.setItem('app-client-secret', longTermToken)
+        console.log('response', response.data.longTermToken)
         return response.data.user
       } catch (error: unknown) {
         this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR

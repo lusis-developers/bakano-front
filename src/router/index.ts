@@ -83,6 +83,7 @@ const routes = [
       {
         path: 'dashboard',
         component: dashboardView,
+        name: 'Dashboard',
         meta: {
           title: 'Bakano 🚀'
         }
