@@ -4,6 +4,7 @@ import {
   type NavigationGuardNext,
   type RouteLocationNormalized
 } from 'vue-router'
+import { checkTokenValidity } from './utils/checkToken'
 
 const loginView = () => import('@/views/LoginView.vue')
 const signUpView = () => import('@/views/SignUpView.vue')
@@ -61,17 +62,6 @@ const routes = [
   {
     path: '/app',
     component: userLayout,
-    beforeEnter: (
-      _to: RouteLocationNormalized,
-      _from: RouteLocationNormalized,
-      next: NavigationGuardNext
-    ) => {
-      if (isLoggedIn()) {
-        next()
-      } else {
-        next('/login')
-      }
-    },
     meta: {
       title: 'Tu agencia digital 🚀'
     },
@@ -125,8 +115,18 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to) => {
+router.beforeEach(async (to, _from, next) => {
   document.title = to.meta.title as string
+
+  if (to.path.startsWith('/app')) {
+    const tokenIsValid = await checkTokenValidity()
+
+    if (!tokenIsValid) {
+      return next({ name: 'Login' })
+    }
+  }
+
+  next()
 })
 
 export default router
