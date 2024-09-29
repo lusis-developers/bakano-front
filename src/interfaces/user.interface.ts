@@ -13,6 +13,7 @@ export interface IUser {
   email: string
   magicLinkToken: string
   magicLinkTokenExpires: Date
+  longTermTokenExpires: Date
   subscription: {
     isActive: boolean
     plan: SubscriptionPlan
@@ -47,4 +48,9 @@ export interface IUser {
     website?: string
   }
   gender: string
+}
+
+export interface LoginResponse {
+  user: IUser
+  longTermToken: string
 }

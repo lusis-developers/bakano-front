@@ -30,6 +30,33 @@ export const useAuthStore = defineStore('authStore', {
       } finally {
         this.isLoading = false
       }
+    },
+    async sendMagicLink(user: Partial<IUser>): Promise<void> {
+      this.isLoading = true
+      try {
+        await authService.sendMagicLink(user)
+        this.successMessage = 'Un link fue enviado tu bandeja'
+      } catch (error: unknown) {
+        console.log(error)
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
+    },
+    async login(token: string): Promise<IUser | null> {
+      this.isLoading = true
+      try {
+        const response = await authService.login(token)
+        const longTermToken = response.data.longTermToken
+        localStorage.setItem('app-client-secret', longTermToken)
+        console.log('response', response.data.longTermToken)
+        return response.data.user
+      } catch (error: unknown) {
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        return null
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 })

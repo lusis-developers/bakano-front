@@ -14,11 +14,5 @@
 .container-xxl {
   max-height: 100vh;
   overflow-y: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  &::-webkit-scrollbar-track {
-    display: none;
-  }
 }
 </style>

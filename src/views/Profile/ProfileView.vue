@@ -50,6 +50,7 @@ const form = reactive<IUser>({
   },
   magicLinkToken: '',
   magicLinkTokenExpires: new Date(),
+  longTermTokenExpires: new Date(),
   subscription: {
     isActive: false,
     plan: SubscriptionPlan.FREE,

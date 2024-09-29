@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AlertType } from '@/enum/components/base/baseAlert.interface'
+import { AlertType } from '@/enum/components/base/baseAlert.enum'
 
 const emit = defineEmits(['close'])
 defineProps({
