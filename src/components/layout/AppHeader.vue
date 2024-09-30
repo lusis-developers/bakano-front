@@ -5,6 +5,7 @@ import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 
 import type { Brand } from '@/interfaces/components/Layout/BrandsTypes.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
+import CreateBrand from '@/views/Forms/CreateBrand/CreateBrand.vue'
 
 const brandStore = useBrandStore()
 
@@ -58,4 +59,5 @@ function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
       </div>
     </nav>
   </header>
+  <CreateBrand :isVisible="true" />
 </template>
