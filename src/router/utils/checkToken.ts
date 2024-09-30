@@ -6,7 +6,6 @@ export async function checkTokenValidity(): Promise<boolean> {
   if (token) {
     const user = await authStore.login(token)
     const isValid = user !== null
-    console.log('isValid', isValid)
     return isValid
   }
   return false
