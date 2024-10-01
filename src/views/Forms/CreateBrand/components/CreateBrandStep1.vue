@@ -1,20 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { reactive } from 'vue';
 
 import FloatInput from '@/components/input/FloatInput.vue';
 import type { IBrand } from '@/interfaces/Brand/brand.interface';
-import type { TargetBrandGender } from '@/enum/brand.enum';
+import { TargetBrandGender } from '@/enum/brand.enum';
+import UploadFileInput from '@/components/input/uploadFileInput.vue';
 
-const formData: Partial<IBrand> = ref({
+const formData = reactive<Partial<IBrand>>({
   name: '',
   targetAudience: {
-    gender: [] as TargetBrandGender[]
-  }
+    gender: [TargetBrandGender.EMPTY],
+    ageRange: '',
+    preferences: ''
+  },
+
 });
 
 const nameValidation = [
   { rule: (value: string) => !!value.trim(), message: 'El nombre es requerido' },
 ];
+
+async function handleFile (file: File) {
+  console.log('file: ', file)
+}
 </script>
 
 <template>
@@ -25,8 +33,15 @@ const nameValidation = [
           label="Nombre de la marca" 
           inputId="brandName" 
           v-model:modelValue="formData.name" 
-          :validations="nameValidation" 
+          :validations="nameValidation"
         />
+        <div>
+          <p>
+            Agrega un logo
+          </p>
+          <UploadFileInput
+            @fileSelected="handleFile"/>
+        </div>
       </div>
     </form>
   </div>
