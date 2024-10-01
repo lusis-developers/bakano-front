@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import useAuthStore from '@/stores/auth.store'
 import { onMounted } from 'vue'
 
+import { facebookPermissions } from '@/config/components/facebookPermissions.config'
+import useAuthStore from '@/stores/auth.store'
+
 const authStore = useAuthStore()
+
+const scope = facebookPermissions.join(',')
 
 async function initFacebookSDK() {
   try {
@@ -11,14 +15,13 @@ async function initFacebookSDK() {
     console.log(import.meta.env.VITE_FACEBOOK_ID)
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: import.meta.env.VITE_FACEBOOK_ID, // Reemplaza con tu App ID de Facebook
+        appId: import.meta.env.VITE_FACEBOOK_ID,
         cookie: true,
         xfbml: true,
-        version: 'v20.0' // Versión de la API
+        version: 'v20.0' // Versión de la API DE FACEBOOK
       })
       window.FB.AppEvents.logPageView() // Registro de eventos
     }
-    console.log('estamos debajo del init interno')
 
     // Cargar el SDK de Facebook de manera asincrónica
     ;(function (d, s, id) {
@@ -49,7 +52,7 @@ function loginWithFacebook() {
           statusChangeCallback(loginResponse)
         },
         {
-          scope: 'ads_management,ads_read,pages_read_engagement,business_management'
+          scope: scope
         }
       )
     }
@@ -66,7 +69,6 @@ function statusChangeCallback(response: any) {
   }
 }
 
-// Ejecutar cuando el componente se monte
 onMounted(() => {
   initFacebookSDK()
 })
