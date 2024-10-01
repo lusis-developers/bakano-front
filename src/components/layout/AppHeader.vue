@@ -9,21 +9,30 @@ import type { Brand } from '@/interfaces/components/Layout/BrandsTypes.interface
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
 import CreateBrand from '@/views/Forms/CreateBrand/CreateBrand.vue'
 import useUserStore from '@/stores/user.store'
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const userStore = useUserStore()
 const brandStore = useBrandStore()
 
-function handleBrandSelection(brand: Brand): void {
+const isCreateBrandModalVisible = ref(false)
+
+function showCreateBrandModal() {
+  isCreateBrandModalVisible.value = true
+}
+
+function handleBrandSelection(brand: IBrand): void {
   brandStore.setSelectedBrand(brand)
 }
 
-function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
-  return brands.map((brand) => ({
-    ...brand,
+function getBrandsAsMenuItems(brands: IBrand[]): MenuDropdownItem[] {
+  const brandForMenu = brands.map((brand: IBrand) => ({
+    name: brand.name,
+    logo: brand.logo,
     link: '#'
   }))
+  console.log('brandForMenu: ', brandForMenu)
+  return brandForMenu
 }
-
 onMounted(async () => {
   await brandStore.getUserBrands(userStore.user?._id as string)
 })
@@ -38,8 +47,8 @@ onMounted(async () => {
         </div>
         <div class="d-flex align-items-center gap-3">
           <DropdownMenu
-            :menuOptions="menuOptions"
-            :menuItems="getMenuItems(brandStore.brands)"
+            :menuOptions="menuOptions({ showCreateBrandModal })"
+            :menuItems="getBrandsAsMenuItems(brandStore.brands)"
             @item-click="handleBrandSelection"
           >
             <template #button-content>
@@ -67,5 +76,5 @@ onMounted(async () => {
       </div>
     </nav>
   </header>
-  <CreateBrand :isVisible="false" />
+  <CreateBrand :isVisible="isCreateBrandModalVisible" />
 </template>
