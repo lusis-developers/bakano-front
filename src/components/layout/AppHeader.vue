@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
 import { useBrandStore } from '@/stores/brand.store'
 import { menuOptions } from '@/utils/menuItems.utils'
 import DropdownMenu from '@/components/layout/DropdownMenu.vue'
@@ -6,7 +8,9 @@ import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 import type { Brand } from '@/interfaces/components/Layout/BrandsTypes.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
 import CreateBrand from '@/views/Forms/CreateBrand/CreateBrand.vue'
+import useUserStore from '@/stores/user.store'
 
+const userStore = useUserStore()
 const brandStore = useBrandStore()
 
 function handleBrandSelection(brand: Brand): void {
@@ -19,6 +23,10 @@ function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
     link: '#'
   }))
 }
+
+onMounted(async () => {
+  await brandStore.getUserBrands(userStore.user?._id as string)
+})
 </script>
 
 <template>
@@ -59,5 +67,5 @@ function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
       </div>
     </nav>
   </header>
-  <CreateBrand :isVisible="true" />
+  <CreateBrand :isVisible="false" />
 </template>
