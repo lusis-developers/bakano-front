@@ -7,17 +7,21 @@ import useAuthStore from '@/stores/auth.store'
 import logo from '@/assets/brand/bakano-negro.png'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 import SpinnerLoader from '@/components/shared/SpinnerLoader.vue'
+import useUserStore from '@/stores/user.store'
 
 const route = useRoute()
 const router = useRouter()
 
 const authStore = useAuthStore()
+const userStore = useUserStore()
 
 const token = computed(() => route.query.token)
 
 onMounted(async () => {
   if (token.value) {
-    await authStore.login(token.value as string)
+    const user = await authStore.login(token.value as string)
+    const userlogged = await userStore.setUser(user)
+    console.log('userlogged: ', userlogged)
     router.push({ name: 'Dashboard' })
   }
 })
