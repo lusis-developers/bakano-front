@@ -5,7 +5,6 @@ import { useBrandStore } from '@/stores/brand.store'
 import { menuOptions } from '@/utils/menuItems.utils'
 import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 
-import type { Brand } from '@/interfaces/components/Layout/BrandsTypes.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
 import CreateBrand from '@/views/Forms/CreateBrand/CreateBrand.vue'
 import useUserStore from '@/stores/user.store'
