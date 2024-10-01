@@ -76,6 +76,9 @@ onMounted(() => {
 
 <template>
   <div>
-    <button class="btn btn-primary" @click="loginWithFacebook">Iniciar sesión con Facebook</button>
+    <button class="btn btn-facebook" @click="loginWithFacebook">
+      Conectar con Facebook
+      <i class="bi bi-facebook"></i>
+    </button>
   </div>
 </template>
