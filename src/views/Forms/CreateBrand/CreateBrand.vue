@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 import GlobalModal from '@/components/shared/GlobalModal.vue'
 import CreateBrandStep1 from './components/CreateBrandStep1.vue'
 import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import { TargetBrandGender } from '@/enum/brand.enum'
 
 const currentStep = ref(1)
 
@@ -14,6 +16,22 @@ defineProps({
     required: true,
     default: true
   }
+})
+
+
+const formData: IBrand = reactive({
+  name: '',
+  description: '',
+  logo: '',
+  industry: '',
+  operationCountry: '',
+  targetAudience: {
+    ageRange: '',
+    gender: [TargetBrandGender.EMPTY],
+    preferences: '',
+  },
+  user: '',
+  id: '',
 })
 
 function handleClose(): void {
