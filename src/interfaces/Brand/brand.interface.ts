@@ -1,11 +1,10 @@
-import type { TargetBrandGender } from '@/enum/brand.enum'
-import type { brandIndustry } from './brandIndustry.interface'
+import type { BrandIndustry, TargetBrandGender } from '@/enum/brand.enum'
 
 export interface IBrand {
   name: string
   operationCountry: string
   targetAudience: UserTargetAudience
-  industry: brandIndustry | string
+  industry: BrandIndustry | string
   logo: string
   user: string
   description: string
@@ -13,7 +12,7 @@ export interface IBrand {
 }
 
 export interface UserTargetAudience {
-  ageRange: string
+  ageRange: [string]
   gender: TargetBrandGender[]
   preferences: string
 }
