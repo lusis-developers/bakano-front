@@ -40,36 +40,39 @@ pnpm install
 ```
 
 ### Setup the env variables
+3.
 - Create a `.env` file in the root directory and add the necessary environment variables.
 
 *The env variables would be provided you
 
 ### Compile and Hot-Reload for Development
 
+4. 
 ```sh
 pnpm dev
 ```
 
 ### Format the code 
+5.
 ```sh
 pnpm format
 ```
 
 ### Type-Check, Compile and Minify for Production
-
+6.
 ```sh
 pnpm build
 ```
 
 
 ### Lint with [ESLint](https://eslint.org/)
-
+7.
 ```sh
 pnpm lint
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
-
+8.
 ```sh
 pnpm test:unit
 ```
