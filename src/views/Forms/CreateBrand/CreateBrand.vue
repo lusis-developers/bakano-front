@@ -18,7 +18,6 @@ defineProps({
   }
 })
 
-
 const formData: IBrand = reactive({
   name: '',
   description: '',
@@ -28,10 +27,10 @@ const formData: IBrand = reactive({
   targetAudience: {
     ageRange: '',
     gender: [TargetBrandGender.EMPTY],
-    preferences: '',
+    preferences: ''
   },
   user: '',
-  id: '',
+  id: ''
 })
 
 function handleClose(): void {
