@@ -64,12 +64,12 @@ function prevStep(): void {
         <CreateBrandStep4 v-if="currentStep === 4" @prev="prevStep"/>
       </template>
       <template #footer>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between w-100">
           <button @click="prevStep" :disabled="currentStep === 1" class="btn bg-primary text-white">
             Anterior
           </button>
           <button @click="nextStep" :disabled="currentStep === 4" class="btn bg-primary text-white">
-            Siguiente
+            {{ currentStep !== 4 ? 'Siguiente' : 'Crear' }}
           </button>
         </div>
       </template>
