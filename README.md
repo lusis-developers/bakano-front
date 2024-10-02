@@ -2,11 +2,11 @@
 
 The frontend platform where the magic happens
 
-This template should help get you started developing with Vue 3 in Vite and to styles is used [Bootstrap](https://getbootstrap.com/).
+This template should help get you started developing with [Vue 3](https://vuejs.org/) in [Vite](https://vite.dev/) and to styles is used [Bootstrap](https://getbootstrap.com/).
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[VSCode](https://code.visualstudio.com/) 
 
 [Cursor](https://www.cursor.com/)
 
