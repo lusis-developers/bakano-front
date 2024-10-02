@@ -29,7 +29,7 @@ class APIBrand extends APIBase {
   }
 
   async getBrands(userId: string): Promise<AxiosResponse<GetBrandsResponse>> {
-    return await this.get(`get-brands/${userId}`)
+    return await this.get(`brands/${userId}`)
   }
 }
 

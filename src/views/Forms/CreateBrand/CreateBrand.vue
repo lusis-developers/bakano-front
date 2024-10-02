@@ -7,6 +7,7 @@ import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import { TargetBrandGender } from '@/enum/brand.enum'
+import CreateBrandStep4 from './components/CreateBrandStep4.vue'
 
 const currentStep = ref(1)
 
@@ -26,7 +27,7 @@ const formData: IBrand = reactive({
   operationCountry: '',
   targetAudience: {
     ageRange: '',
-    gender: [TargetBrandGender.EMPTY],
+    gender: [TargetBrandGender.NOT_SURE],
     preferences: ''
   },
   user: '',
@@ -38,7 +39,7 @@ function handleClose(): void {
 }
 
 function nextStep(): void {
-  if (currentStep.value < 3) {
+  if (currentStep.value < 4) {
     currentStep.value++
   }
 }
@@ -59,14 +60,15 @@ function prevStep(): void {
       <template #content>
         <CreateBrandStep1 v-if="currentStep === 1" @next="nextStep" />
         <CreateBrandStep2 v-if="currentStep === 2" @next="nextStep" @prev="prevStep" />
-        <CreateBrandStep3 v-if="currentStep === 3" @prev="prevStep" />
+        <CreateBrandStep3 v-if="currentStep === 3" @next="nextStep" @prev="prevStep" />
+        <CreateBrandStep4 v-if="currentStep === 4" @prev="prevStep"/>
       </template>
       <template #footer>
         <div class="d-flex justify-content-between">
           <button @click="prevStep" :disabled="currentStep === 1" class="btn bg-primary text-white">
             Anterior
           </button>
-          <button @click="nextStep" :disabled="currentStep === 3" class="btn bg-primary text-white">
+          <button @click="nextStep" :disabled="currentStep === 4" class="btn bg-primary text-white">
             Siguiente
           </button>
         </div>
