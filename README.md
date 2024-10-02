@@ -27,11 +27,22 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ### Getting Started
 
+1. Clone te repository
+```
+git clone git@github.com:lusis-developers/bakano-front.git
+```
+
 ## Project Setup
 
+2. Install dependencies
 ```sh
 pnpm install
 ```
+
+### Setup the env variables
+- Create a `.env` file in the root directory and add the necessary environment variables.
+
+*The env variables would be provided you
 
 ### Compile and Hot-Reload for Development
 
