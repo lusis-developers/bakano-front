@@ -1,10 +1,21 @@
 # front-bakano
 
-This template should help get you started developing with Vue 3 in Vite.
+The frontend platform where the magic happens
+
+This template should help get you started developing with Vue 3 in Vite and to styles is used [Bootstrap](https://getbootstrap.com/).
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+
+[Cursor](https://www.cursor.com/)
+
+## Prerequisites
+
+- Node.js (v18 or later)
+- pnpm 
+- ENV variables (will be provided)
+
 
 ## Type Support for `.vue` Imports in TS
 
@@ -13,6 +24,8 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+### Getting Started
 
 ## Project Setup
 
@@ -26,20 +39,26 @@ pnpm install
 pnpm dev
 ```
 
+### Format the code 
+```sh
+pnpm format
+```
+
 ### Type-Check, Compile and Minify for Production
 
 ```sh
 pnpm build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-pnpm test:unit
-```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
 pnpm lint
+```
+
+### Run Unit Tests with [Vitest](https://vitest.dev/)
+
+```sh
+pnpm test:unit
 ```
