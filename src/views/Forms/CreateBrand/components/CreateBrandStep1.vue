@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 
 import FloatInput from '@/components/input/FloatInput.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
-import { TargetBrandGender } from '@/enum/brand.enum'
-import { wordValidation } from '@/validation/components/ProfileSettings'
-// import UploadFileInput from '@/components/input/uploadFileInput.vue';
+
+const emit = defineEmits(['update:brand-data'])
 
 const formData = reactive<Partial<IBrand>>({
   name: '',
-  targetAudience: {
-    gender: [TargetBrandGender.NOT_SURE],
-    ageRange: '',
-    preferences: ''
-  }
+  operationCountry: ''
 })
 
-// async function handleFile (file: File) {
-//   console.log('file: ', file)
-// }
+const updateFormData = (field: keyof IBrand, value: string) => {
+  formData[field] = value
+}
+
+watch(formData, () => {
+  emit('update:brand-data', formData)
+})
 </script>
 
 <template>
@@ -30,13 +29,13 @@ const formData = reactive<Partial<IBrand>>({
           label="Nombre de la marca"
           inputId="brandName"
           v-model:modelValue="formData.name"
-          :validations="wordValidation"
+          @input="updateFormData('name', $event.target.value)"
         />
         <FloatInput
           label="País de operaciones"
           inputId="operationCountries"
           v-model:modelValue="formData.operationCountry"
-          :validations="wordValidation"
+          @input="updateFormData('operationCountry', $event.target.value)"
         />
       </div>
     </form>

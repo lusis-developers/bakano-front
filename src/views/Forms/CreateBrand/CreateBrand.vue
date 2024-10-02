@@ -49,6 +49,12 @@ function prevStep(): void {
     currentStep.value--
   }
 }
+
+function handleDataStep1(data: any) {
+  console.log('Datos recibidos desde CreateBrandStep1:', data)
+  formData.name = data.name
+  formData.operationCountry = data.operationCountry
+}
 </script>
 
 <template>
@@ -58,10 +64,14 @@ function prevStep(): void {
         <h2>Crear marca 📌</h2>
       </template>
       <template #content>
-        <CreateBrandStep1 v-if="currentStep === 1" @next="nextStep" />
+        <CreateBrandStep1
+          v-if="currentStep === 1"
+          @update:brand-data="handleDataStep1"
+          @next="nextStep"
+        />
         <CreateBrandStep2 v-if="currentStep === 2" @next="nextStep" @prev="prevStep" />
         <CreateBrandStep3 v-if="currentStep === 3" @next="nextStep" @prev="prevStep" />
-        <CreateBrandStep4 v-if="currentStep === 4" @prev="prevStep"/>
+        <CreateBrandStep4 v-if="currentStep === 4" @prev="prevStep" />
       </template>
       <template #footer>
         <div class="d-flex justify-content-between w-100">

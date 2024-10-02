@@ -26,7 +26,7 @@ const genders = [
   { value: TargetBrandGender.NOT_SURE, label: 'No estoy seguro' }
 ]
 
-function handleSubmit () {
+function handleSubmit() {
   console.log('Rangos de edad seleccionados:', selectedAgeRanges.value)
 }
 </script>
@@ -49,9 +49,7 @@ function handleSubmit () {
         id="ageRangeSelector"
       />
       <hr class="my-4" />
-      <h6>
-        Escribe lo que consideres le guste a tu público objetivo
-      </h6>
+      <h6>Escribe lo que consideres le guste a tu público objetivo</h6>
       <FloatInput
         label="Preferencias de tu público"
         inputId="brandName"

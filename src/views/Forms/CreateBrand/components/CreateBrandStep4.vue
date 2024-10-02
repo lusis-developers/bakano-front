@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import FloatInput from '@/components/input/FloatInput.vue';
-
-
+import FloatInput from '@/components/input/FloatInput.vue'
 </script>
 
 <template>
@@ -11,6 +9,6 @@ import FloatInput from '@/components/input/FloatInput.vue';
       label="Describe un poco lo que hace tu marca"
       inputId="brandDescription"
       placeholder="Describe un poco lo que hace tu marca"
-      />
+    />
   </div>
 </template>

@@ -1,4 +1,4 @@
-import { BrandIndustry } from "@/enum/brand.enum";
+import { BrandIndustry } from '@/enum/brand.enum'
 
 export const industriesOptions = [
   {
@@ -82,7 +82,7 @@ export const industriesOptions = [
     label: 'Farmacéutica'
   },
   {
-    value: 'Otros', 
+    value: 'Otros',
     label: 'Otros'
   }
-];
+]
