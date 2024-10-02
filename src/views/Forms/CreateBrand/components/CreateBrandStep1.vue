@@ -11,7 +11,7 @@ const formData = reactive<Partial<IBrand>>({
   operationCountry: ''
 })
 
-const updateFormData = (field: keyof IBrand, value: string) => {
+function updateFormData (field: keyof IBrand, value: string):void {
   formData[field] = value
 }
 
