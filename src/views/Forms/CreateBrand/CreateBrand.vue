@@ -64,8 +64,7 @@ function prevStep(): void {
   }
 }
 
-function handleDataStep1(data: any): void {
-  console.log({ data })
+function handleDataStep1(data: Pick<IBrand, 'name' | 'operationCountry' | 'mainAddress'>): void {
   formData.name = data.name
   formData.operationCountry = data.operationCountry
   formData.mainAddress = data.mainAddress
@@ -108,6 +107,11 @@ async function handleCreate() {
     notificationMessage.value = brandStore.error
     notificationType.value = NotificationType.ERROR
   }
+
+  setTimeout(() => {
+    notificationMessage.value = ''
+    notificationType.value = NotificationType.SUCCESS
+  }, 3000)
 }
 </script>
 
