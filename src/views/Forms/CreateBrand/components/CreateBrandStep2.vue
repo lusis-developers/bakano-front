@@ -21,7 +21,7 @@ const formData = reactive<Partial<IBrand>>({
   }
 })
 
-const genders = [
+const genders: { value: TargetBrandGender; label: string }[] = [
   { value: TargetBrandGender.MALE, label: 'Masculino' },
   { value: TargetBrandGender.FEMALE, label: 'Femenino' },
   { value: TargetBrandGender.NOT_SURE, label: 'No estoy seguro' }

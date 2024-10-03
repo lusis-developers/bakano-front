@@ -74,7 +74,8 @@ onMounted(async () => {
       </div>
     </nav>
   </header>
-  <CreateBrand 
-    :isVisible="isCreateBrandModalVisible" 
-    @update:is-visible="isCreateBrandModalVisible = $event"/>
+  <CreateBrand
+    :isVisible="isCreateBrandModalVisible"
+    @update:is-visible="isCreateBrandModalVisible = $event"
+  />
 </template>

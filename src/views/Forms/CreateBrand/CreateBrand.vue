@@ -10,11 +10,10 @@ import CreateBrandStep4 from './components/CreateBrandStep4.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import useUserStore from '@/stores/user.store'
 
+const emit = defineEmits(['update:isVisible'])
+
 const brandStore = useBrandStore()
 const userStore = useUserStore()
-
-const currentStep = ref(1)
-const isCreated = ref(false) 
 
 defineProps({
   isVisible: {
@@ -23,6 +22,9 @@ defineProps({
     default: true
   }
 })
+
+const currentStep = ref(1)
+const isCreated = ref(false)
 
 const formData: IBrand = reactive({
   name: '',
@@ -41,6 +43,7 @@ const formData: IBrand = reactive({
 
 function handleClose(): void {
   console.log('Se ha cerrado el modal')
+  emit('update:isVisible', false)
 }
 
 function nextStep(): void {
@@ -86,10 +89,10 @@ function handleDataStep4(data: Pick<IBrand, 'description'>): void {
 }
 
 async function handleCreate() {
-  const userId = await userStore.user?._id
+  const userId = userStore.user?._id
   await brandStore.createBrand(formData, userId!)
   await brandStore.getUserBrands(userId!)
-  isCreated.value = true // Marca creada
+  isCreated.value = true
 }
 </script>
 
