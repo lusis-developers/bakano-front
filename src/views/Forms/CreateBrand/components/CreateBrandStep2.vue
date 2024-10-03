@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
-import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
+
 import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
 import FloatInput from '@/components/input/FloatInput.vue'
+import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:brand-data'])
@@ -42,6 +43,9 @@ watch([selectedAgeRanges, selectedGenders], () => {
 <template>
   <div>
     <h5>Configuración de audiencia</h5>
+    <hr class="my-4" />
+
+    <h6>Escribe lo que consideres le guste a tu público objetivo</h6>
     <FloatInput
       label="Preferencias de tu público"
       inputId="preferences"
@@ -50,6 +54,8 @@ watch([selectedAgeRanges, selectedGenders], () => {
       :validations="[]"
       @input="updateFormData('preferences', $event.target.value)"
     />
+    <hr class="my-4" />
+
     <div class="mb-3">
       <MultipleSelectInput
         v-model="selectedAgeRanges"
@@ -64,8 +70,6 @@ watch([selectedAgeRanges, selectedGenders], () => {
         label="Selecciona los géneros objetivo que crees que les puede interesar tu producto"
         id="genderSelector"
       />
-      <hr class="my-4" />
-      <h6>Escribe lo que consideres le guste a tu público objetivo</h6>
     </div>
   </div>
 </template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
+
 import FloatInput from '@/components/input/FloatInput.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 

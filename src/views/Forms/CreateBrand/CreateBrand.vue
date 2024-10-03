@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 
+import { TargetBrandGender } from '@/enum/brand.enum'
+import useBrandStore from '@/stores/brand.store'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
 import CreateBrandStep1 from './components/CreateBrandStep1.vue'
 import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
-import { TargetBrandGender } from '@/enum/brand.enum'
 import CreateBrandStep4 from './components/CreateBrandStep4.vue'
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import useUserStore from '@/stores/user.store'
+
+const brandStore = useBrandStore()
+const userStore = useUserStore()
 
 const currentStep = ref(1)
 
@@ -51,28 +56,28 @@ function prevStep(): void {
 }
 
 function handleDataStep1(data: any): void {
-  console.log('Datos recibidos desde CreateBrandStep1:', data)
   formData.name = data.name
   formData.operationCountry = data.operationCountry
 }
 
 function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
-  console.log('datos reibidos', data)
   formData.targetAudience.ageRange = data.targetAudience.ageRange
   formData.targetAudience.gender = data.targetAudience.gender
   formData.targetAudience.preferences = data.targetAudience.preferences
 }
 
 function handleDataStep3(data: Pick<IBrand, 'industry'>): void {
-  console.log('datos recibidos', data)
   formData.industry = data.industry
-  console.log({ formData })
 }
 
 function handleDataStep4(data: Pick<IBrand, 'description'>): void {
-  console.log('datos recibidos', data)
   formData.description = data.description
-  console.log('form data: ', formData)
+}
+
+async function handleCreate() {
+  const userId = await userStore.user?._id
+  const brandCreated = await brandStore.createBrand(formData, userId!)
+  console.log('brand created: ', brandCreated)
 }
 </script>
 
@@ -111,7 +116,10 @@ function handleDataStep4(data: Pick<IBrand, 'description'>): void {
           <button @click="prevStep" :disabled="currentStep === 1" class="btn bg-primary text-white">
             Anterior
           </button>
-          <button @click="nextStep" :disabled="currentStep === 4" class="btn bg-primary text-white">
+          <button
+            @click="currentStep !== 4 ? nextStep() : handleCreate()"
+            class="btn bg-primary text-white"
+          >
             {{ currentStep !== 4 ? 'Siguiente' : 'Crear' }}
           </button>
         </div>
