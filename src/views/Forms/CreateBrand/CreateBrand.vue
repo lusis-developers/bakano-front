@@ -62,7 +62,18 @@ function handleDataStep1(data: any): void {
 
 function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
   formData.targetAudience.ageRange = data.targetAudience.ageRange
-  formData.targetAudience.gender = data.targetAudience.gender
+  formData.targetAudience.gender = data.targetAudience.gender.map((gender) => {
+    switch (gender) {
+      case 'male':
+        return TargetBrandGender.MALE
+      case 'female':
+        return TargetBrandGender.FEMALE
+      case 'not sure':
+        return TargetBrandGender.NOT_SURE
+      default:
+        return TargetBrandGender.NOT_SURE
+    }
+  })
   formData.targetAudience.preferences = data.targetAudience.preferences
 }
 
