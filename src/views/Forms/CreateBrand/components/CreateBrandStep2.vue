@@ -7,9 +7,10 @@ import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:brand-data'])
 
+const audienceOptions = Object.values(TargetAudience)
+
 const selectedAgeRanges = ref<string[]>([])
 const selectedGenders = ref<TargetBrandGender[]>([])
-const publicPreferences = ref<string>('')
 
 const formData = reactive<Partial<IBrand>>({
   targetAudience: {
@@ -31,10 +32,9 @@ function updateFormData(field: keyof IBrand['targetAudience'], value: any): void
   }
 }
 
-watch([selectedAgeRanges, selectedGenders, publicPreferences], () => {
+watch([selectedAgeRanges, selectedGenders], () => {
   updateFormData('ageRange', [...selectedAgeRanges.value])
   updateFormData('gender', [...selectedGenders.value])
-  updateFormData('preferences', publicPreferences.value)
   emit('update:brand-data', formData)
 })
 </script>
@@ -42,10 +42,18 @@ watch([selectedAgeRanges, selectedGenders, publicPreferences], () => {
 <template>
   <div>
     <h5>Configuración de audiencia</h5>
+    <FloatInput
+      label="Preferencias de tu público"
+      inputId="preferences"
+      placeholder="Escribe lo que consideres le gusta a tu público"
+      v-model:modelValue="formData.targetAudience!.preferences"
+      :validations="[]"
+      @input="updateFormData('preferences', $event.target.value)"
+    />
     <div class="mb-3">
       <MultipleSelectInput
         v-model="selectedAgeRanges"
-        :options="TargetAudience"
+        :options="audienceOptions"
         label="Selecciona tu público objetivo"
         id="ageRangeSelector"
       />
@@ -58,14 +66,6 @@ watch([selectedAgeRanges, selectedGenders, publicPreferences], () => {
       />
       <hr class="my-4" />
       <h6>Escribe lo que consideres le guste a tu público objetivo</h6>
-      <FloatInput
-        label="Preferencias de tu público"
-        inputId="preferences"
-        placeholder="Escribe lo que consideres le gusta a tu público"
-        v-model:modelValue="publicPreferences"
-        :validations="[]"
-        @input="updateFormData('preferences', $event.target.value)"
-      />
     </div>
   </div>
 </template>
