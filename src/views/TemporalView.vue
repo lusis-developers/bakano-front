@@ -4,6 +4,6 @@ import FacebookLogin from '@/components/auth/FacebookLogin.vue'
 
 <template>
   <div>
-    <FacebookLogin />
+    <FacebookLogin :brandId="'brandId'" />
   </div>
 </template>
