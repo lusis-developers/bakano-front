@@ -3,6 +3,7 @@ import type { BrandIndustry, TargetBrandGender } from '@/enum/brand.enum'
 export interface IBrand {
   name: string
   operationCountry: string
+  mainAddress: string
   targetAudience: UserTargetAudience
   industry: BrandIndustry | string
   logo: string

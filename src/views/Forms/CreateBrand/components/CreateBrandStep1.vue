@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { reactive, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
+import { allCountries } from 'country-region-data'
 
 import FloatInput from '@/components/input/FloatInput.vue'
 import type { IBrand, UserTargetAudience } from '@/interfaces/Brand/brand.interface'
+import SelectInput from '@/components/input/SelectInput.vue'
 
 const emit = defineEmits(['update:brand-data'])
 
 const formData = reactive<Partial<IBrand>>({
   name: '',
-  operationCountry: ''
+  operationCountry: '',
+  mainAddress: ''
+})
+
+const countryOptions = computed(() => {
+  return allCountries.map((c) => ({ value: c[0], label: c[0] }))
 })
 
 function isTargetAudienceField(field: keyof IBrand | keyof UserTargetAudience): boolean {
@@ -38,6 +45,10 @@ function updateFormData(field: keyof IBrand | keyof UserTargetAudience, value: a
   }
 }
 
+function handleCountrySelected(countrySelected: string): void {
+  formData.operationCountry = countrySelected
+}
+
 watch(formData, () => {
   emit('update:brand-data', formData)
 })
@@ -54,11 +65,20 @@ watch(formData, () => {
           v-model:modelValue="formData.name"
           @input="updateFormData('name', $event.target.value)"
         />
-        <FloatInput
+        <hr class="my-4" />
+        <SelectInput
           label="País de operaciones"
-          inputId="operationCountries"
-          v-model:modelValue="formData.operationCountry"
-          @input="updateFormData('operationCountry', $event.target.value)"
+          icon="bi bi-globe-americas"
+          inputId="countryOperation"
+          :options="countryOptions"
+          @update:modelValue="handleCountrySelected"
+        />
+        <hr class="my-4" />
+        <FloatInput
+          label="Dirección principal"
+          inputId="mainAddress"
+          v-model:modelValue="formData.mainAddress"
+          @input="updateFormData('mainAddress', $event.target.value)"
         />
       </div>
     </form>

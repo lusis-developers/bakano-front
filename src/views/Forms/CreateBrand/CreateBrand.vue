@@ -10,6 +10,8 @@ import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
 import CreateBrandStep4 from './components/CreateBrandStep4.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import { NotificationType } from '@/enum/components/shared/GeneralNotificationts'
+import GeneralNotification from '@/components/shared/GeneralNotification.vue'
 
 const emit = defineEmits(['update:isVisible'])
 
@@ -26,6 +28,8 @@ defineProps({
 
 const currentStep = ref(1)
 const isCreated = ref(false)
+const notificationMessage = ref('')
+const notificationType = ref(NotificationType.SUCCESS)
 
 const formData: IBrand = reactive({
   name: '',
@@ -33,6 +37,7 @@ const formData: IBrand = reactive({
   logo: '',
   industry: '',
   operationCountry: '',
+  mainAddress: '',
   targetAudience: {
     ageRange: [''],
     gender: [TargetBrandGender.NOT_SURE],
@@ -60,8 +65,10 @@ function prevStep(): void {
 }
 
 function handleDataStep1(data: any): void {
+  console.log({ data })
   formData.name = data.name
   formData.operationCountry = data.operationCountry
+  formData.mainAddress = data.mainAddress
 }
 
 function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
@@ -94,6 +101,13 @@ async function handleCreate() {
   await brandStore.createBrand(formData, userId!)
   await brandStore.getUserBrands(userId!)
   isCreated.value = true
+  if (brandStore.successMessage) {
+    notificationMessage.value = brandStore.successMessage
+    notificationType.value = NotificationType.SUCCESS
+  } else if (brandStore.error) {
+    notificationMessage.value = brandStore.error
+    notificationType.value = NotificationType.ERROR
+  }
 }
 </script>
 
@@ -142,5 +156,10 @@ async function handleCreate() {
         </div>
       </template>
     </GlobalModal>
+    <GeneralNotification
+      v-if="notificationMessage"
+      :message="notificationMessage"
+      :type="notificationType"
+    />
   </div>
 </template>
