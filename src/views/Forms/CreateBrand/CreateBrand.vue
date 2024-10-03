@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-
 import { TargetBrandGender } from '@/enum/brand.enum'
 import useBrandStore from '@/stores/brand.store'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
@@ -15,6 +14,7 @@ const brandStore = useBrandStore()
 const userStore = useUserStore()
 
 const currentStep = ref(1)
+const isCreated = ref(false) 
 
 defineProps({
   isVisible: {
@@ -87,8 +87,9 @@ function handleDataStep4(data: Pick<IBrand, 'description'>): void {
 
 async function handleCreate() {
   const userId = await userStore.user?._id
-  const brandCreated = await brandStore.createBrand(formData, userId!)
-  console.log('brand created: ', brandCreated)
+  await brandStore.createBrand(formData, userId!)
+  await brandStore.getUserBrands(userId!)
+  isCreated.value = true // Marca creada
 }
 </script>
 
@@ -129,9 +130,10 @@ async function handleCreate() {
           </button>
           <button
             @click="currentStep !== 4 ? nextStep() : handleCreate()"
+            :disabled="brandStore.isLoading || isCreated"
             class="btn bg-primary text-white"
           >
-            {{ currentStep !== 4 ? 'Siguiente' : 'Crear' }}
+            {{ currentStep !== 4 ? 'Siguiente' : brandStore.isLoading ? 'Cargando...' : 'Crear' }}
           </button>
         </div>
       </template>
