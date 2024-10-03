@@ -4,6 +4,13 @@ import { onMounted } from 'vue'
 import { facebookPermissions } from '@/config/components/facebookPermissions.config'
 import useAuthStore from '@/stores/auth.store'
 
+const props = defineProps({
+  brandId: {
+    type: String,
+    required: true
+  }
+})
+
 const authStore = useAuthStore()
 
 const scope = facebookPermissions.join(',')
@@ -63,7 +70,7 @@ function loginWithFacebook() {
 function statusChangeCallback(response: any) {
   if (response.status === 'connected') {
     const accessToken = response.authResponse.accessToken
-    authStore.sendFacebookTokenToBackend(accessToken) // Enviar el token al backend mediante el store
+    authStore.sendFacebookTokenToBackend(accessToken, props.brandId) // Enviar el token al backend mediante el store
   } else {
     console.log('El usuario no está autenticado con Facebook.')
   }

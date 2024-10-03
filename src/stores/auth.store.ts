@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 import APIAuth from '@/services/auth/auth'
 import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
 import type { IUser } from '@/interfaces/user.interface'
+import APIFacebookAuth from '@/services/auth/facebook'
 
 interface RootState {
   isLoading: boolean
@@ -13,6 +14,7 @@ interface RootState {
 }
 
 const authService = new APIAuth()
+const authFBService = new APIFacebookAuth()
 
 export const useAuthStore = defineStore('authStore', {
   state: (): RootState => ({
@@ -60,11 +62,11 @@ export const useAuthStore = defineStore('authStore', {
         this.isLoading = false
       }
     },
-    async sendFacebookTokenToBackend(facebookToken: string): Promise<void> {
+    async sendFacebookTokenToBackend(facebookToken: string, brandId: string): Promise<void> {
       this.isLoading = true
       try {
+        await authFBService.saveTokenSecret(facebookToken, brandId)
         this.facebookToken = facebookToken
-        console.log(this.facebookToken)
       } catch (error: unknown) {
         this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
