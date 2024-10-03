@@ -50,17 +50,29 @@ function prevStep(): void {
   }
 }
 
-function handleDataStep1(data: any):void {
+function handleDataStep1(data: any): void {
   console.log('Datos recibidos desde CreateBrandStep1:', data)
   formData.name = data.name
   formData.operationCountry = data.operationCountry
 }
 
-function handleDataStep2(data: Pick<IBrand, 'targetAudience'>):void {
+function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
   console.log('datos reibidos', data)
   formData.targetAudience.ageRange = data.targetAudience.ageRange
   formData.targetAudience.gender = data.targetAudience.gender
   formData.targetAudience.preferences = data.targetAudience.preferences
+}
+
+function handleDataStep3(data: Pick<IBrand, 'industry'>): void {
+  console.log('datos recibidos', data)
+  formData.industry = data.industry
+  console.log({ formData })
+}
+
+function handleDataStep4(data: Pick<IBrand, 'description'>): void {
+  console.log('datos recibidos', data)
+  formData.description = data.description
+  console.log('form data: ', formData)
 }
 </script>
 
@@ -76,9 +88,23 @@ function handleDataStep2(data: Pick<IBrand, 'targetAudience'>):void {
           @update:brand-data="handleDataStep1"
           @next="nextStep"
         />
-        <CreateBrandStep2 v-if="currentStep === 2" @update:brand-data="handleDataStep2" @next="nextStep" @prev="prevStep" />
-        <CreateBrandStep3 v-if="currentStep === 3" @next="nextStep" @prev="prevStep" />
-        <CreateBrandStep4 v-if="currentStep === 4" @prev="prevStep" />
+        <CreateBrandStep2
+          v-if="currentStep === 2"
+          @update:brand-data="handleDataStep2"
+          @next="nextStep"
+          @prev="prevStep"
+        />
+        <CreateBrandStep3
+          v-if="currentStep === 3"
+          @update:brand-data="handleDataStep3"
+          @next="nextStep"
+          @prev="prevStep"
+        />
+        <CreateBrandStep4
+          v-if="currentStep === 4"
+          @update:brand-data="handleDataStep4"
+          @prev="prevStep"
+        />
       </template>
       <template #footer>
         <div class="d-flex justify-content-between w-100">

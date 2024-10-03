@@ -12,32 +12,31 @@ const formData = reactive<Partial<IBrand>>({
 })
 
 function isTargetAudienceField(field: keyof IBrand | keyof UserTargetAudience): boolean {
-  return ['ageRange', 'gender', 'preferences'].includes(field as string);
+  return ['ageRange', 'gender', 'preferences'].includes(field as string)
 }
 
 function updateTargetAudienceField(field: keyof UserTargetAudience, value: any): void {
   if (!formData.targetAudience) {
-    console.error("La audiencia objetivo no está definida en formData.");
-    return;
+    console.error('La audiencia objetivo no está definida en formData.')
+    return
   }
 
-  formData.targetAudience[field] = value;
-  console.log(`Campo ${field} de targetAudience actualizado:`, value);
+  formData.targetAudience[field] = value
+  console.log(`Campo ${field} de targetAudience actualizado:`, value)
 }
 
 function updateBrandField(field: keyof IBrand, value: any): void {
-  formData[field] = value;
-  console.log(`Campo ${field} de la marca actualizado:`, value);
+  formData[field] = value
+  console.log(`Campo ${field} de la marca actualizado:`, value)
 }
 
 function updateFormData(field: keyof IBrand | keyof UserTargetAudience, value: any): void {
   if (isTargetAudienceField(field)) {
-    updateTargetAudienceField(field as keyof UserTargetAudience, value);
+    updateTargetAudienceField(field as keyof UserTargetAudience, value)
   } else {
-    updateBrandField(field as keyof IBrand, value);
+    updateBrandField(field as keyof IBrand, value)
   }
 }
-
 
 watch(formData, () => {
   emit('update:brand-data', formData)

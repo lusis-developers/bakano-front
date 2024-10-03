@@ -94,6 +94,33 @@ export const useBrandStore = defineStore('brandStore', {
       } finally {
         this.isLoading = false
       }
+    },
+
+    async getUserBrand(brandId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        const { data } = await brandService.getBrand(brandId)
+        this.selectedBrand = data.brand
+        this.successMessage = 'Se ha cargado tu marca'
+      } catch (error: unknown) {
+        console.error({ error })
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async updateBrandLogo(file: File, brandId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        await brandService.uploadBrandLogo(file, brandId)
+        this.successMessage = 'Tu imagen ha sido cargada'
+      } catch (error: unknown) {
+        console.error({ error })
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 })

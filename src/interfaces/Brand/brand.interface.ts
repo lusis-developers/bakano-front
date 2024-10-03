@@ -54,3 +54,23 @@ export interface BrandUpdatedResponse {
     }
   }
 }
+
+export interface BrandResponse {
+  brand: IBrand & {
+    targetAudience: {
+      ageRange: string[]
+      gender: TargetBrandGender[]
+    }
+    socialMediaIntegrations: {
+      facebook: string | null
+    }
+    _id: string
+    createdAt: string
+    updatedAt: string
+  }
+}
+
+export interface BrandLogoUpdateResponse {
+  message: string
+  url: string
+}
