@@ -12,6 +12,8 @@ const dashboardView = () => import('@/views/Dashboard/DashboardView.vue')
 const profileView = () => import('@/views/Profile/ProfileView.vue')
 const wizardView = () => import('@/views/Wizard/WizardView.vue')
 const authView = () => import('@/views/AuthView.vue')
+const temporaView = () => import('@/views/TemporalView.vue')
+const facebookView = () => import('@/views/FacebookView.vue')
 
 const routes = [
   {
@@ -46,6 +48,14 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     component: authView,
+    meta: {
+      title: 'Autenticando 🚀'
+    }
+  },
+  {
+    path: '/auth/facebook/callback',
+    name: 'Auth Facebook',
+    component: facebookView,
     meta: {
       title: 'Autenticando 🚀'
     }
@@ -93,6 +103,13 @@ const routes = [
       {
         path: 'profile',
         component: profileView,
+        meta: {
+          title: 'Bakano 🚀 | Perfil'
+        }
+      },
+      {
+        path: 'social-login',
+        component: temporaView,
         meta: {
           title: 'Bakano 🚀 | Perfil'
         }

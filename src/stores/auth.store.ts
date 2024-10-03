@@ -4,20 +4,24 @@ import { AxiosError } from 'axios'
 import APIAuth from '@/services/auth/auth'
 import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
 import type { IUser } from '@/interfaces/user.interface'
+import APIFacebookAuth from '@/services/auth/facebook'
 
 interface RootState {
   isLoading: boolean
   error: string | null
   successMessage: string | null
+  facebookToken: string | null
 }
 
 const authService = new APIAuth()
+const authFBService = new APIFacebookAuth()
 
 export const useAuthStore = defineStore('authStore', {
   state: (): RootState => ({
     isLoading: false,
     error: null,
-    successMessage: null
+    successMessage: null,
+    facebookToken: null
   }),
   actions: {
     async signUp(user: Partial<IUser>): Promise<void> {
@@ -53,6 +57,17 @@ export const useAuthStore = defineStore('authStore', {
       } catch (error: unknown) {
         this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
         return null
+      } finally {
+        this.isLoading = false
+      }
+    },
+    async sendFacebookTokenToBackend(facebookToken: string, brandId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        await authFBService.saveTokenSecret(facebookToken, brandId)
+        this.facebookToken = facebookToken
+      } catch (error: unknown) {
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
       }
