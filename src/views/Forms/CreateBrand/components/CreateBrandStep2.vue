@@ -1,34 +1,42 @@
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { reactive, ref, watch } from 'vue'
 import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
-import { TargetBrandGender } from '@/enum/brand.enum'
+import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
 import FloatInput from '@/components/input/FloatInput.vue'
+import type { IBrand } from '@/interfaces/Brand/brand.interface';
 
-const selectedAgeRanges = ref([])
-const selectedGenders = ref([])
-const publicPreferences = ref('')
+const emit = defineEmits(['update:brand-data'])
 
-const ageRanges = [
-  '18-24',
-  '25-34',
-  '35-44',
-  '45-54',
-  '55-64',
-  '65-74',
-  '75 o más',
-  'No estoy seguro'
-]
+const selectedAgeRanges = ref<string[]>([])
+const selectedGenders = ref<TargetBrandGender[]>([])
+const publicPreferences = ref<string>('')
+
+const formData = reactive<Partial<IBrand>>({
+  targetAudience: {
+    ageRange: [''],
+    gender: [TargetBrandGender.NOT_SURE],
+    preferences: ''
+  }
+})
 
 const genders = [
   { value: TargetBrandGender.MALE, label: 'Masculino' },
   { value: TargetBrandGender.FEMALE, label: 'Femenino' },
-  { value: TargetBrandGender.BOTH, label: 'Ambos' },
   { value: TargetBrandGender.NOT_SURE, label: 'No estoy seguro' }
 ]
 
-function handleSubmit() {
-  console.log('Rangos de edad seleccionados:', selectedAgeRanges.value)
+function updateFormData (field: keyof IBrand['targetAudience'], value: any): void {
+  if (formData.targetAudience) {
+    formData.targetAudience[field] = value
+  }
 }
+
+watch([selectedAgeRanges, selectedGenders, publicPreferences], () => {
+  updateFormData('ageRange', [...selectedAgeRanges.value]) 
+  updateFormData('gender', [...selectedGenders.value]) 
+  updateFormData('preferences', publicPreferences.value)
+  emit('update:brand-data', formData)
+})
 </script>
 
 <template>
@@ -37,7 +45,7 @@ function handleSubmit() {
     <div class="mb-3">
       <MultipleSelectInput
         v-model="selectedAgeRanges"
-        :options="ageRanges"
+        :options="TargetAudience"
         label="Selecciona tu público objetivo"
         id="ageRangeSelector"
       />
@@ -45,17 +53,18 @@ function handleSubmit() {
       <MultipleSelectInput
         v-model="selectedGenders"
         :options="genders.map((gender) => gender.label)"
-        label="Selecciona los generes objetivo que crees que les puede interesar tu producto"
-        id="ageRangeSelector"
+        label="Selecciona los géneros objetivo que crees que les puede interesar tu producto"
+        id="genderSelector"
       />
       <hr class="my-4" />
       <h6>Escribe lo que consideres le guste a tu público objetivo</h6>
       <FloatInput
         label="Preferencias de tu público"
-        inputId="brandName"
+        inputId="preferences"
         placeholder="Escribe lo que consideres le gusta a tu público"
         v-model:modelValue="publicPreferences"
         :validations="[]"
+        @input="updateFormData('preferences', $event.target.value)"
       />
     </div>
   </div>

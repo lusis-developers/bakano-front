@@ -2,7 +2,7 @@
 import { reactive, watch } from 'vue'
 
 import FloatInput from '@/components/input/FloatInput.vue'
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import type { IBrand, UserTargetAudience } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -11,9 +11,33 @@ const formData = reactive<Partial<IBrand>>({
   operationCountry: ''
 })
 
-function updateFormData (field: keyof IBrand, value: string):void {
-  formData[field] = value
+function isTargetAudienceField(field: keyof IBrand | keyof UserTargetAudience): boolean {
+  return ['ageRange', 'gender', 'preferences'].includes(field as string);
 }
+
+function updateTargetAudienceField(field: keyof UserTargetAudience, value: any): void {
+  if (!formData.targetAudience) {
+    console.error("La audiencia objetivo no está definida en formData.");
+    return;
+  }
+
+  formData.targetAudience[field] = value;
+  console.log(`Campo ${field} de targetAudience actualizado:`, value);
+}
+
+function updateBrandField(field: keyof IBrand, value: any): void {
+  formData[field] = value;
+  console.log(`Campo ${field} de la marca actualizado:`, value);
+}
+
+function updateFormData(field: keyof IBrand | keyof UserTargetAudience, value: any): void {
+  if (isTargetAudienceField(field)) {
+    updateTargetAudienceField(field as keyof UserTargetAudience, value);
+  } else {
+    updateBrandField(field as keyof IBrand, value);
+  }
+}
+
 
 watch(formData, () => {
   emit('update:brand-data', formData)

@@ -26,7 +26,7 @@ const formData: IBrand = reactive({
   industry: '',
   operationCountry: '',
   targetAudience: {
-    ageRange: '',
+    ageRange: [''],
     gender: [TargetBrandGender.NOT_SURE],
     preferences: ''
   },
@@ -50,10 +50,17 @@ function prevStep(): void {
   }
 }
 
-function handleDataStep1(data: any) {
+function handleDataStep1(data: any):void {
   console.log('Datos recibidos desde CreateBrandStep1:', data)
   formData.name = data.name
   formData.operationCountry = data.operationCountry
+}
+
+function handleDataStep2(data: Pick<IBrand, 'targetAudience'>):void {
+  console.log('datos reibidos', data)
+  formData.targetAudience.ageRange = data.targetAudience.ageRange
+  formData.targetAudience.gender = data.targetAudience.gender
+  formData.targetAudience.preferences = data.targetAudience.preferences
 }
 </script>
 
@@ -69,7 +76,7 @@ function handleDataStep1(data: any) {
           @update:brand-data="handleDataStep1"
           @next="nextStep"
         />
-        <CreateBrandStep2 v-if="currentStep === 2" @next="nextStep" @prev="prevStep" />
+        <CreateBrandStep2 v-if="currentStep === 2" @update:brand-data="handleDataStep2" @next="nextStep" @prev="prevStep" />
         <CreateBrandStep3 v-if="currentStep === 3" @next="nextStep" @prev="prevStep" />
         <CreateBrandStep4 v-if="currentStep === 4" @prev="prevStep" />
       </template>
