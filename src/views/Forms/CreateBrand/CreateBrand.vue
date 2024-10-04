@@ -117,6 +117,30 @@ function handleDataStep4(data: Pick<IBrand, 'description'>): void {
   isStep4DataValid.value = data.description.length > 0
 }
 
+function resetForm() {
+  Object.assign(formData, {
+    name: '',
+    description: '',
+    logo: '',
+    industry: '',
+    operationCountry: '',
+    mainAddress: '',
+    targetAudience: {
+      ageRange: [''],
+      gender: [TargetBrandGender.NOT_SURE],
+      preferences: ''
+    },
+    user: '',
+    id: ''
+  });
+  isCreated.value = false;
+  isStep1DataValid.value = false;
+  isStep2DataValid.value = false;
+  isStep3DataValid.value = false;
+  isStep4DataValid.value = false;
+  currentStep.value = 1;
+}
+
 async function handleCreate() {
   const userId = userStore.user?._id
   await brandStore.createBrand(formData, userId!)
@@ -127,6 +151,8 @@ async function handleCreate() {
     ? NotificationType.SUCCESS
     : NotificationType.ERROR
   emit('update:isVisible', false)
+
+  resetForm();
 
   setTimeout(() => {
     notificationMessage.value = ''
