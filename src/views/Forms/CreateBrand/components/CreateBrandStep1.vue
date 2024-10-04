@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
-import { allCountries } from 'country-region-data'
 
 import FloatInput from '@/components/input/FloatInput.vue'
 import SelectInput from '@/components/input/SelectInput.vue'
@@ -9,6 +8,7 @@ import {
   nameBrandValidations
 } from '@/validation/components/forms/brand.validation'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import { PrincipalCountries } from '@/enum/brand.enum'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -19,7 +19,10 @@ const formData = reactive<Partial<IBrand>>({
 })
 
 const countryOptions = computed(() => {
-  return allCountries.map((c) => ({ value: c[0], label: c[0] }))
+  return Object.values(PrincipalCountries).map((country) => ({
+    value: country,
+    label: country
+  }))
 })
 
 const isFormDataValid = computed(() => {

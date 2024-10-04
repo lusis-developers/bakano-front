@@ -37,3 +37,16 @@ export enum TargetAudience {
   AGE_65_PLUS = '65+',
   NOT_SURE = 'not sure'
 }
+
+export enum PrincipalCountries {
+  SPAIN = 'España',
+  ECUADOR = 'Ecuador',
+  COLOMBIA = 'Colombia',
+  ARGENTINA = 'Argentina',
+  PERU = 'Perú',
+  MEXICO = 'Mexico',
+  CHILE = 'Chile',
+  PARAGUAY = 'Paraguay',
+  URUGUAY = 'Uruguay',
+  OTHER = 'Otro'
+}
