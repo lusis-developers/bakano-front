@@ -1,12 +1,14 @@
 import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
 
-export const menuOptions: Navigation[] = [
+export const menuOptions: (props: { showCreateBrandModal: () => void }) => Navigation[] = ({
+  showCreateBrandModal
+}) => [
   {
     name: 'Agregar marca',
     link: '#',
     icon: 'bi bi-plus-lg',
     action: () => {
-      alert('aquí saldrá el hover para agregar marca')
+      showCreateBrandModal()
     }
   }
 ]

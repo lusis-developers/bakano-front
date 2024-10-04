@@ -8,6 +8,7 @@ import type {
 } from '@/enum/user.enum'
 
 export interface IUser {
+  _id?: string
   name: string
   lastname: string
   email: string

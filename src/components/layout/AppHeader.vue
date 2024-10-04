@@ -1,23 +1,38 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
 import { useBrandStore } from '@/stores/brand.store'
 import { menuOptions } from '@/utils/menuItems.utils'
+import useUserStore from '@/stores/user.store'
 import DropdownMenu from '@/components/layout/DropdownMenu.vue'
-
-import type { Brand } from '@/interfaces/components/Layout/BrandsTypes.interface'
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
+import CreateBrand from '../app/brand/CreateBrand.vue'
 
+const userStore = useUserStore()
 const brandStore = useBrandStore()
 
-function handleBrandSelection(brand: Brand): void {
+const isCreateBrandModalVisible = ref(false)
+
+function showCreateBrandModal() {
+  isCreateBrandModalVisible.value = true
+}
+
+function handleBrandSelection(brand: IBrand): void {
   brandStore.setSelectedBrand(brand)
 }
 
-function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
-  return brands.map((brand) => ({
-    ...brand,
+function getBrandsAsMenuItems(brands: IBrand[]): MenuDropdownItem[] {
+  const brandForMenu = brands.map((brand: IBrand) => ({
+    name: brand.name,
+    logo: brand.logo,
     link: '#'
   }))
+  return brandForMenu
 }
+onMounted(async () => {
+  await brandStore.getUserBrands(userStore.user?._id as string)
+})
 </script>
 
 <template>
@@ -25,12 +40,12 @@ function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid d-flex justify-content-between align-items-center">
         <div>
-          <slot name="header"></slot>
+          <slot name="header" />
         </div>
         <div class="d-flex align-items-center gap-3">
           <DropdownMenu
-            :menuOptions="menuOptions"
-            :menuItems="getMenuItems(brandStore.brands)"
+            :menuOptions="menuOptions({ showCreateBrandModal })"
+            :menuItems="getBrandsAsMenuItems(brandStore.brands)"
             @item-click="handleBrandSelection"
           >
             <template #button-content>
@@ -58,4 +73,8 @@ function getMenuItems(brands: Brand[]): MenuDropdownItem[] {
       </div>
     </nav>
   </header>
+  <CreateBrand
+    :isVisible="isCreateBrandModalVisible"
+    @update:is-visible="isCreateBrandModalVisible = $event"
+  />
 </template>

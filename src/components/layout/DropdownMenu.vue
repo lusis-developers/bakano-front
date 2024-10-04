@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
-
 import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
 
