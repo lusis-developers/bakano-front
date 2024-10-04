@@ -2,6 +2,7 @@
 import { reactive, ref } from 'vue'
 
 import { TargetBrandGender } from '@/enum/brand.enum'
+import { NotificationType } from '@/enum/components/shared/GeneralNotifications'
 import useUserStore from '@/stores/user.store'
 import useBrandStore from '@/stores/brand.store'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
@@ -9,9 +10,9 @@ import CreateBrandStep1 from './components/CreateBrandStep1.vue'
 import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
 import CreateBrandStep4 from './components/CreateBrandStep4.vue'
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
-import { NotificationType } from '@/enum/components/shared/GeneralNotificationts'
 import GeneralNotification from '@/components/shared/GeneralNotification.vue'
+
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:isVisible'])
 
@@ -104,9 +105,11 @@ async function handleCreate() {
   if (brandStore.successMessage) {
     notificationMessage.value = brandStore.successMessage
     notificationType.value = NotificationType.SUCCESS
+    emit('update:isVisible', false)
   } else if (brandStore.error) {
     notificationMessage.value = brandStore.error
     notificationType.value = NotificationType.ERROR
+    emit('update:isVisible', false)
   }
 
   setTimeout(() => {
