@@ -28,7 +28,6 @@ function getBrandsAsMenuItems(brands: IBrand[]): MenuDropdownItem[] {
     logo: brand.logo,
     link: '#'
   }))
-  console.log('brandForMenu: ', brandForMenu)
   return brandForMenu
 }
 onMounted(async () => {
