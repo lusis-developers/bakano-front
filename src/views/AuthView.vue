@@ -17,13 +17,16 @@ const userStore = useUserStore()
 
 const token = computed(() => route.query.token)
 
-onMounted(async () => {
+async function handleLogin() {
   if (token.value) {
     const user = await authStore.login(token.value as string)
-    const userlogged = await userStore.setUser(user)
-    console.log('userlogged: ', userlogged)
+    await userStore.setUser(user)
     router.push({ name: 'Dashboard' })
   }
+}
+
+onMounted(async () => {
+  handleLogin()
 })
 
 onBeforeMount(() => {
