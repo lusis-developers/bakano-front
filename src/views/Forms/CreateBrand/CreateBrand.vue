@@ -9,11 +9,11 @@ import useBrandStore from '@/stores/brand.store'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
 import GeneralNotification from '@/components/shared/GeneralNotification.vue'
 
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import CreateBrandStep1 from './components/CreateBrandStep1.vue'
 import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
 import CreateBrandStep4 from './components/CreateBrandStep4.vue'
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:isVisible'])
 
@@ -28,16 +28,14 @@ defineProps({
   }
 })
 
-const currentStep = ref(1)
 const isCreated = ref(false)
-const notificationMessage = ref<string | null>('')
-const notificationType = ref(NotificationType.SUCCESS)
-
-// Validaciones para cada paso
 const isStep1DataValid = ref(false)
 const isStep2DataValid = ref(false)
 const isStep3DataValid = ref(false)
 const isStep4DataValid = ref(false)
+const currentStep = ref(1)
+const notificationMessage = ref<string | null>('')
+const notificationType = ref(NotificationType.SUCCESS)
 
 const formData: IBrand = reactive({
   name: '',
@@ -55,7 +53,6 @@ const formData: IBrand = reactive({
   id: ''
 })
 
-// Mapeo de pasos a componentes
 const steps = [
   { component: CreateBrandStep1, dataHandler: handleDataStep1 },
   { component: CreateBrandStep2, dataHandler: handleDataStep2 },
@@ -88,37 +85,28 @@ function handleDataStep1(data: Pick<IBrand, 'name' | 'operationCountry' | 'mainA
 }
 
 function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
-  console.log('Datos recibidos en handleDataStep2:', data);
-
-  formData.targetAudience.ageRange = data.targetAudience.ageRange;
-  console.log('Rango de edad actualizado:', formData.targetAudience.ageRange);
+  formData.targetAudience.ageRange = data.targetAudience.ageRange
 
   formData.targetAudience.gender = data.targetAudience.gender.map((gender) => {
-    console.log('Género recibido:', gender);
     switch (gender.toLowerCase()) {
       case 'masculino':
-        return TargetBrandGender.MALE;
+        return TargetBrandGender.MALE
       case 'femenino':
-        return TargetBrandGender.FEMALE;
+        return TargetBrandGender.FEMALE
       case 'no estoy seguro':
-        return TargetBrandGender.NOT_SURE;
+        return TargetBrandGender.NOT_SURE
       default:
-        return TargetBrandGender.NOT_SURE;
+        return TargetBrandGender.NOT_SURE
     }
-  });
+  })
 
-  console.log('Género actualizado:', formData.targetAudience.gender);
-
-  formData.targetAudience.preferences = data.targetAudience.preferences;
-  console.log('Preferencias actualizadas:', formData.targetAudience.preferences);
+  formData.targetAudience.preferences = data.targetAudience.preferences
 
   isStep2DataValid.value =
     data.targetAudience.ageRange.length > 0 &&
     data.targetAudience.gender.length > 0 &&
     data.targetAudience.preferences.length > 0 &&
-    data.targetAudience.preferences.length <= 500;
-
-  console.log('Validación de paso 2:', isStep2DataValid.value);
+    data.targetAudience.preferences.length <= 500
 }
 
 function handleDataStep3(data: Pick<IBrand, 'industry'>): void {
@@ -137,7 +125,9 @@ async function handleCreate() {
   await brandStore.getUserBrands(userId!)
   isCreated.value = true
   notificationMessage.value = brandStore.successMessage || brandStore.error
-  notificationType.value = brandStore.successMessage ? NotificationType.SUCCESS : NotificationType.ERROR
+  notificationType.value = brandStore.successMessage
+    ? NotificationType.SUCCESS
+    : NotificationType.ERROR
   emit('update:isVisible', false)
 
   setTimeout(() => {
@@ -176,7 +166,13 @@ async function handleCreate() {
             "
             class="btn bg-primary text-white"
           >
-            {{ currentStep !== steps.length ? 'Siguiente' : brandStore.isLoading ? 'Cargando...' : 'Crear' }}
+            {{
+              currentStep !== steps.length
+                ? 'Siguiente'
+                : brandStore.isLoading
+                  ? 'Cargando...'
+                  : 'Crear'
+            }}
           </button>
         </div>
       </template>
