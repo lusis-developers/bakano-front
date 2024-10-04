@@ -21,7 +21,6 @@ function handleClickOutside(event: MouseEvent): void {
 
 <template>
   <div v-if="modelValue" class="modal-overlay"></div>
-  <!-- Overlay agregado aquí -->
   <div v-if="modelValue" class="modal d-block" tabindex="-1" @click="handleClickOutside">
     <div class="modal-dialog modal-dialog-centered" @click.stop>
       <div class="modal-content">
