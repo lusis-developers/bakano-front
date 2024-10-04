@@ -3,8 +3,12 @@ import { computed, reactive, watch } from 'vue'
 import { allCountries } from 'country-region-data'
 
 import FloatInput from '@/components/input/FloatInput.vue'
-import type { IBrand, UserTargetAudience } from '@/interfaces/Brand/brand.interface'
 import SelectInput from '@/components/input/SelectInput.vue'
+import {
+  mainAddressValidations,
+  nameBrandValidations
+} from '@/validation/components/forms/brand.validation'
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -19,38 +23,19 @@ const countryOptions = computed(() => {
 })
 
 const isFormDataValid = computed(() => {
-  return Object.values(formData).every((value) => typeof value === 'string' && value.length > 0)
+  const nameValid = nameBrandValidations.every((validation) => validation.rule(formData.name || ''))
+  const addressValid = mainAddressValidations.every((validation) =>
+    validation.rule(formData.mainAddress || '')
+  )
+
+  return nameValid && addressValid
 })
 
-function isTargetAudienceField(field: keyof IBrand | keyof UserTargetAudience): boolean {
-  return ['ageRange', 'gender', 'preferences'].includes(field as string)
-}
-
-function updateTargetAudienceField(field: keyof UserTargetAudience, value: any): void {
-  if (!formData.targetAudience) {
-    console.error('La audiencia objetivo no está definida en formData.')
-    return
-  }
-
-  formData.targetAudience[field] = value
-  console.log(`Campo ${field} de targetAudience actualizado:`, value)
-}
-
-function updateBrandField(field: keyof IBrand, value: any): void {
+function updateField(field: keyof IBrand, value: any): void {
   formData[field] = value
-  console.log(`Campo ${field} de la marca actualizado:`, value)
-}
-
-function updateFormData(field: keyof IBrand | keyof UserTargetAudience, value: any): void {
-  if (isTargetAudienceField(field)) {
-    updateTargetAudienceField(field as keyof UserTargetAudience, value)
-  } else {
-    updateBrandField(field as keyof IBrand, value)
+  if (isFormDataValid.value) {
+    emit('update:brand-data', formData)
   }
-}
-
-function handleCountrySelected(countrySelected: string): void {
-  formData.operationCountry = countrySelected
 }
 
 watch(formData, () => {
@@ -69,7 +54,8 @@ watch(formData, () => {
           label="Nombre de la marca"
           inputId="brandName"
           v-model:modelValue="formData.name"
-          @input="updateFormData('name', $event.target.value)"
+          :validations="nameBrandValidations"
+          @input="updateField('name', $event.target.value)"
         />
         <hr class="my-4" />
         <SelectInput
@@ -77,14 +63,15 @@ watch(formData, () => {
           icon="bi bi-globe-americas"
           inputId="countryOperation"
           :options="countryOptions"
-          @update:modelValue="handleCountrySelected"
+          @update:modelValue="(value) => updateField('operationCountry', value)"
         />
         <hr class="my-4" />
         <FloatInput
           label="Dirección principal"
           inputId="mainAddress"
           v-model:modelValue="formData.mainAddress"
-          @input="updateFormData('mainAddress', $event.target.value)"
+          :validations="mainAddressValidations"
+          @input="updateField('mainAddress', $event.target.value)"
         />
       </div>
     </form>
