@@ -65,6 +65,7 @@ function prevStep(): void {
 }
 
 function handleDataStep1(data: Pick<IBrand, 'name' | 'operationCountry' | 'mainAddress'>): void {
+  console.log({ data })
   formData.name = data.name
   formData.operationCountry = data.operationCountry
   formData.mainAddress = data.mainAddress
