@@ -115,7 +115,6 @@ async function handleCreate() {
 }
 </script>
 
-
 <template>
   <div class="create-brand">
     <GlobalModal :modelValue="isVisible" @close="handleClose">
@@ -123,10 +122,7 @@ async function handleCreate() {
         <h2>Crear marca 📌</h2>
       </template>
       <template #content>
-        <component
-          :is="currentComponent"
-          @update:brand-data="currentDataHandler"
-        />
+        <component :is="currentComponent" @update:brand-data="currentDataHandler" />
       </template>
       <template #footer>
         <div class="d-flex justify-content-between w-100">
