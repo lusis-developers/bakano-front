@@ -5,6 +5,7 @@ import { industriesOptions } from '@/utils/industriesOptions.utils'
 import FloatInput from '@/components/input/FloatInput.vue'
 import SelectInput from '@/components/input/SelectInput.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import { industryValidations } from '@/validation/components/forms/brand.validation'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -15,18 +16,21 @@ const formData = reactive<Partial<IBrand>>({
 const showOtherIndustryInput = computed(() => {
   return formData.industry === 'Otros'
 })
+const isFormDataValid = computed(() => {
+  return formData.industry!.length > 0
+})
 
 function handleIndustryChange(selectedIndustry: string) {
   formData.industry = selectedIndustry
-  emit('update:brand-data', formData)
 }
 function updateIndustryField(value: string): void {
   formData.industry = value
-  emit('update:brand-data', formData)
 }
 
 watch(formData, () => {
-  emit('update:brand-data', formData)
+  if (isFormDataValid.value) {
+    emit('update:brand-data', formData)
+  }
 })
 </script>
 
@@ -47,6 +51,7 @@ watch(formData, () => {
       label="Especifica la industria"
       inputId="industrySpecified"
       v-model:modelValue="formData.industry"
+      :validations="industryValidations"
       @input="updateIndustryField($event.target.value)"
     />
   </div>

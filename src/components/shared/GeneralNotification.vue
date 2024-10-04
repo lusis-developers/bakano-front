@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 defineProps({
   message: {
     type: String,

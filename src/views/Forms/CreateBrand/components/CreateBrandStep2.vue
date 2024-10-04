@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 
 import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
 import FloatInput from '@/components/input/FloatInput.vue'
 import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import { descriptionValidations } from '@/validation/components/forms/brand.validation'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -27,16 +28,27 @@ const genders: { value: TargetBrandGender; label: string }[] = [
   { value: TargetBrandGender.NOT_SURE, label: 'No estoy seguro' }
 ]
 
+const isFormDataValid = computed(() => {
+  const preferencesValid =
+    formData.targetAudience!.preferences.length > 0 &&
+    formData.targetAudience!.preferences.length <= 500
+  const ageRangeValid = selectedAgeRanges.value.length > 0
+  const genderValid = selectedGenders.value.length > 0
+  return preferencesValid && ageRangeValid && genderValid
+})
+
 function updateFormData(field: keyof IBrand['targetAudience'], value: any): void {
   if (formData.targetAudience) {
     formData.targetAudience[field] = value
   }
 }
 
-watch([selectedAgeRanges, selectedGenders], () => {
-  updateFormData('ageRange', [...selectedAgeRanges.value])
-  updateFormData('gender', [...selectedGenders.value])
-  emit('update:brand-data', formData)
+watch([selectedAgeRanges, selectedGenders, () => formData.targetAudience?.preferences], () => {
+  if (isFormDataValid.value) {
+    updateFormData('ageRange', [...selectedAgeRanges.value])
+    updateFormData('gender', [...selectedGenders.value])
+    emit('update:brand-data', formData)
+  }
 })
 </script>
 
@@ -51,7 +63,7 @@ watch([selectedAgeRanges, selectedGenders], () => {
       inputId="preferences"
       placeholder="Escribe lo que consideres le gusta a tu público"
       v-model:modelValue="formData.targetAudience!.preferences"
-      :validations="[]"
+      :validations="descriptionValidations"
       @input="updateFormData('preferences', $event.target.value)"
     />
     <hr class="my-4" />

@@ -16,6 +16,11 @@ import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:isVisible'])
 
+const isStep1DataValid = ref(false)
+const isStep2DataValid = ref(false)
+const isStep3DataValid = ref(false)
+const isStep4DataValid = ref(false)
+
 const brandStore = useBrandStore()
 const userStore = useUserStore()
 
@@ -70,6 +75,8 @@ function handleDataStep1(data: Pick<IBrand, 'name' | 'operationCountry' | 'mainA
   formData.name = data.name
   formData.operationCountry = data.operationCountry
   formData.mainAddress = data.mainAddress
+  isStep1DataValid.value =
+    data.name.length > 0 && data.operationCountry.length > 0 && data.mainAddress.length > 0
 }
 
 function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
@@ -87,14 +94,22 @@ function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
     }
   })
   formData.targetAudience.preferences = data.targetAudience.preferences
+  isStep2DataValid.value =
+    data.targetAudience.ageRange.length > 0 &&
+    data.targetAudience.gender.length > 0 &&
+    data.targetAudience.preferences.length > 0 &&
+    data.targetAudience.preferences.length <= 500
 }
 
 function handleDataStep3(data: Pick<IBrand, 'industry'>): void {
   formData.industry = data.industry
+  isStep3DataValid.value = data.industry.length > 0
 }
 
 function handleDataStep4(data: Pick<IBrand, 'description'>): void {
   formData.description = data.description
+
+  isStep4DataValid.value = data.description.length > 0
 }
 
 async function handleCreate() {
@@ -156,7 +171,14 @@ async function handleCreate() {
           </button>
           <button
             @click="currentStep !== 4 ? nextStep() : handleCreate()"
-            :disabled="brandStore.isLoading || isCreated"
+            :disabled="
+              brandStore.isLoading ||
+              isCreated ||
+              (currentStep === 1 && !isStep1DataValid) ||
+              (currentStep === 2 && !isStep2DataValid) ||
+              (currentStep === 3 && !isStep3DataValid) ||
+              (currentStep === 4 && !isStep4DataValid)
+            "
             class="btn bg-primary text-white"
           >
             {{ currentStep !== 4 ? 'Siguiente' : brandStore.isLoading ? 'Cargando...' : 'Crear' }}

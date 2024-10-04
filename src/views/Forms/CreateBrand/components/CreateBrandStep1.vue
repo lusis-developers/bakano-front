@@ -18,6 +18,10 @@ const countryOptions = computed(() => {
   return allCountries.map((c) => ({ value: c[0], label: c[0] }))
 })
 
+const isFormDataValid = computed(() => {
+  return Object.values(formData).every((value) => typeof value === 'string' && value.length > 0)
+})
+
 function isTargetAudienceField(field: keyof IBrand | keyof UserTargetAudience): boolean {
   return ['ageRange', 'gender', 'preferences'].includes(field as string)
 }
@@ -50,7 +54,9 @@ function handleCountrySelected(countrySelected: string): void {
 }
 
 watch(formData, () => {
-  emit('update:brand-data', formData)
+  if (isFormDataValid.value) {
+    emit('update:brand-data', formData)
+  }
 })
 </script>
 
