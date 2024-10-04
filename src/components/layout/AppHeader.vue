@@ -4,10 +4,10 @@ import { onMounted, ref } from 'vue'
 import { useBrandStore } from '@/stores/brand.store'
 import { menuOptions } from '@/utils/menuItems.utils'
 import useUserStore from '@/stores/user.store'
-import CreateBrand from '../Forms/CreateBrand/CreateBrand.vue'
 import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
+import CreateBrand from '../app/brand/CreateBrand.vue'
 
 const userStore = useUserStore()
 const brandStore = useBrandStore()
