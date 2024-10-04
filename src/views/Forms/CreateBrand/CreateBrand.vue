@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 
-import { TargetBrandGender } from '@/enum/brand.enum'
 import { NotificationType } from '@/enum/components/shared/GeneralNotifications'
+import { useBrandCreationService } from '@/composables/forms/brandCreation'
 import useUserStore from '@/stores/user.store'
 import useBrandStore from '@/stores/brand.store'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
@@ -11,7 +11,6 @@ import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
 import CreateBrandStep4 from './components/CreateBrandStep4.vue'
 import GeneralNotification from '@/components/shared/GeneralNotification.vue'
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:isVisible'])
 
@@ -26,30 +25,26 @@ defineProps({
   }
 })
 
-const isCreated = ref(false)
-const isStep1DataValid = ref(false)
-const isStep2DataValid = ref(false)
-const isStep3DataValid = ref(false)
-const isStep4DataValid = ref(false)
-const currentStep = ref(1)
+const {
+  isCreated,
+  isStep1DataValid,
+  isStep2DataValid,
+  isStep3DataValid,
+  isStep4DataValid,
+  currentStep,
+  formData,
+  handleDataStep1,
+  handleDataStep2,
+  handleDataStep3,
+  handleDataStep4,
+  resetForm,
+  nextStep,
+  prevStep
+} = useBrandCreationService()
+
 const notificationMessage = ref<string | null>('')
 const notificationType = ref(NotificationType.SUCCESS)
 
-const formData: IBrand = reactive({
-  name: '',
-  description: '',
-  logo: '',
-  industry: '',
-  operationCountry: '',
-  mainAddress: '',
-  targetAudience: {
-    ageRange: [''],
-    gender: [TargetBrandGender.NOT_SURE],
-    preferences: ''
-  },
-  user: '',
-  id: ''
-})
 const isDisabled = computed(() => {
   return (
     brandStore.isLoading ||
@@ -61,6 +56,33 @@ const isDisabled = computed(() => {
   )
 })
 
+const isFirstStep = computed(() => currentStep.value === 1)
+
+const currentComponent = computed(() => {
+  return steps[currentStep.value - 1].component
+})
+
+const currentDataHandler = computed(() => {
+  return steps[currentStep.value - 1].dataHandler
+})
+
+function handleNextOrCreate(): void {
+  if (currentStep.value !== steps.length) {
+    nextStep()
+  } else {
+    handleCreate()
+  }
+}
+
+const buttonText = computed(() => {
+  if (currentStep.value !== steps.length) {
+    return 'Siguiente'
+  } else if (brandStore.isLoading) {
+    return 'Cargando...'
+  } else {
+    return 'Crear'
+  }
+})
 
 const steps = [
   { component: CreateBrandStep1, dataHandler: handleDataStep1 },
@@ -71,85 +93,6 @@ const steps = [
 
 function handleClose(): void {
   emit('update:isVisible', false)
-}
-
-function nextStep(): void {
-  if (currentStep.value < steps.length) {
-    currentStep.value++
-  }
-}
-
-function prevStep(): void {
-  if (currentStep.value > 1) {
-    currentStep.value--
-  }
-}
-
-function handleDataStep1(data: Pick<IBrand, 'name' | 'operationCountry' | 'mainAddress'>): void {
-  formData.name = data.name
-  formData.operationCountry = data.operationCountry
-  formData.mainAddress = data.mainAddress
-  isStep1DataValid.value =
-    data.name.length > 0 && data.operationCountry.length > 0 && data.mainAddress.length > 0
-}
-
-function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
-  formData.targetAudience.ageRange = data.targetAudience.ageRange
-
-  formData.targetAudience.gender = data.targetAudience.gender.map((gender) => {
-    switch (gender.toLowerCase()) {
-      case 'masculino':
-        return TargetBrandGender.MALE
-      case 'femenino':
-        return TargetBrandGender.FEMALE
-      case 'no estoy seguro':
-        return TargetBrandGender.NOT_SURE
-      default:
-        return TargetBrandGender.NOT_SURE
-    }
-  })
-
-  formData.targetAudience.preferences = data.targetAudience.preferences
-
-  isStep2DataValid.value =
-    data.targetAudience.ageRange.length > 0 &&
-    data.targetAudience.gender.length > 0 &&
-    data.targetAudience.preferences.length > 0 &&
-    data.targetAudience.preferences.length <= 500
-}
-
-function handleDataStep3(data: Pick<IBrand, 'industry'>): void {
-  formData.industry = data.industry
-  isStep3DataValid.value = data.industry.length > 0
-}
-
-function handleDataStep4(data: Pick<IBrand, 'description'>): void {
-  formData.description = data.description
-  isStep4DataValid.value = data.description.length > 0
-}
-
-function resetForm() {
-  Object.assign(formData, {
-    name: '',
-    description: '',
-    logo: '',
-    industry: '',
-    operationCountry: '',
-    mainAddress: '',
-    targetAudience: {
-      ageRange: [''],
-      gender: [TargetBrandGender.NOT_SURE],
-      preferences: ''
-    },
-    user: '',
-    id: ''
-  })
-  isCreated.value = false
-  isStep1DataValid.value = false
-  isStep2DataValid.value = false
-  isStep3DataValid.value = false
-  isStep4DataValid.value = false
-  currentStep.value = 1
 }
 
 async function handleCreate() {
@@ -172,6 +115,7 @@ async function handleCreate() {
 }
 </script>
 
+
 <template>
   <div class="create-brand">
     <GlobalModal :modelValue="isVisible" @close="handleClose">
@@ -180,27 +124,21 @@ async function handleCreate() {
       </template>
       <template #content>
         <component
-          :is="steps[currentStep - 1].component"
-          @update:brand-data="steps[currentStep - 1].dataHandler"
+          :is="currentComponent"
+          @update:brand-data="currentDataHandler"
         />
       </template>
       <template #footer>
         <div class="d-flex justify-content-between w-100">
-          <button @click="prevStep" :disabled="currentStep === 1" class="btn bg-primary text-white">
+          <button @click="prevStep" :disabled="isFirstStep" class="btn bg-primary text-white">
             Anterior
           </button>
           <button
-            @click="currentStep !== steps.length ? nextStep() : handleCreate()"
+            @click="handleNextOrCreate"
             :disabled="isDisabled"
             class="btn bg-primary text-white"
           >
-            {{
-              currentStep !== steps.length
-                ? 'Siguiente'
-                : brandStore.isLoading
-                  ? 'Cargando...'
-                  : 'Crear'
-            }}
+            {{ buttonText }}
           </button>
         </div>
       </template>
