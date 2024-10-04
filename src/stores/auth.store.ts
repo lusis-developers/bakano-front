@@ -11,6 +11,7 @@ interface RootState {
   error: string | null
   successMessage: string | null
   facebookToken: string | null
+  linkedInToken: string | null
 }
 
 const authService = new APIAuth()
@@ -21,7 +22,8 @@ export const useAuthStore = defineStore('authStore', {
     isLoading: false,
     error: null,
     successMessage: null,
-    facebookToken: null
+    facebookToken: null,
+    linkedInToken: null
   }),
   actions: {
     async signUp(user: Partial<IUser>): Promise<void> {
@@ -71,6 +73,15 @@ export const useAuthStore = defineStore('authStore', {
         this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
+      }
+    },
+    async sendLinkedInTokenToBackend(linkedInToken: string, brandId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        this.linkedInToken = linkedInToken
+        // TODO: add service
+      } catch (error: unknown) {
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       }
     }
   }

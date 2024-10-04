@@ -6,6 +6,6 @@ import LinkedInLogin from '@/components/auth/LinkedInLogin.vue'
 <template>
   <div>
     <FacebookLogin :brandId="'brandId'" />
-    <LinkedInLogin />
+    <LinkedInLogin :brandId="'brandId'" />
   </div>
 </template>
