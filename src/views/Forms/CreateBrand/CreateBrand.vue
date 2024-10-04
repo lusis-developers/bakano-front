@@ -132,13 +132,13 @@ function resetForm() {
     },
     user: '',
     id: ''
-  });
-  isCreated.value = false;
-  isStep1DataValid.value = false;
-  isStep2DataValid.value = false;
-  isStep3DataValid.value = false;
-  isStep4DataValid.value = false;
-  currentStep.value = 1;
+  })
+  isCreated.value = false
+  isStep1DataValid.value = false
+  isStep2DataValid.value = false
+  isStep3DataValid.value = false
+  isStep4DataValid.value = false
+  currentStep.value = 1
 }
 
 async function handleCreate() {
@@ -152,7 +152,7 @@ async function handleCreate() {
     : NotificationType.ERROR
   emit('update:isVisible', false)
 
-  resetForm();
+  resetForm()
 
   setTimeout(() => {
     notificationMessage.value = ''
