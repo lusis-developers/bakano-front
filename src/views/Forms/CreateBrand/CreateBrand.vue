@@ -118,12 +118,11 @@ async function handleCreate() {
   if (brandStore.successMessage) {
     notificationMessage.value = brandStore.successMessage
     notificationType.value = NotificationType.SUCCESS
-    emit('update:isVisible', false)
   } else if (brandStore.error) {
     notificationMessage.value = brandStore.error
     notificationType.value = NotificationType.ERROR
-    emit('update:isVisible', false)
   }
+  emit('update:isVisible', false)
 
   setTimeout(() => {
     notificationMessage.value = ''
