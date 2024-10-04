@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 import { TargetBrandGender } from '@/enum/brand.enum'
 import { NotificationType } from '@/enum/components/shared/GeneralNotifications'
@@ -50,6 +50,17 @@ const formData: IBrand = reactive({
   user: '',
   id: ''
 })
+const isDisabled = computed(() => {
+  return (
+    brandStore.isLoading ||
+    isCreated.value ||
+    (currentStep.value === 1 && !isStep1DataValid.value) ||
+    (currentStep.value === 2 && !isStep2DataValid.value) ||
+    (currentStep.value === 3 && !isStep3DataValid.value) ||
+    (currentStep.value === 4 && !isStep4DataValid.value)
+  )
+})
+
 
 const steps = [
   { component: CreateBrandStep1, dataHandler: handleDataStep1 },
@@ -180,14 +191,7 @@ async function handleCreate() {
           </button>
           <button
             @click="currentStep !== steps.length ? nextStep() : handleCreate()"
-            :disabled="
-              brandStore.isLoading ||
-              isCreated ||
-              (currentStep === 1 && !isStep1DataValid) ||
-              (currentStep === 2 && !isStep2DataValid) ||
-              (currentStep === 3 && !isStep3DataValid) ||
-              (currentStep === 4 && !isStep4DataValid)
-            "
+            :disabled="isDisabled"
             class="btn bg-primary text-white"
           >
             {{
