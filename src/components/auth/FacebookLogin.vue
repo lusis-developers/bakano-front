@@ -83,9 +83,16 @@ onMounted(() => {
 
 <template>
   <div>
-    <button class="btn btn-facebook" @click="loginWithFacebook">
-      Conectar con Facebook
+    <button class="btn btn-facebook social-button" @click="loginWithFacebook">
+      Conecta con Facebook
       <i class="bi bi-facebook"></i>
     </button>
   </div>
 </template>
+
+<style lang="scss">
+.social-button {
+  width: 100%;
+  max-width: 320px;
+}
+</style>
