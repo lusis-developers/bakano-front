@@ -1,37 +1,109 @@
 import { defineStore } from 'pinia'
 
-import type { Brand, socialMedia } from '@/interfaces/components/Layout/BrandsTypes.interface'
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
+import APIBrand from '@/services/brand/brand'
+import { AxiosError } from 'axios'
+import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
 
 interface RootState {
-  brands: Brand[]
-  selectedBrand: Brand | null
+  isLoading: boolean
+  brands: IBrand[]
+  selectedBrand: IBrand | null
+  successMessage: string | null
+  error: string | null
 }
+
+const brandService = new APIBrand()
 
 export const useBrandStore = defineStore('brandStore', {
   state: (): RootState => ({
-    brands: [
-      {
-        id: 1,
-        name: 'boxitrip',
-        logo: 'https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg',
-        socialMedia: [] as socialMedia[],
-        isLoading: false,
-        error: null
-      },
-      {
-        id: 2,
-        name: 'yeyo tienda',
-        logo: 'https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg',
-        socialMedia: [] as socialMedia[],
-        isLoading: false,
-        error: null
-      }
-    ],
-    selectedBrand: null
+    brands: [],
+    isLoading: false,
+    selectedBrand: null,
+    successMessage: null,
+    error: null
   }),
   actions: {
-    setSelectedBrand(brand: Brand) {
+    setSelectedBrand(brand: IBrand) {
       this.selectedBrand = brand
+    },
+
+    async getUserBrands(userId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        const { data } = await brandService.getBrands(userId)
+        this.brands = data.brands
+      } catch (error) {
+        console.error('error: ', error)
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async createBrand(brand: IBrand, userId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        await brandService.createBrand(brand, userId)
+        this.successMessage = 'Se ha creado exitosamente tu marca'
+      } catch (error: unknown) {
+        console.error('error: ', error)
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async removeBrand(brandId: string, userId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        const brandRemoved = await brandService.removeBrand(brandId, userId)
+        this.successMessage = `Se he eliminado con éxito la marca: ${brandRemoved.data.brandRemoved.name}`
+      } catch (error) {
+        console.error('error: ', error)
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async editBrand(brandUpdated: Partial<IBrand>, brandId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        const brandEdited = await brandService.editBrand(brandUpdated, brandId)
+        this.successMessage = `Se ha actualizado exitosamente tu marca: ${brandEdited.data.brandUpdated.name}`
+      } catch (error: unknown) {
+        console.error('error: ', error)
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async getUserBrand(brandId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        const { data } = await brandService.getBrand(brandId)
+        this.selectedBrand = data.brand
+        this.successMessage = 'Se ha cargado tu marca'
+      } catch (error: unknown) {
+        console.error({ error })
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    async updateBrandLogo(file: File, brandId: string): Promise<void> {
+      this.isLoading = true
+      try {
+        await brandService.uploadBrandLogo(file, brandId)
+        this.successMessage = 'Tu imagen ha sido cargada'
+      } catch (error: unknown) {
+        console.error({ error })
+        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+      } finally {
+        this.isLoading = false
+      }
     }
   }
 })
