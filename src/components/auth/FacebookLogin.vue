@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
-import { facebookPermissions } from '@/config/components/facebookPermissions.config'
+import { facebookScopes } from '@/config/components/auth/facebookPermissions.config'
 import useAuthStore from '@/stores/auth.store'
 
 const props = defineProps({
@@ -13,7 +13,7 @@ const props = defineProps({
 
 const authStore = useAuthStore()
 
-const scope = facebookPermissions.join(',')
+const scope = facebookScopes.join(',')
 
 async function initFacebookSDK() {
   try {
