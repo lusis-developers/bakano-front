@@ -17,24 +17,7 @@ const brandService = new APIBrand()
 
 export const useBrandStore = defineStore('brandStore', {
   state: (): RootState => ({
-    brands: [
-      // {
-      //   id: 1,
-      //   name: 'boxitrip',
-      //   logo: 'https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg',
-      //   socialMedia: [] as socialMedia[],
-      //   isLoading: false,
-      //   error: null
-      // },
-      // {
-      //   id: 2,
-      //   name: 'yeyo tienda',
-      //   logo: 'https://i.pinimg.com/236x/22/09/02/220902e0b406bbd28afccd44a3551b1e.jpg',
-      //   socialMedia: [] as socialMedia[],
-      //   isLoading: false,
-      //   error: null
-      // }
-    ],
+    brands: [],
     isLoading: false,
     selectedBrand: null,
     successMessage: null,
