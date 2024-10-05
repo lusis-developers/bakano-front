@@ -82,13 +82,17 @@ export const useAuthStore = defineStore('authStore', {
         this.isLoading = false
       }
     },
-    async sendLinkedInTokenToBackend(linkedInToken: string, brandId: string): Promise<void> {
+    async sendLinkedInTokenToBackend(
+      linkedInToken: string,
+      brandId: string
+    ): Promise<void> {
       this.isLoading = true
       try {
         this.linkedInToken = linkedInToken
         // TODO: add service
       } catch (error: unknown) {
-        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        this.error =
+          error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       }
     }
   }

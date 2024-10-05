@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+
 import { useRoute } from 'vue-router'
 
-import { linkedInScopes } from '@/config/components/auth/linkedInPermissions.config'
 import useAuthStore from '@/stores/auth.store'
+
+import { linkedInScopes } from '@/config/components/auth/linkedInPermissions.config'
 
 const route = useRoute()
 
@@ -17,7 +19,8 @@ const props = defineProps({
 const authStore = useAuthStore()
 
 const linkedInClientId = import.meta.env.VITE_LINKEDIN_CLIENT_ID
-const redirectUri = 'https://d811-2800-bf0-8143-f0-c5f4-6c27-3530-85de.ngrok-free.app'
+const redirectUri =
+  'https://d811-2800-bf0-8143-f0-c5f4-6c27-3530-85de.ngrok-free.app'
 
 function loginWithLinkedIn() {
   const state = Math.random().toString(36).substring(2)
