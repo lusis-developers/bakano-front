@@ -17,7 +17,7 @@ const props = defineProps({
 const authStore = useAuthStore()
 
 const linkedInClientId = import.meta.env.VITE_LINKEDIN_CLIENT_ID
-const redirectUri = 'https://bakano-app-front.netlify.app '
+const redirectUri = 'https://d811-2800-bf0-8143-f0-c5f4-6c27-3530-85de.ngrok-free.app'
 
 function loginWithLinkedIn() {
   const state = Math.random().toString(36).substring(2)
