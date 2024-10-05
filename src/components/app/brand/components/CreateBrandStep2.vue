@@ -2,10 +2,13 @@
 import { computed, reactive, ref, watch } from 'vue'
 
 import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
+
 import FloatInput from '@/components/input/FloatInput.vue'
 import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
+
 import { descriptionValidations } from '@/validation/components/forms/brand.validation'
+
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -37,19 +40,29 @@ const isFormDataValid = computed(() => {
   return preferencesValid && ageRangeValid && genderValid
 })
 
-function updateFormData(field: keyof IBrand['targetAudience'], value: any): void {
+function updateFormData(
+  field: keyof IBrand['targetAudience'],
+  value: any
+): void {
   if (formData.targetAudience) {
     formData.targetAudience[field] = value
   }
 }
 
-watch([selectedAgeRanges, selectedGenders, () => formData.targetAudience?.preferences], () => {
-  if (isFormDataValid.value) {
-    updateFormData('ageRange', [...selectedAgeRanges.value])
-    updateFormData('gender', [...selectedGenders.value])
-    emit('update:brand-data', formData)
+watch(
+  [
+    selectedAgeRanges,
+    selectedGenders,
+    () => formData.targetAudience?.preferences
+  ],
+  () => {
+    if (isFormDataValid.value) {
+      updateFormData('ageRange', [...selectedAgeRanges.value])
+      updateFormData('gender', [...selectedGenders.value])
+      emit('update:brand-data', formData)
+    }
   }
-})
+)
 </script>
 
 <template>

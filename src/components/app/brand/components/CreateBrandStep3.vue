@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
 
-import { industriesOptions } from '@/utils/industriesOptions.utils'
 import FloatInput from '@/components/input/FloatInput.vue'
 import SelectInput from '@/components/input/SelectInput.vue'
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
+
 import { industryValidations } from '@/validation/components/forms/brand.validation'
+
+import { industriesOptions } from '@/utils/industriesOptions.utils'
+
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:brand-data'])
 

@@ -13,7 +13,10 @@ defineProps({
 </script>
 
 <template>
-  <div :class="['alert', type === 'success' ? 'alert-success' : 'alert-danger']" role="alert">
+  <div
+    :class="['alert', type === 'success' ? 'alert-success' : 'alert-danger']"
+    role="alert"
+  >
     {{ message }}
   </div>
 </template>

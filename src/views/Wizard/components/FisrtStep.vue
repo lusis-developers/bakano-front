@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+
+import SelectInput from '@/components/input/SelectInput.vue'
 
 import {
   foundUsByOptions,
   usageCountOptions,
   usageTypeOptions
 } from '@/utils/wizardSelections.utils'
-
-import SelectInput from '@/components/input/SelectInput.vue'
 
 const emit = defineEmits(['next', 'prev'])
 
@@ -31,7 +31,9 @@ const usageType = ref(props.usageType || '')
 const foundUsBy = ref(props.foundUsBy || '')
 
 const isFormValid = computed(() => {
-  return usageCount.value !== '' && usageType.value !== '' && foundUsBy.value !== ''
+  return (
+    usageCount.value !== '' && usageType.value !== '' && foundUsBy.value !== ''
+  )
 })
 
 function submitForm(): void {
@@ -92,7 +94,13 @@ watch(
       />
     </div>
     <div class="d-flex justify-content-end">
-      <button @click="submitForm" :disabled="!isFormValid" class="btn btn-primary">Adelante</button>
+      <button
+        @click="submitForm"
+        :disabled="!isFormValid"
+        class="btn btn-primary"
+      >
+        Adelante
+      </button>
     </div>
   </div>
 </template>

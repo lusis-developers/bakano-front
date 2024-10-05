@@ -47,7 +47,10 @@ function isExternalLink(link: string): boolean {
       </slot>
       <slot name="button-icon"> </slot>
     </button>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+    <ul
+      class="dropdown-menu dropdown-menu-end"
+      aria-labelledby="dropdownMenuButton"
+    >
       <li v-for="(item, index) in props.menuOptions" :key="index">
         <router-link
           v-if="!isExternalLink(item.link)"
@@ -79,7 +82,12 @@ function isExternalLink(link: string): boolean {
           @click.prevent="handleItemClick(item)"
           class="dropdown-item d-flex align-items-center"
         >
-          <img :src="item.logo" alt="Logo" class="me-2" style="width: 30px; height: 30px" />
+          <img
+            :src="item.logo"
+            alt="Logo"
+            class="me-2"
+            style="width: 30px; height: 30px"
+          />
           {{ item.name }}
         </router-link>
         <a
@@ -89,7 +97,12 @@ function isExternalLink(link: string): boolean {
           rel="noopener noreferrer"
           class="dropdown-item d-flex align-items-center"
         >
-          <img :src="item.logo" alt="Logo" class="me-2" style="width: 30px; height: 30px" />
+          <img
+            :src="item.logo"
+            alt="Logo"
+            class="me-2"
+            style="width: 30px; height: 30px"
+          />
           {{ item.name }}
         </a>
       </li>

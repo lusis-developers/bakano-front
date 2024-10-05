@@ -2,15 +2,19 @@
 import { computed, ref } from 'vue'
 
 import { NotificationType } from '@/enum/components/shared/GeneralNotifications'
+
 import { useBrandCreationService } from '@/composables/forms/brandCreation'
-import useUserStore from '@/stores/user.store'
+
 import useBrandStore from '@/stores/brand.store'
+import useUserStore from '@/stores/user.store'
+
+import GeneralNotification from '@/components/shared/GeneralNotification.vue'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
+
 import CreateBrandStep1 from './components/CreateBrandStep1.vue'
 import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
 import CreateBrandStep4 from './components/CreateBrandStep4.vue'
-import GeneralNotification from '@/components/shared/GeneralNotification.vue'
 
 const emit = defineEmits(['update:isVisible'])
 
@@ -122,11 +126,18 @@ async function handleCreate() {
         <h2>Crear marca 📌</h2>
       </template>
       <template #content>
-        <component :is="currentComponent" @update:brand-data="currentDataHandler" />
+        <component
+          :is="currentComponent"
+          @update:brand-data="currentDataHandler"
+        />
       </template>
       <template #footer>
         <div class="d-flex justify-content-between w-100">
-          <button @click="prevStep" :disabled="isFirstStep" class="btn bg-primary text-white">
+          <button
+            @click="prevStep"
+            :disabled="isFirstStep"
+            class="btn bg-primary text-white"
+          >
             Anterior
           </button>
           <button

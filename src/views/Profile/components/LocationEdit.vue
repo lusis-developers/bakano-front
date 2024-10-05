@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, watch, type PropType } from 'vue'
-import { allCountries } from 'country-region-data'
+import { type PropType, computed, ref, watch } from 'vue'
 
 import SelectInput from '@/components/input/SelectInput.vue'
 
 import type { IUser } from '@/interfaces/user.interface'
+import { allCountries } from 'country-region-data'
 
 const emit = defineEmits(['update:form'])
 
@@ -33,7 +33,10 @@ const regionOptions = computed(() => {
 })
 
 watch(selectedCountry, (newCountry) => {
-  emit('update:form', { ...props.form, location: { country: newCountry, province: '' } })
+  emit('update:form', {
+    ...props.form,
+    location: { country: newCountry, province: '' }
+  })
 })
 
 watch(localProvince, (newProvince) => {

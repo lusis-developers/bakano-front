@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, watch, type PropType } from 'vue'
+import { type PropType, ref, watch } from 'vue'
 
 import { UserGender } from '@/enum/user.enum'
+
 import SelectInput from '@/components/input/SelectInput.vue'
 
 import type { IUser } from '@/interfaces/user.interface'

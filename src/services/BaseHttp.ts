@@ -5,7 +5,8 @@ class APIBase {
   private baseUrl: string
 
   constructor() {
-    this.baseUrl = import.meta.env.VITE_BAKANO_API || 'http://localhost:8100/api'
+    this.baseUrl =
+      import.meta.env.VITE_BAKANO_API || 'http://localhost:8100/api'
   }
 
   private buildUrl(endpoint: string): string {
@@ -63,7 +64,10 @@ class APIBase {
     }
   }
 
-  protected async uploadFile<T>(endpoint: string, file: File): Promise<AxiosResponse<T>> {
+  protected async uploadFile<T>(
+    endpoint: string,
+    file: File
+  ): Promise<AxiosResponse<T>> {
     const url = this.buildUrl(endpoint)
     const formData = new FormData()
     formData.append('file', file)
@@ -84,7 +88,10 @@ class APIBase {
     }
   }
 
-  protected async put<T>(endpoint: string, data: any): Promise<AxiosResponse<T>> {
+  protected async put<T>(
+    endpoint: string,
+    data: any
+  ): Promise<AxiosResponse<T>> {
     const url = this.buildUrl(endpoint)
     try {
       return await axios.put<T>(url, data, {
@@ -99,7 +106,10 @@ class APIBase {
     }
   }
 
-  protected async patch<T>(endpoint: string, data: any): Promise<AxiosResponse<T>> {
+  protected async patch<T>(
+    endpoint: string,
+    data: any
+  ): Promise<AxiosResponse<T>> {
     const url = this.buildUrl(endpoint)
     try {
       return await axios.patch<T>(url, data, {

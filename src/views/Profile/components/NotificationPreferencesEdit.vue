@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, type PropType } from 'vue'
+import { type PropType, ref, watch } from 'vue'
 
 import CheckboxInput from '@/components/input/CheckboxInput.vue'
 
@@ -16,17 +16,25 @@ const props = defineProps({
   }
 })
 
-const notificationOptions: { label: string; option: NotificationPreferenceKey }[] = [
+const notificationOptions: {
+  label: string
+  option: NotificationPreferenceKey
+}[] = [
   { label: 'Correo electrónico', option: 'email' },
   { label: 'SMS', option: 'sms' },
   { label: 'Push', option: 'push' }
 ]
-const localNotificationPreferences = ref({ ...props.form.notificationPreferences })
+const localNotificationPreferences = ref({
+  ...props.form.notificationPreferences
+})
 
 watch(
   localNotificationPreferences,
   (newPreferences) => {
-    emit('update:form', { ...props.form, notificationPreferences: newPreferences })
+    emit('update:form', {
+      ...props.form,
+      notificationPreferences: newPreferences
+    })
   },
   { deep: true }
 )
