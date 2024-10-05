@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-
-import logoImage from '@/assets/brand/bakano-blanco.png'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { menuUserOptions } from '@/utils/menuItems.utils'
-import DropdownMenu from './DropdownMenu.vue'
 
+import DropdownMenu from './DropdownMenu.vue'
+import logoImage from '@/assets/brand/bakano-blanco.png'
 import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
 
 defineProps({
@@ -37,11 +36,20 @@ onBeforeUnmount(() => {
   >
     <div class="d-flex flex-column align-items-start h-100">
       <div class="d-flex align-items-center mb-3">
-        <img :src="logoImage" alt="Logo" class="img-fluid" style="max-height: 50px" />
+        <img
+          :src="logoImage"
+          alt="Logo"
+          class="img-fluid"
+          style="max-height: 50px"
+        />
       </div>
       <div class="d-flex flex-column justify-content-between flex-grow-1">
         <ul class="mt-4 nav nav-pills flex-column">
-          <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item fs-6">
+          <li
+            v-for="(item, index) in sidebarItems"
+            :key="index"
+            class="nav-item fs-6"
+          >
             <router-link
               :to="item.link"
               :class="[

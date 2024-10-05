@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, onMounted } from 'vue'
+
 import { useRoute, useRouter } from 'vue-router'
 
 import { SpinnerSize } from '@/enum/components/shared/SpinnerLoader.enum'
+
 import useAuthStore from '@/stores/auth.store'
-import logo from '@/assets/brand/bakano-negro.png'
+import useUserStore from '@/stores/user.store'
+
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
 import SpinnerLoader from '@/components/shared/SpinnerLoader.vue'
-import useUserStore from '@/stores/user.store'
+
+import logo from '@/assets/brand/bakano-negro.png'
 
 const route = useRoute()
 const router = useRouter()
@@ -42,10 +46,16 @@ onBeforeMount(() => {
         <div v-if="authStore.isLoading" class="auth-loading">
           <SpinnerLoader :size="SpinnerSize.LARGE" />
         </div>
-        <div v-else class="auth-no-auth d-flex flex-column justify-content-center gap-4 mt-5 pt-5">
+        <div
+          v-else
+          class="auth-no-auth d-flex flex-column justify-content-center gap-4 mt-5 pt-5"
+        >
           <img :src="logo" alt="bakano logo" />
           <h1 class="text-center">No estás autenticado...</h1>
-          <router-link class="text-center text-success text-decoration-underline fs-5" to="/login">
+          <router-link
+            class="text-center text-success text-decoration-underline fs-5"
+            to="/login"
+          >
             Ir a Inicio de sesión</router-link
           >
         </div>

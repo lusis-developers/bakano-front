@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
-import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
+
 import useAuthStore from '@/stores/auth.store'
-import logo from '@/assets/brand/bakano-negro.png'
+
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+
+import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
+
+import logo from '@/assets/brand/bakano-negro.png'
 
 const {
   alertMessage,
@@ -35,7 +39,11 @@ const authStore = useAuthStore()
             :type="alertType"
             @close="closeAlert"
           />
-          <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4 mt-5" />
+          <img
+            :src="logo"
+            alt="bakano-logo"
+            class="logo rounded mx-auto d-block mb-4 mt-5"
+          />
           <p class="fs-3 text-center">Inicia Sesión</p>
           <FloatInput
             :validations="emailValidations"

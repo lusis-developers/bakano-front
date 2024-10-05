@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, computed, type PropType } from 'vue'
+import { type PropType, computed, ref, watch } from 'vue'
 
 import { validateUrl } from '@/validation/components/ProfileSettings'
 
@@ -41,7 +41,9 @@ const validationErrors = computed(() => {
       <input
         v-model="localSocialMediaLinks.linkedin"
         :class="{
-          'is-invalid': localSocialMediaLinks.linkedin && validationErrors.linkedin.length > 0
+          'is-invalid':
+            localSocialMediaLinks.linkedin &&
+            validationErrors.linkedin.length > 0
         }"
         type="text"
         class="form-control"
@@ -49,7 +51,9 @@ const validationErrors = computed(() => {
         placeholder="Link de tu perfil"
       />
       <span
-        v-if="localSocialMediaLinks.linkedin && validationErrors.linkedin.length > 0"
+        v-if="
+          localSocialMediaLinks.linkedin && validationErrors.linkedin.length > 0
+        "
         class="text-danger"
       >
         {{ validationErrors.linkedin[0] }}
@@ -60,7 +64,8 @@ const validationErrors = computed(() => {
       <input
         v-model="localSocialMediaLinks.twitter"
         :class="{
-          'is-invalid': localSocialMediaLinks.twitter && validationErrors.twitter.length > 0
+          'is-invalid':
+            localSocialMediaLinks.twitter && validationErrors.twitter.length > 0
         }"
         type="text"
         id="twitter"
@@ -68,7 +73,9 @@ const validationErrors = computed(() => {
         class="form-control"
       />
       <span
-        v-if="localSocialMediaLinks.twitter && validationErrors.twitter.length > 0"
+        v-if="
+          localSocialMediaLinks.twitter && validationErrors.twitter.length > 0
+        "
         class="text-danger"
       >
         {{ validationErrors.twitter[0] }}
@@ -79,7 +86,9 @@ const validationErrors = computed(() => {
       <input
         v-model="localSocialMediaLinks.instagram"
         :class="{
-          'is-invalid': localSocialMediaLinks.instagram && validationErrors.instagram.length > 0
+          'is-invalid':
+            localSocialMediaLinks.instagram &&
+            validationErrors.instagram.length > 0
         }"
         type="text"
         id="instagram"
@@ -87,7 +96,10 @@ const validationErrors = computed(() => {
         class="form-control"
       />
       <span
-        v-if="localSocialMediaLinks.instagram && validationErrors.instagram.length > 0"
+        v-if="
+          localSocialMediaLinks.instagram &&
+          validationErrors.instagram.length > 0
+        "
         class="text-danger"
       >
         {{ validationErrors.instagram[0] }}
@@ -98,7 +110,8 @@ const validationErrors = computed(() => {
       <input
         v-model="localSocialMediaLinks.website"
         :class="{
-          'is-invalid': localSocialMediaLinks.website && validationErrors.website.length > 0
+          'is-invalid':
+            localSocialMediaLinks.website && validationErrors.website.length > 0
         }"
         type="text"
         id="website"
@@ -106,7 +119,9 @@ const validationErrors = computed(() => {
         class="form-control"
       />
       <span
-        v-if="localSocialMediaLinks.website && validationErrors.website.length > 0"
+        v-if="
+          localSocialMediaLinks.website && validationErrors.website.length > 0
+        "
         class="text-danger"
       >
         {{ validationErrors.website[0] }}

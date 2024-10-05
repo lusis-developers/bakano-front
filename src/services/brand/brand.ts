@@ -1,5 +1,3 @@
-import type { AxiosResponse } from 'axios'
-
 import APIBase from '../BaseHttp'
 import type {
   BrandCreatedResponse,
@@ -10,6 +8,7 @@ import type {
   GetBrandsResponse,
   IBrand
 } from '@/interfaces/Brand/brand.interface'
+import type { AxiosResponse } from 'axios'
 
 class APIBrand extends APIBase {
   async createBrand(
@@ -19,7 +18,10 @@ class APIBrand extends APIBase {
     return await this.post(`brand/${userId}`, brand)
   }
 
-  async removeBrand(brandId: string, userId: string): Promise<AxiosResponse<BrandRemovedResponse>> {
+  async removeBrand(
+    brandId: string,
+    userId: string
+  ): Promise<AxiosResponse<BrandRemovedResponse>> {
     return await this.delete(`brand/${userId}/${brandId}`)
   }
 

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+
 import { useRoute } from 'vue-router'
 
-import { sidebarItems } from '@/utils/menuItems.utils'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+
+import { sidebarItems } from '@/utils/menuItems.utils'
 
 const route = useRoute()
 

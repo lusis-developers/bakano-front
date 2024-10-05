@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, type PropType } from 'vue'
+import { type PropType, ref } from 'vue'
 
 import type { Validation } from '@/interfaces/components/input/EmailAndPassword.interface'
 
@@ -59,7 +59,9 @@ function validateInput(): void {
     <label :for="inputId">{{ label }}</label>
     <div v-if="errorMessages.length" class="invalid-feedback d-block">
       <ul>
-        <li v-for="(message, index) in errorMessages" :key="index">{{ message }}</li>
+        <li v-for="(message, index) in errorMessages" :key="index">
+          {{ message }}
+        </li>
       </ul>
     </div>
   </div>

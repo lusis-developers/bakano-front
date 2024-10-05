@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { computed, ref, watch, type PropType } from 'vue'
-import { listCountryCodes } from '@/utils/listPhoneCodeArea'
+import { type PropType, computed, ref, watch } from 'vue'
+
+import FloatInput from '@/components/input/FloatInput.vue'
+import SelectInput from '@/components/input/SelectInput.vue'
+import UploadFileInput from '@/components/input/uploadFileInput.vue'
 
 import {
   emailValidation,
   phoneNumberValidation,
   wordValidation
 } from '@/validation/components/ProfileSettings'
-import FloatInput from '@/components/input/FloatInput.vue'
-import SelectInput from '@/components/input/SelectInput.vue'
-import UploadFileInput from '@/components/input/uploadFileInput.vue'
+
+import { listCountryCodes } from '@/utils/listPhoneCodeArea'
 
 import type { IUser } from '@/interfaces/user.interface'
 
@@ -45,7 +47,10 @@ function onFileSelected(file: File) {
   }
   reader.readAsDataURL(file)
 }
-function handleValidation(field: keyof IUser, payload: { value: string; isValid: boolean }) {
+function handleValidation(
+  field: keyof IUser,
+  payload: { value: string; isValid: boolean }
+) {
   localForm.value[field] = payload.value
 }
 
@@ -100,12 +105,19 @@ watch(
       />
     </div>
     <div class="mb-3">
-      <label for="profilePictureUrl" class="form-label">Subir una foto de perfil</label>
+      <label for="profilePictureUrl" class="form-label"
+        >Subir una foto de perfil</label
+      >
       <UploadFileInput @file-selected="onFileSelected" />
     </div>
     <div class="mb-3">
       <label for="dateOfBirth" class="form-label">Fecha de Nacimiento</label>
-      <input v-model="localForm.dateOfBirth" type="date" id="dateOfBirth" class="form-control" />
+      <input
+        v-model="localForm.dateOfBirth"
+        type="date"
+        id="dateOfBirth"
+        class="form-control"
+      />
     </div>
   </div>
 </template>

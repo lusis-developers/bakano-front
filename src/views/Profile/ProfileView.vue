@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import { reactive, computed, ref, watch } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
+
+import { SubscriptionPlan, UserStatus } from '@/enum/user.enum'
+
+import BaseAccordion from '@/components/base/BaseAccordion.vue'
 
 import {
-  validateUrl,
-  validateField,
   emailValidation,
-  wordValidation,
-  phoneNumberValidation
+  phoneNumberValidation,
+  validateField,
+  validateUrl,
+  wordValidation
 } from '@/validation/components/ProfileSettings'
-import { SubscriptionPlan, UserStatus } from '@/enum/user.enum'
-import BaseAccordion from '@/components/base/BaseAccordion.vue'
-import PersonalInfo from '@/views/Profile/components/PersonalEdit.vue'
-import LocationEdit from '@/views/Profile/components/LocationEdit.vue'
-import JobInfo from '@/views/Profile/components/JobInformationEdit.vue'
-import GenderInfo from '@/views/Profile/components/GenderInformationEdit.vue'
-import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
-import NotificationPreferences from '@/views/Profile/components/NotificationPreferencesEdit.vue'
 
-import type { IUser } from '@/interfaces/user.interface'
+import GenderInfo from '@/views/Profile/components/GenderInformationEdit.vue'
+import JobInfo from '@/views/Profile/components/JobInformationEdit.vue'
+import LocationEdit from '@/views/Profile/components/LocationEdit.vue'
+import NotificationPreferences from '@/views/Profile/components/NotificationPreferencesEdit.vue'
+import PersonalInfo from '@/views/Profile/components/PersonalEdit.vue'
+import SocialMediaLinks from '@/views/Profile/components/SocialNetworkEdit.vue'
+
 import type { AccordionItem } from '@/interfaces/components/accordion/AccordionItem.interface'
+import type { IUser } from '@/interfaces/user.interface'
 
 //TODO - DEFAULT VALUE WILL BE THE USER INFORMATION
 //TOOD - FUNCTION TO DETECT ANY CHANGE Y COULD SAVE CHANGES
@@ -76,10 +79,12 @@ const accordionItems: AccordionItem[] = [
 const hasUnsavedChanges = ref(false)
 
 const hasErrors = computed(() => {
-  const socialMediaErrors = Object.values(form.socialMediaLinks).some((link) => {
-    const errors = validateUrl(link)
-    return link && errors.length > 0
-  })
+  const socialMediaErrors = Object.values(form.socialMediaLinks).some(
+    (link) => {
+      const errors = validateUrl(link)
+      return link && errors.length > 0
+    }
+  )
 
   const personalInfoErrors =
     [
@@ -127,7 +132,11 @@ watch(
           :index="index"
           parent-id="#profileAccordion"
         >
-          <component :is="item.component" :form="form" @update:form="updateForm" />
+          <component
+            :is="item.component"
+            :form="form"
+            @update:form="updateForm"
+          />
         </BaseAccordion>
       </div>
       <button

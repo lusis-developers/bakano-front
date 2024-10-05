@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, type PropType } from 'vue'
+import { type PropType, ref, watch } from 'vue'
 
 import type { IUser } from '@/interfaces/user.interface'
 
@@ -26,7 +26,9 @@ watch(
 <template>
   <div class="accordion-body">
     <div class="mb-3">
-      <label for="jobDescription" class="form-label">Descripción del Trabajo</label>
+      <label for="jobDescription" class="form-label"
+        >Descripción del Trabajo</label
+      >
       <input
         v-model="localForm.jobDescription"
         type="text"

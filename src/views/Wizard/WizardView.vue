@@ -62,7 +62,12 @@ function sendData(): void {
         @prev="prevStep"
         :jobDescription="jobDescription"
       />
-      <ThirdStep v-if="currentStep === 3" @next="nextStep" @prev="prevStep" :gender="gender" />
+      <ThirdStep
+        v-if="currentStep === 3"
+        @next="nextStep"
+        @prev="prevStep"
+        :gender="gender"
+      />
     </div>
   </div>
 </template>
