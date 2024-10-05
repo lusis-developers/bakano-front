@@ -1,8 +1,8 @@
 import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
 
-export const menuOptions: (props: { showCreateBrandModal: () => void }) => Navigation[] = ({
-  showCreateBrandModal
-}) => [
+export const menuOptions: (props: {
+  showCreateBrandModal: () => void
+}) => Navigation[] = ({ showCreateBrandModal }) => [
   {
     name: 'Agregar marca',
     link: '#',

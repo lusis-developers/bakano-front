@@ -56,7 +56,9 @@ watch(
         style="display: flex; align-items: center; cursor: pointer"
       >
         {{ option }}
-        <span @click="removeOption(option)" class="ms-2" style="cursor: pointer">&times;</span>
+        <span @click="removeOption(option)" class="ms-2" style="cursor: pointer"
+          >&times;</span
+        >
       </div>
     </div>
     <div class="dropdown mt-2">

@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import { useAuthForm } from '@/composables/views/useAuthForm.composable'
-import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
+
 import useAuthStore from '@/stores/auth.store'
-import logo from '@/assets/brand/bakano-negro.png'
+
 import BaseAlert from '@/components/base/BaseAlert.vue'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
+
+import { emailValidations } from '@/validation/components/EmailAndPassword.validation'
+
+import logo from '@/assets/brand/bakano-negro.png'
 import type { IUser } from '@/interfaces/user.interface'
 
 const {
@@ -30,10 +34,18 @@ const nameErrors = ref<string[]>([])
 const lastnameErrors = ref<string[]>([])
 
 const isRegistrationDisabled = computed(() => {
-  return isDisabled.value || name.value.length === 0 || lastname.value.length === 0
+  return (
+    isDisabled.value || name.value.length === 0 || lastname.value.length === 0
+  )
 })
 
-function handleName({ value, isValid }: { value: string; isValid: boolean }): void {
+function handleName({
+  value,
+  isValid
+}: {
+  value: string
+  isValid: boolean
+}): void {
   name.value = value
   if (!isValid) {
     nameErrors.value = ['Campo obligatorio']
@@ -42,7 +54,13 @@ function handleName({ value, isValid }: { value: string; isValid: boolean }): vo
   }
 }
 
-function handleLastname({ value, isValid }: { value: string; isValid: boolean }): void {
+function handleLastname({
+  value,
+  isValid
+}: {
+  value: string
+  isValid: boolean
+}): void {
   lastname.value = value
   if (!isValid) {
     lastnameErrors.value = ['Campo obligatorio']
@@ -75,7 +93,11 @@ function submit(): void {
             :type="alertType"
             @close="closeAlert"
           />
-          <img :src="logo" alt="bakano-logo" class="logo rounded mx-auto d-block mb-4 mt-5" />
+          <img
+            :src="logo"
+            alt="bakano-logo"
+            class="logo rounded mx-auto d-block mb-4 mt-5"
+          />
           <p class="fs-3 text-center">Regístrate</p>
           <FloatInput
             label="Nombre"

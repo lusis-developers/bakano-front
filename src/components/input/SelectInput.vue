@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, type PropType } from 'vue'
+import { type PropType, computed, ref } from 'vue'
 
 interface Option {
   value: string | number
@@ -55,11 +55,18 @@ const emitChange = () => {
       v-model="selectedValue"
       @change="emitChange"
     >
-      <option v-for="option in options" :key="option.value" :value="option.value">
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+      >
         {{ option.label }}
       </option>
     </select>
-    <span v-if="validationErrors && validationErrors.length > 0" class="text-danger">
+    <span
+      v-if="validationErrors && validationErrors.length > 0"
+      class="text-danger"
+    >
       {{ validationErrors[0] }}
     </span>
   </div>

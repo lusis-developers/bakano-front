@@ -1,6 +1,7 @@
 import { reactive, ref } from 'vue'
 
 import { TargetBrandGender } from '@/enum/brand.enum'
+
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 export function useBrandCreationService() {
@@ -26,29 +27,35 @@ export function useBrandCreationService() {
     id: ''
   })
 
-  function handleDataStep1(data: Pick<IBrand, 'name' | 'operationCountry' | 'mainAddress'>): void {
+  function handleDataStep1(
+    data: Pick<IBrand, 'name' | 'operationCountry' | 'mainAddress'>
+  ): void {
     formData.name = data.name
     formData.operationCountry = data.operationCountry
     formData.mainAddress = data.mainAddress
     isStep1DataValid.value =
-      data.name.length > 0 && data.operationCountry.length > 0 && data.mainAddress.length > 0
+      data.name.length > 0 &&
+      data.operationCountry.length > 0 &&
+      data.mainAddress.length > 0
   }
 
   function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
     formData.targetAudience.ageRange = data.targetAudience.ageRange
 
-    formData.targetAudience.gender = data.targetAudience.gender.map((gender) => {
-      switch (gender.toLowerCase()) {
-        case 'masculino':
-          return TargetBrandGender.MALE
-        case 'femenino':
-          return TargetBrandGender.FEMALE
-        case 'no estoy seguro':
-          return TargetBrandGender.NOT_SURE
-        default:
-          return TargetBrandGender.NOT_SURE
+    formData.targetAudience.gender = data.targetAudience.gender.map(
+      (gender) => {
+        switch (gender.toLowerCase()) {
+          case 'masculino':
+            return TargetBrandGender.MALE
+          case 'femenino':
+            return TargetBrandGender.FEMALE
+          case 'no estoy seguro':
+            return TargetBrandGender.NOT_SURE
+          default:
+            return TargetBrandGender.NOT_SURE
+        }
       }
-    })
+    )
 
     formData.targetAudience.preferences = data.targetAudience.preferences
 

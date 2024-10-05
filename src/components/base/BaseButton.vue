@@ -52,7 +52,11 @@ function click(): void {
 </script>
 
 <template>
-  <button :class="buttonClasses" :disabled="isDisabled || isLoading" @click="click">
+  <button
+    :class="buttonClasses"
+    :disabled="isDisabled || isLoading"
+    @click="click"
+  >
     <!-- Mostrar spinner si isLoading es true -->
     <span
       v-if="isLoading"

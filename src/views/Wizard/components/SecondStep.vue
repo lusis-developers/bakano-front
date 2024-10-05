@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
+
+import SelectInput from '@/components/input/SelectInput.vue'
 
 import { jobDescriptionOptions } from '@/utils/wizardSelections.utils'
-import SelectInput from '@/components/input/SelectInput.vue'
 
 const emit = defineEmits(['next', 'prev'])
 
@@ -47,7 +48,13 @@ watch(
     </div>
     <div class="d-flex justify-content-between">
       <button class="btn btn-secondary" @click="goBack">Atrás</button>
-      <button class="btn btn-primary" @click="submitForm" :disabled="!isFormValid">Adelante</button>
+      <button
+        class="btn btn-primary"
+        @click="submitForm"
+        :disabled="!isFormValid"
+      >
+        Adelante
+      </button>
     </div>
   </div>
 </template>

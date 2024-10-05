@@ -2,12 +2,15 @@
 import { onMounted, ref } from 'vue'
 
 import { useBrandStore } from '@/stores/brand.store'
-import { menuOptions } from '@/utils/menuItems.utils'
 import useUserStore from '@/stores/user.store'
+
 import DropdownMenu from '@/components/layout/DropdownMenu.vue'
+
+import { menuOptions } from '@/utils/menuItems.utils'
+
+import CreateBrand from '../app/brand/CreateBrand.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
-import CreateBrand from '../app/brand/CreateBrand.vue'
 
 const userStore = useUserStore()
 const brandStore = useBrandStore()
@@ -38,7 +41,9 @@ onMounted(async () => {
 <template>
   <header class="bg-light border-bottom">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container-fluid d-flex justify-content-between align-items-center">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center"
+      >
         <div>
           <slot name="header" />
         </div>

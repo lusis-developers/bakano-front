@@ -10,7 +10,11 @@ import type { SelectOption } from '@/interfaces/components/input/SelectInput.int
 
 export const usageCountOptions: SelectOption[] = [
   { value: '', label: 'Seleccione', icon: 'bi bi-people-fill' },
-  { value: BakanoUsageCount.INDIVIDUAL, label: 'Individual', icon: 'bi bi-people-fill' },
+  {
+    value: BakanoUsageCount.INDIVIDUAL,
+    label: 'Individual',
+    icon: 'bi bi-people-fill'
+  },
   { value: BakanoUsageCount.GROUP, label: 'Grupo', icon: 'bi bi-people-fill' }
 ]
 

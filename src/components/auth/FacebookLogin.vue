@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 
-import { facebookScopes } from '@/config/components/auth/facebookPermissions.config'
 import useAuthStore from '@/stores/auth.store'
+
+import { facebookScopes } from '@/config/components/auth/facebookPermissions.config'
 
 const props = defineProps({
   brandId: {

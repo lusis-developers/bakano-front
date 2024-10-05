@@ -2,8 +2,10 @@
 import { computed, reactive } from 'vue'
 
 import FloatInput from '@/components/input/FloatInput.vue'
-import type { IBrand } from '@/interfaces/Brand/brand.interface'
+
 import { descriptionValidations } from '@/validation/components/forms/brand.validation'
+
+import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -11,7 +13,9 @@ const formData = reactive<Partial<IBrand>>({
   description: ''
 })
 const isDescriptionValid = computed(() =>
-  descriptionValidations.every((validation) => validation.rule(formData.description!))
+  descriptionValidations.every((validation) =>
+    validation.rule(formData.description!)
+  )
 )
 
 function updateDescription(value: string) {

@@ -1,8 +1,8 @@
+import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
+
+import type { IUser } from '@/interfaces/user.interface'
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
-
-import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
-import type { IUser } from '@/interfaces/user.interface'
 
 interface RootState {
   isLoading: boolean
@@ -24,7 +24,8 @@ const useUserStore = defineStore('userStore', {
       try {
         this.user = user
       } catch (error: unknown) {
-        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        this.error =
+          error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
       }

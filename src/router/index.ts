@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import { checkTokenValidity } from './utils/checkToken'
 
 const loginView = () => import('@/views/LoginView.vue')

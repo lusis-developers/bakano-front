@@ -1,9 +1,9 @@
-import { defineStore } from 'pinia'
+import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
 
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import APIBrand from '@/services/brand/brand'
 import { AxiosError } from 'axios'
-import { ResponseMessage } from '@/enum/store/ResponseMessage.enum'
+import { defineStore } from 'pinia'
 
 interface RootState {
   isLoading: boolean
@@ -35,7 +35,8 @@ export const useBrandStore = defineStore('brandStore', {
         this.brands = data.brands
       } catch (error) {
         console.error('error: ', error)
-        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        this.error =
+          error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
       }
@@ -48,7 +49,8 @@ export const useBrandStore = defineStore('brandStore', {
         this.successMessage = 'Se ha creado exitosamente tu marca'
       } catch (error: unknown) {
         console.error('error: ', error)
-        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        this.error =
+          error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
       }
@@ -66,14 +68,18 @@ export const useBrandStore = defineStore('brandStore', {
       }
     },
 
-    async editBrand(brandUpdated: Partial<IBrand>, brandId: string): Promise<void> {
+    async editBrand(
+      brandUpdated: Partial<IBrand>,
+      brandId: string
+    ): Promise<void> {
       this.isLoading = true
       try {
         const brandEdited = await brandService.editBrand(brandUpdated, brandId)
         this.successMessage = `Se ha actualizado exitosamente tu marca: ${brandEdited.data.brandUpdated.name}`
       } catch (error: unknown) {
         console.error('error: ', error)
-        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        this.error =
+          error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
       }
@@ -87,7 +93,8 @@ export const useBrandStore = defineStore('brandStore', {
         this.successMessage = 'Se ha cargado tu marca'
       } catch (error: unknown) {
         console.error({ error })
-        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        this.error =
+          error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
       }
@@ -100,7 +107,8 @@ export const useBrandStore = defineStore('brandStore', {
         this.successMessage = 'Tu imagen ha sido cargada'
       } catch (error: unknown) {
         console.error({ error })
-        this.error = error instanceof AxiosError ? error.message : ResponseMessage.ERROR
+        this.error =
+          error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
         this.isLoading = false
       }

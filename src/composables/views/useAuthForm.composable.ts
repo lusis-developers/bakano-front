@@ -1,7 +1,9 @@
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import { AlertType } from '@/enum/components/base/baseAlert.enum'
+
 import useAuthStore from '@/stores/auth.store'
+
 import type { IUser } from '@/interfaces/user.interface'
 
 export function useAuthForm() {
@@ -24,7 +26,13 @@ export function useAuthForm() {
     return emailErrors.value.length > 0 || email.value.length === 0
   })
 
-  function handleEmailValidation({ value, isValid }: { value: string; isValid: boolean }) {
+  function handleEmailValidation({
+    value,
+    isValid
+  }: {
+    value: string
+    isValid: boolean
+  }) {
     email.value = value
     if (!isValid) {
       emailErrors.value = ['El email ingresado no es válido']

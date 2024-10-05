@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
 
+import { PrincipalCountries } from '@/enum/brand.enum'
+
 import FloatInput from '@/components/input/FloatInput.vue'
 import SelectInput from '@/components/input/SelectInput.vue'
+
 import {
   mainAddressValidations,
   nameBrandValidations
 } from '@/validation/components/forms/brand.validation'
+
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
-import { PrincipalCountries } from '@/enum/brand.enum'
 
 const emit = defineEmits(['update:brand-data'])
 
@@ -26,7 +29,9 @@ const countryOptions = computed(() => {
 })
 
 const isFormDataValid = computed(() => {
-  const nameValid = nameBrandValidations.every((validation) => validation.rule(formData.name || ''))
+  const nameValid = nameBrandValidations.every((validation) =>
+    validation.rule(formData.name || '')
+  )
   const addressValid = mainAddressValidations.every((validation) =>
     validation.rule(formData.mainAddress || '')
   )
