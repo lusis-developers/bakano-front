@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
 
-import FloatInput from '@/components/input/FloatInput.vue'
+import FloatInputArea from '@/components/input/FloatInputArea.vue'
 
 import { descriptionValidations } from '@/validation/components/forms/brand.validation'
 
@@ -29,7 +29,7 @@ function updateDescription(value: string) {
 <template>
   <div>
     <h5>Una última cosa...</h5>
-    <FloatInput
+    <FloatInputArea
       label="Describe un poco lo que hace tu marca"
       inputId="brandDescription"
       placeholder="Describe un poco lo que hace tu marca"

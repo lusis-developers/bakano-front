@@ -3,7 +3,7 @@ import { computed, reactive, ref, watch } from 'vue'
 
 import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
 
-import FloatInput from '@/components/input/FloatInput.vue'
+import FloatInputArea from '@/components/input/FloatInputArea.vue'
 import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
 
 import { descriptionValidations } from '@/validation/components/forms/brand.validation'
@@ -71,7 +71,7 @@ watch(
     <hr class="my-4" />
 
     <h6>Escribe lo que consideres le guste a tu público objetivo</h6>
-    <FloatInput
+    <FloatInputArea
       label="Preferencias de tu público"
       inputId="preferences"
       placeholder="Escribe lo que consideres le gusta a tu público"
