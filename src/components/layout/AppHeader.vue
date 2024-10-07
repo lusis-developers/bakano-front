@@ -29,7 +29,8 @@ function getBrandsAsMenuItems(brands: IBrand[]): MenuDropdownItem[] {
   const brandForMenu = brands.map((brand: IBrand) => ({
     name: brand.name,
     logo: brand.logo,
-    link: '#'
+    link: '#',
+    brand
   }))
   return brandForMenu
 }
@@ -51,7 +52,7 @@ onMounted(async () => {
           <DropdownMenu
             :menuOptions="menuOptions({ showCreateBrandModal })"
             :menuItems="getBrandsAsMenuItems(brandStore.brands)"
-            @item-click="handleBrandSelection"
+            @item-click="(item) => handleBrandSelection(item.brand)"
           >
             <template #button-content>
               <img
