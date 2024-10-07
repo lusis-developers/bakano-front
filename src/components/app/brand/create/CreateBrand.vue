@@ -10,12 +10,11 @@ import useUserStore from '@/stores/user.store'
 
 import GeneralNotification from '@/components/shared/GeneralNotification.vue'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
+
 import CreateBrandStep1 from './components/CreateBrandStep1.vue'
 import CreateBrandStep2 from './components/CreateBrandStep2.vue'
 import CreateBrandStep3 from './components/CreateBrandStep3.vue'
 import CreateBrandStep4 from './components/CreateBrandStep4.vue'
-
-
 
 const emit = defineEmits(['update:isVisible'])
 

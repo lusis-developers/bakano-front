@@ -8,7 +8,7 @@ import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 
 import { menuOptions } from '@/utils/menuItems.utils'
 
-import CreateBrand from '../app/brand/CreateBrand.vue'
+import CreateBrand from '../app/brand/create/CreateBrand.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
 
