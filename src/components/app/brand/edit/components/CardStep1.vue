@@ -11,6 +11,7 @@ import {
 
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import { PrincipalCountries } from '@/enum/brand.enum'
+import SelectInput from '@/components/input/SelectInput.vue'
 
 const emit = defineEmits(['update:brand-data'])
 
