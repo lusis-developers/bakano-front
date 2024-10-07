@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
+import useBrandStore from '@/stores/brand.store'
+
 import { menuUserOptions } from '@/utils/menuItems.utils'
 
 import CreateBrand from '../app/brand/create/CreateBrand.vue'
 import DropdownMenu from './DropdownMenu.vue'
 import logoImage from '@/assets/brand/bakano-blanco.png'
 import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
+
+const brandStore = useBrandStore()
 
 defineProps({
   sidebarItems: {
@@ -48,7 +52,7 @@ onBeforeUnmount(() => {
       </div>
 
       <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
+        <li class="nav-item" v-if="!brandStore.selectedBrand">
           <button
             class="nav-link text-white d-flex align-items-center bg-transparent border-0"
             @click="isCreateBrandModalVisible = true"
