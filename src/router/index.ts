@@ -120,15 +120,11 @@ const routes = [
       },
       {
         path: 'brand',
-        children: [
-          {
-            path: 'edit',
-            component: EditBrand,
-            meta: {
-              title: 'Modificar marca 📌'
-            }
-          }
-        ]
+        name: 'EditBrand',
+        component: EditBrand,
+        meta: {
+          title: 'Modificar marca 📌'
+        }
       }
     ]
   }
