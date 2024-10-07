@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
+
+import { PrincipalCountries } from '@/enum/brand.enum'
+
+import useBrandStore from '@/stores/brand.store'
 
 import FloatInput from '@/components/input/FloatInput.vue'
+import SelectInput from '@/components/input/SelectInput.vue'
 import GeneralCard from '@/components/shared/GeneralCard.vue'
 
 import {
@@ -10,9 +15,6 @@ import {
 } from '@/validation/components/forms/brand.validation'
 
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
-import { PrincipalCountries } from '@/enum/brand.enum'
-import SelectInput from '@/components/input/SelectInput.vue'
-import useBrandStore from '@/stores/brand.store'
 
 const brandStore = useBrandStore()
 
@@ -29,7 +31,6 @@ const countryOptions = computed(() => {
     label: country
   }))
 })
-
 
 const isFormDataValid = computed(() => {
   const nameValid = nameBrandValidations.every((validation) =>
@@ -49,14 +50,17 @@ function updateField(field: keyof IBrand, value: any): void {
   }
 }
 
+watch(formData, () => {
+  if (isFormDataValid.value) {
+    emit('update:brand-data', formData)
+  }
+})
 </script>
 
 <template>
-  <GeneralCard title="Primeros datos">
+  <GeneralCard title="Primeros">
     <template #content>
-      <h5>
-        Actual nombre
-      </h5>
+      <h5>Actual nombre</h5>
       <p class="text-muted">
         {{ brandStore.selectedBrand?.name }}
       </p>
@@ -67,9 +71,8 @@ function updateField(field: keyof IBrand, value: any): void {
         :validations="nameBrandValidations"
         @input="updateField('name', $event.target.value)"
       />
-      <h5>
-        Actual de operaciones
-      </h5>
+      <hr class="my-4" />
+      <h5>Actual de operaciones</h5>
       <p class="text-muted">
         {{ brandStore.selectedBrand?.operationCountry }}
       </p>
@@ -78,11 +81,12 @@ function updateField(field: keyof IBrand, value: any): void {
         icon="bi bi-globe-americas"
         inputId="countryOperation"
         :options="countryOptions"
-        @update:modelValue="(value: string) => updateField('operationCountry', value)"
+        @update:modelValue="
+          (value: string) => updateField('operationCountry', value)
+        "
       />
-      <h5>
-        Dirección principal actual
-      </h5>
+      <hr class="my-4" />
+      <h5>Dirección principal actual</h5>
       <p class="text-muted">
         {{ brandStore.selectedBrand?.mainAddress }}
       </p>
@@ -92,7 +96,7 @@ function updateField(field: keyof IBrand, value: any): void {
         v-model:modelValue="formData.mainAddress"
         :validations="mainAddressValidations"
         @input="updateField('mainAddress', $event.target.value)"
-        />
+      />
     </template>
   </GeneralCard>
 </template>
