@@ -34,13 +34,7 @@ onUnmounted(() => {
   <div class="d-flex">
     <AppSidebar :sidebarItems="sidebarItems" />
     <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
-      <AppHeader v-if="showHeader">
-        <template #header>
-          <router-link to="brand/edit" class="btn">
-            <i class="bi bi-gear-wide-connected" />
-          </router-link>
-        </template>
-      </AppHeader>
+      <AppHeader v-if="showHeader"> </AppHeader>
       <main class="flex-grow-1">
         <ContainerWrapper>
           <template #content>
