@@ -4,6 +4,7 @@
 
 $primary: $pink-500;
 $facebook: #3b5998;
+$linkedin: #0e76a8;
 
 $theme-colors: (
   'primary': $primary,
@@ -14,7 +15,8 @@ $theme-colors: (
   'danger': $danger,
   'light': $light,
   'dark': $dark,
-  'facebook': $facebook
+  'facebook': $facebook,
+  'linkedin': $linkedin
 );
 
 @import 'bootstrap/scss/bootstrap';

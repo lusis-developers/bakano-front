@@ -1,4 +1,4 @@
-export const facebookPermissions = [
+export const facebookScopes = [
   'ads_management',
   'ads_read',
   'pages_read_engagement',
