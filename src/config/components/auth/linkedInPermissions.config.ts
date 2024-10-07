@@ -1,6 +1,10 @@
 export const linkedInScopes: string[] = [
-  'openid', // Acceso al perfil básico del usuario
-  'w_member_social', // Permiso para publicar en nombre del usuario
-  'email', // Use email address
-  'profile', // Use main info from user profile
+  'profile', // Perfil básico del usuario
+  'email', // Correo electrónico del usuario
+  'w_member_social', // Publicar en el perfil personal
+  // 'w_organization_social',  // Publicar en páginas administradas
+  // 'r_organization_social',   // Leer datos y estadísticas de las páginas
+  'openid' // Leer datos y estadísticas de las páginas
 ]
+
+// TODO: once got the revision completed we can add page
