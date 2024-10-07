@@ -34,5 +34,6 @@ export const sidebarItems: Navigation[] = [
   { name: 'Planificar', icon: 'bi bi-journal-richtext', link: 'planning' },
   { name: 'Post', icon: 'bi bi-file-post', link: 'post' },
   { name: 'Tendencias', icon: 'bi bi-bar-chart-line', link: 'trends' },
-  { name: 'Perfil', icon: 'bi bi-person', link: 'profile' }
+  { name: 'Perfil', icon: 'bi bi-person', link: 'profile' },
+  { name: 'Editar marca', icon: 'bi bi-gear-wide-connected', link: 'brand' }
 ]
