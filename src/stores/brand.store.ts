@@ -76,6 +76,7 @@ export const useBrandStore = defineStore('brandStore', {
       try {
         const brandEdited = await brandService.editBrand(brandUpdated, brandId)
         this.successMessage = `Se ha actualizado exitosamente tu marca: ${brandEdited.data.brandUpdated.name}`
+        this.selectedBrand = brandEdited.data.brandUpdated
       } catch (error: unknown) {
         console.error('error: ', error)
         this.error =
@@ -100,10 +101,10 @@ export const useBrandStore = defineStore('brandStore', {
       }
     },
 
-    async updateBrandLogo(file: File, brandId: string): Promise<void> {
+    async updateBrandLogo(formData: FormData, brandId: string): Promise<void> {
       this.isLoading = true
       try {
-        await brandService.uploadBrandLogo(file, brandId)
+        await brandService.uploadBrandLogo(formData, brandId)
         this.successMessage = 'Tu imagen ha sido cargada'
       } catch (error: unknown) {
         console.error({ error })

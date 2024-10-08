@@ -41,10 +41,10 @@ class APIBrand extends APIBase {
   }
 
   async uploadBrandLogo(
-    file: File,
+    formData: FormData,
     brandId: string
   ): Promise<AxiosResponse<BrandLogoUpdateResponse>> {
-    return await this.post(`brand-picture/${brandId}`, file)
+    return await this.post(`brand-picture/${brandId}`, formData)
   }
 }
 

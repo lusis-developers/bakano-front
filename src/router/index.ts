@@ -16,6 +16,9 @@ const authView = () => import('@/views/AuthView.vue')
 const temporaView = () => import('@/views/TemporalView.vue')
 const facebookView = () => import('@/views/FacebookView.vue')
 
+// brand views
+const EditBrand = () => import('@/views/Brand/EditView.vue')
+
 const routes = [
   {
     path: '/',
@@ -113,6 +116,14 @@ const routes = [
         component: temporaView,
         meta: {
           title: 'Bakano 🚀 | Perfil'
+        }
+      },
+      {
+        path: 'brand',
+        name: 'EditBrand',
+        component: EditBrand,
+        meta: {
+          title: 'Modificar marca 📌'
         }
       }
     ]

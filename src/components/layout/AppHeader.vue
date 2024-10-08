@@ -8,7 +8,7 @@ import DropdownMenu from '@/components/layout/DropdownMenu.vue'
 
 import { menuOptions } from '@/utils/menuItems.utils'
 
-import CreateBrand from '../app/brand/CreateBrand.vue'
+import CreateBrand from '../app/brand/create/CreateBrand.vue'
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 import type { MenuDropdownItem } from '@/interfaces/components/Layout/MenuDropdownItems.interface'
 
@@ -29,7 +29,8 @@ function getBrandsAsMenuItems(brands: IBrand[]): MenuDropdownItem[] {
   const brandForMenu = brands.map((brand: IBrand) => ({
     name: brand.name,
     logo: brand.logo,
-    link: '#'
+    link: '#',
+    brand
   }))
   return brandForMenu
 }
@@ -51,7 +52,7 @@ onMounted(async () => {
           <DropdownMenu
             :menuOptions="menuOptions({ showCreateBrandModal })"
             :menuItems="getBrandsAsMenuItems(brandStore.brands)"
-            @item-click="handleBrandSelection"
+            @item-click="(item) => handleBrandSelection(item.brand)"
           >
             <template #button-content>
               <img
