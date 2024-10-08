@@ -115,5 +115,7 @@ watchEffect(() => {
       />
     </div>
   </div>
-  <button @click="saveBrand">guardar</button>
+  <button 
+    @click="saveBrand"
+    class="btn btn-primary mt-3">guardar</button>
 </template>
