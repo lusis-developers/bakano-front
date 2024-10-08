@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 
 import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
 
@@ -35,15 +35,6 @@ const genders: { value: TargetBrandGender; label: string }[] = [
 
 const audienceOptions = Object.values(TargetAudience)
 
-const isFormDataValid = computed(() => {
-  const preferencesValid =
-    formData.targetAudience!.preferences.length > 0 &&
-    formData.targetAudience!.preferences.length <= 500
-  const ageRangeValid = selectedAgeRanges.value.length > 0
-  const genderValid = selectedGenders.value.length > 0
-  return preferencesValid && ageRangeValid && genderValid
-})
-
 function updateFormData(
   field: keyof IBrand['targetAudience'],
   value: any
@@ -60,11 +51,9 @@ watch(
     () => formData.targetAudience?.preferences
   ],
   () => {
-    if (isFormDataValid.value) {
-      updateFormData('ageRange', [...selectedAgeRanges.value])
-      updateFormData('gender', [...selectedGenders.value])
-      emit('update:brand-data', formData)
-    }
+    updateFormData('ageRange', [...selectedAgeRanges.value])
+    updateFormData('gender', [...selectedGenders.value])
+    emit('update:brand-data', formData)
   }
 )
 </script>

@@ -10,6 +10,8 @@ import { industriesOptions } from '@/utils/industriesOptions.utils'
 
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
+const emit = defineEmits(['update:brand-data'])
+
 const brandStore = useBrandStore()
 
 const formData = reactive<Partial<IBrand>>({
@@ -17,6 +19,7 @@ const formData = reactive<Partial<IBrand>>({
 })
 function handleIndustryChange(selectedIndustry: string) {
   formData.industry = selectedIndustry
+  emit('update:brand-data', selectedIndustry)
 }
 </script>
 

@@ -20,7 +20,9 @@ const brandStore = useBrandStore()
 
 const emit = defineEmits(['update:brand-data'])
 
-const formData = reactive<Partial<IBrand>>({
+const formData = reactive<
+  Pick<IBrand, 'name' | 'operationCountry' | 'mainAddress'>
+>({
   name: '',
   operationCountry: '',
   mainAddress: ''
@@ -32,28 +34,13 @@ const countryOptions = computed(() => {
   }))
 })
 
-const isFormDataValid = computed(() => {
-  const nameValid = nameBrandValidations.every((validation) =>
-    validation.rule(formData.name || '')
-  )
-  const addressValid = mainAddressValidations.every((validation) =>
-    validation.rule(formData.mainAddress || '')
-  )
-
-  return nameValid && addressValid
-})
-
-function updateField(field: keyof IBrand, value: any): void {
+function updateField(field: keyof typeof formData, value: string): void {
   formData[field] = value
-  if (isFormDataValid.value) {
-    emit('update:brand-data', formData)
-  }
+  emit('update:brand-data', formData)
 }
 
 watch(formData, () => {
-  if (isFormDataValid.value) {
-    emit('update:brand-data', formData)
-  }
+  emit('update:brand-data', formData)
 })
 </script>
 
