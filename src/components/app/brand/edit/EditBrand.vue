@@ -16,6 +16,7 @@ const brandStore = useBrandStore()
 const router = useRouter()
 
 const activeStep = ref(1)
+const brandModified = ref<boolean>(false)
 
 const brandUpdated = reactive<Partial<IBrand>>({})
 
@@ -35,6 +36,7 @@ function handleDataStep1(
   brandUpdated.name = data.name
   brandUpdated.mainAddress = data.mainAddress
   brandUpdated.operationCountry = data.operationCountry
+  brandModified.value = true
 }
 function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
   const genderMap: Record<string, TargetBrandGender> = {
@@ -49,16 +51,18 @@ function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
   }
 
   brandUpdated.targetAudience = convertedTargetAudience
+  brandModified.value = true
 }
 
 function handleDataStep3(industry: string): void {
-  console.log(brandUpdated)
   brandUpdated.industry = industry
+  brandModified.value = true
 }
 
 async function saveBrand(): Promise<void> {
   const updatedBrand = brandUpdated as IBrand
   await brandStore.editBrand(updatedBrand, brandStore.selectedBrand!._id)
+  brandModified.value = false
 }
 
 watchEffect(() => {
@@ -115,7 +119,11 @@ watchEffect(() => {
       />
     </div>
   </div>
-  <button 
+  <button
     @click="saveBrand"
-    class="btn btn-primary mt-3">guardar</button>
+    :disabled="!brandModified"
+    class="btn btn-primary mt-3"
+  >
+    guardar
+  </button>
 </template>
