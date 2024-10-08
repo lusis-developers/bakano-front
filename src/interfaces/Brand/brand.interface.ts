@@ -9,7 +9,7 @@ export interface IBrand {
   logo: string
   user: string
   description: string
-  id: string
+  _id: string
 }
 
 export interface UserTargetAudience {
