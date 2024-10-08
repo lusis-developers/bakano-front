@@ -52,15 +52,6 @@ onBeforeUnmount(() => {
       </div>
 
       <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item" v-if="!brandStore.selectedBrand">
-          <button
-            class="nav-link text-white d-flex align-items-center bg-transparent border-0"
-            @click="isCreateBrandModalVisible = true"
-          >
-            <i class="bi bi-plus-square"></i>
-            <span v-if="isSidebarExpanded" class="ms-2">Agregar marca</span>
-          </button>
-        </li>
         <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item">
           <router-link
             :to="item.link"

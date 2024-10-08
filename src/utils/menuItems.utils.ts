@@ -1,18 +1,5 @@
 import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
 
-export const menuOptions: (props: {
-  showCreateBrandModal: () => void
-}) => Navigation[] = ({ showCreateBrandModal }) => [
-  {
-    name: 'Agregar marca',
-    link: '#',
-    icon: 'bi bi-plus-lg',
-    action: () => {
-      showCreateBrandModal()
-    }
-  }
-]
-
 export const menuUserOptions: Navigation[] = [
   {
     name: 'Términos y condiciones',
