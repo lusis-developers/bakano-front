@@ -1,23 +1,11 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-import useBrandStore from '@/stores/brand.store'
-
-import { menuUserOptions } from '@/utils/menuItems.utils'
+import { menuUserOptions, userMenuItems } from '@/utils/menuItems.utils'
 
 import CreateBrand from '../app/brand/create/CreateBrand.vue'
 import DropdownMenu from './DropdownMenu.vue'
 import logoImage from '@/assets/brand/bakano-blanco.png'
-import type { Navigation } from '@/interfaces/components/Layout/LinkTypes.interface'
-
-const brandStore = useBrandStore()
-
-defineProps({
-  sidebarItems: {
-    type: Array as () => Navigation[],
-    required: true
-  }
-})
 
 const isSidebarExpanded = ref(false)
 const isCreateBrandModalVisible = ref(false)
@@ -52,11 +40,15 @@ onBeforeUnmount(() => {
       </div>
 
       <ul class="nav nav-pills flex-column mb-auto">
-        <li v-for="(item, index) in sidebarItems" :key="index" class="nav-item">
+        <li
+          v-for="(item, index) in userMenuItems"
+          :key="index"
+          class="nav-item"
+        >
           <router-link
             :to="item.link"
-            class="nav-link text-white d-flex align-items-center"
             :class="isSidebarExpanded ? '' : 'justify-content-center'"
+            class="nav-link text-white d-flex align-items-center"
             active-class="bg-primary"
           >
             <i :class="item.icon"></i>

@@ -1,25 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-
-import { useRoute } from 'vue-router'
-
-import useBrandStore from '@/stores/brand.store'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
-
-import { getSidebarItems } from '@/utils/menuItems.utils'
-
-const route = useRoute()
-
-const brandStore = useBrandStore()
-
-const showHeader = computed(() => {
-  return route.path !== '/app/trends' && route.path !== '/app/profile'
-})
-const hasBrandSelected = computed(() => !!brandStore.selectedBrand)
-const sidebarItems = computed(() => getSidebarItems(hasBrandSelected.value))
 
 const isScreenSmall = ref(window.innerWidth < 1023)
 
@@ -38,9 +22,9 @@ onUnmounted(() => {
 
 <template>
   <div class="d-flex">
-    <AppSidebar :sidebarItems="sidebarItems" />
+    <AppSidebar />
     <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
-      <AppHeader v-if="showHeader"> </AppHeader>
+      <AppHeader></AppHeader>
       <main class="flex-grow-1">
         <ContainerWrapper>
           <template #content>
