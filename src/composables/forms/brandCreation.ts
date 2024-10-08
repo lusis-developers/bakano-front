@@ -24,7 +24,7 @@ export function useBrandCreationService() {
       preferences: ''
     },
     user: '',
-    id: ''
+    _id: ''
   })
 
   function handleDataStep1(

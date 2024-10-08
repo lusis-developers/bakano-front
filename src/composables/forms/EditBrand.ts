@@ -1,16 +1,15 @@
 import { reactive, ref, watchEffect } from 'vue'
 
-import { useRouter } from 'vue-router'
-
 import { TargetBrandGender } from '@/enum/brand.enum'
 
 import useBrandStore from '@/stores/brand.store'
+import useUserStore from '@/stores/user.store'
 
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 export function useBrandForm() {
   const brandStore = useBrandStore()
-  const router = useRouter()
+  const userStore = useUserStore()
 
   const activeStep = ref(1)
   const brandModified = ref<boolean>(false)
@@ -97,21 +96,21 @@ export function useBrandForm() {
     }
   }
 
-  watchEffect(() => {
+  watchEffect(async () => {
     const selectedBrand = brandStore.selectedBrand
 
     if (!selectedBrand) {
-      router.push('/app/dashboard')
-      return
+      await brandStore.getBrands(userStore.user?._id!)
+    } else {
+      brandUpdated.name = selectedBrand.name
+      brandUpdated.description = selectedBrand.description
+      brandUpdated.industry = selectedBrand.industry
+      brandUpdated.mainAddress = selectedBrand.mainAddress
+      brandUpdated.operationCountry = selectedBrand.operationCountry
+      brandUpdated.targetAudience = selectedBrand.targetAudience
+      brandUpdated.user = selectedBrand.user
+      brandUpdated._id = selectedBrand._id
     }
-    brandUpdated.name = selectedBrand.name
-    brandUpdated.description = selectedBrand.description
-    brandUpdated.industry = selectedBrand.industry
-    brandUpdated.mainAddress = selectedBrand.mainAddress
-    brandUpdated.operationCountry = selectedBrand.operationCountry
-    brandUpdated.targetAudience = selectedBrand.targetAudience
-    brandUpdated.user = selectedBrand.user
-    brandUpdated._id = selectedBrand._id
   })
 
   return {

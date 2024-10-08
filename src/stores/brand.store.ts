@@ -28,11 +28,12 @@ export const useBrandStore = defineStore('brandStore', {
       this.selectedBrand = brand
     },
 
-    async getUserBrands(userId: string): Promise<void> {
+    async getBrands(userId: string): Promise<void> {
       this.isLoading = true
       try {
         const { data } = await brandService.getBrands(userId)
         this.brands = data.brands
+        this.selectedBrand = this.brands[0]
       } catch (error) {
         console.error('error: ', error)
         this.error =
@@ -46,6 +47,7 @@ export const useBrandStore = defineStore('brandStore', {
       this.isLoading = true
       try {
         await brandService.createBrand(brand, userId)
+        this.getBrands(userId)
         this.successMessage = 'Se ha creado exitosamente tu marca'
       } catch (error: unknown) {
         console.error('error: ', error)

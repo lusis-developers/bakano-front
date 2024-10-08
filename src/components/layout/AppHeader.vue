@@ -35,7 +35,7 @@ function getBrandsAsMenuItems(brands: IBrand[]): MenuDropdownItem[] {
   return brandForMenu
 }
 onMounted(async () => {
-  await brandStore.getUserBrands(userStore.user?._id as string)
+  await brandStore.getBrands(userStore.user?._id as string)
 })
 </script>
 

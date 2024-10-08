@@ -102,7 +102,7 @@ function handleClose(): void {
 async function handleCreate() {
   const userId = userStore.user?._id
   await brandStore.createBrand(formData, userId!)
-  await brandStore.getUserBrands(userId!)
+  await brandStore.getBrands(userId!)
   isCreated.value = true
   notificationMessage.value = brandStore.successMessage || brandStore.error
   notificationType.value = brandStore.successMessage
