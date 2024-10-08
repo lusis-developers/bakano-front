@@ -76,6 +76,7 @@ export const useBrandStore = defineStore('brandStore', {
       try {
         const brandEdited = await brandService.editBrand(brandUpdated, brandId)
         this.successMessage = `Se ha actualizado exitosamente tu marca: ${brandEdited.data.brandUpdated.name}`
+        this.selectedBrand = brandEdited.data.brandUpdated
       } catch (error: unknown) {
         console.error('error: ', error)
         this.error =
