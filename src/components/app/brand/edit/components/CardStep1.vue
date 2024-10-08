@@ -7,6 +7,7 @@ import useBrandStore from '@/stores/brand.store'
 
 import FloatInput from '@/components/input/FloatInput.vue'
 import SelectInput from '@/components/input/SelectInput.vue'
+import UploadFileInput from '@/components/input/uploadFileInput.vue'
 import GeneralCard from '@/components/shared/GeneralCard.vue'
 
 import {
@@ -27,16 +28,30 @@ const formData = reactive<
   operationCountry: '',
   mainAddress: ''
 })
+
 const countryOptions = computed(() => {
   return Object.values(PrincipalCountries).map((country) => ({
     value: country,
     label: country
   }))
 })
-
 function updateField(field: keyof typeof formData, value: string): void {
   formData[field] = value
   emit('update:brand-data', formData)
+}
+
+async function handleFileSelected(file: File): Promise<void> {
+  console.log('file that comes fron upload component: ', file)
+  if (brandStore.selectedBrand) {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1])
+    }
+
+    await brandStore.updateBrandLogo(formData, brandStore.selectedBrand._id)
+  }
 }
 
 watch(formData, () => {
@@ -59,7 +74,7 @@ watch(formData, () => {
         @input="updateField('name', $event.target.value)"
       />
       <hr class="my-4" />
-      <h5>Actual de operaciones</h5>
+      <h5>Actual país de operaciones</h5>
       <p class="text-muted">
         {{ brandStore.selectedBrand?.operationCountry }}
       </p>
@@ -84,6 +99,9 @@ watch(formData, () => {
         :validations="mainAddressValidations"
         @input="updateField('mainAddress', $event.target.value)"
       />
+      <hr class="my-4" />
+      <h5>Cambia tu foto de perfil</h5>
+      <UploadFileInput @file-selected="handleFileSelected" />
     </template>
   </GeneralCard>
 </template>
