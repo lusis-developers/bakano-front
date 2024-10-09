@@ -41,16 +41,8 @@ function updateField(field: keyof typeof formData, value: string): void {
 }
 
 async function handleFileSelected(file: File): Promise<void> {
-  console.log('file that comes fron upload component: ', file)
   if (brandStore.selectedBrand) {
-    const formData = new FormData()
-    formData.append('file', file)
-
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1])
-    }
-
-    await brandStore.updateBrandLogo(formData, brandStore.selectedBrand._id)
+    await brandStore.updateBrandLogo(file, brandStore.selectedBrand._id)
   }
 }
 

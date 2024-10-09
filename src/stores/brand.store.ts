@@ -103,10 +103,10 @@ export const useBrandStore = defineStore('brandStore', {
       }
     },
 
-    async updateBrandLogo(formData: FormData, brandId: string): Promise<void> {
+    async updateBrandLogo(file: File, brandId: string): Promise<void> {
       this.isLoading = true
       try {
-        await brandService.uploadBrandLogo(formData, brandId)
+        await brandService.uploadBrandLogo(file, brandId)
         this.successMessage = 'Tu imagen ha sido cargada'
       } catch (error: unknown) {
         console.error({ error })

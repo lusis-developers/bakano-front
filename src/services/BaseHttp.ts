@@ -75,7 +75,6 @@ class APIBase {
     try {
       return await axios.post<T>(url, formData, {
         headers: {
-          ...this.getHeaders(),
           'Content-Type': 'multipart/form-data'
         }
       })
