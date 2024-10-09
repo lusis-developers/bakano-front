@@ -70,11 +70,18 @@ class APIBase {
   ): Promise<AxiosResponse<T>> {
     const url = this.buildUrl(endpoint)
     const formData = new FormData()
+
+    if (!file) {
+      throw new Error('No file provided')
+    }
+
     formData.append('file', file)
 
+    console.log('file', formData.get('file'))
     try {
       return await axios.post<T>(url, formData, {
         headers: {
+          ...this.getHeaders(),
           'Content-Type': 'multipart/form-data'
         }
       })
