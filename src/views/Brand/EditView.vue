@@ -26,7 +26,7 @@ watch(
 
 <template>
   <div class="w-100">
-    <h5>Editar marca</h5>
+    <h5>Editar</h5>
     <div
       class="d-flex justify-content-start align-items-center flex-wrap gap-3"
     >

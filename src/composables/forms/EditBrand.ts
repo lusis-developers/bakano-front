@@ -77,7 +77,7 @@ export function useBrandForm() {
     }, 3000)
   }
 
-  async function saveBrand(): Promise<void> {
+  async function updateBrand(): Promise<void> {
     try {
       const updatedBrand = brandUpdated as IBrand
 
@@ -123,6 +123,6 @@ export function useBrandForm() {
     handleDataStep1,
     handleDataStep2,
     handleDataStep3,
-    saveBrand
+    updateBrand
   }
 }

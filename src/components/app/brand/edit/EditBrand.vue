@@ -20,7 +20,7 @@ const {
   handleDataStep1,
   handleDataStep2,
   handleDataStep3,
-  saveBrand
+  updateBrand
 } = useBrandForm()
 
 const brandStore = useBrandStore()
@@ -64,7 +64,7 @@ const brandStore = useBrandStore()
       </div>
     </div>
     <button
-      @click="saveBrand"
+      @click="updateBrand"
       :disabled="!brandModified || brandStore.isLoading"
       class="btn btn-primary mt-3"
     >

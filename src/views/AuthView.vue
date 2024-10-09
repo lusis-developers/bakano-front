@@ -69,6 +69,7 @@ onBeforeMount(() => {
   &-no-auth {
     width: 100%;
     max-width: 380px;
+    margin: auto;
     img {
       width: 100px;
       margin: auto;
