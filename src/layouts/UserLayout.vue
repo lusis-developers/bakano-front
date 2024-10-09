@@ -21,11 +21,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="d-flex">
+  <div class="d-flex vh-100 overflow-y-hidden">
     <AppSidebar />
-    <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
+    <div class="d-flex flex-column col vh-100">
       <AppHeader></AppHeader>
-      <main class="flex-grow-1">
+      <main class="overflow-y-auto p-4">
         <ContainerWrapper>
           <template #content>
             <RouterView />

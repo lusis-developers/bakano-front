@@ -26,20 +26,19 @@ watch(
 
 <template>
   <div class="w-100">
-    <h2>Editar marca</h2>
+    <h5>Editar marca</h5>
     <div
-      class="d-flex justify-content-between align-items-center flex-wrap gap-3"
+      class="d-flex justify-content-start align-items-center flex-wrap gap-3"
     >
-      <h3>
-        Marca seleccionada:
-        <span :class="[colorClass]">{{
-          brandStore.selectedBrand?.name.toLocaleUpperCase()
-        }}</span>
-      </h3>
       <img
         :src="brandStore.selectedBrand?.logo"
         :alt="brandStore.selectedBrand?.name"
       />
+      <h3>
+        <span :class="[colorClass]">
+          {{ brandStore.selectedBrand?.name.toLocaleUpperCase() }}
+        </span>
+      </h3>
     </div>
     <EditBrand />
   </div>
