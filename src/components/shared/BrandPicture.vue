@@ -42,7 +42,7 @@ function getRandomColor(): string {
       :src="image"
       alt="Logo"
       class="me-2"
-      style="width: 30px; height: 30px"
+      style="width: 40px; height: 40px"
     />
     <div
       v-else
@@ -56,8 +56,8 @@ function getRandomColor(): string {
 
 <style lang="scss" scoped>
 .profile-initials {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   color: white;
   font-weight: bold;
   text-transform: uppercase;
