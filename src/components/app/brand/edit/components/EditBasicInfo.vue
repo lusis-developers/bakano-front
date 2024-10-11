@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { useEditBrand } from '@/composables/components/brand/EditBrand'
-
 import useBrandStore from '@/stores/brand.store'
 
 import BrandPicture from '@/components/shared/BrandPicture.vue'
@@ -11,8 +9,6 @@ import GlobalCard from '@/components/shared/GlobalCard.vue'
 import BasicInfoModal from './BasicInfoModal.vue'
 
 const brandStore = useBrandStore()
-
-// const { resetValues } = useEditBrand()
 
 const isModalOpen = ref(false)
 

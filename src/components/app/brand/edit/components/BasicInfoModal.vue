@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 import { PrincipalCountries } from '@/enum/brand.enum'
 
-import { useEditBrand } from '@/composables/components/brand/EditBrand'
+import { useEditBrand } from '@/composables/components/brand/editBrand'
 
 import useBrandStore from '@/stores/brand.store'
 
@@ -16,8 +16,6 @@ import {
   mainAddressValidations,
   nameBrandValidations
 } from '@/validation/components/forms/brand.validation'
-
-// import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 const emit = defineEmits(['close-modal', 'update:brand-data'])
 defineProps({
@@ -56,9 +54,6 @@ const countryOptions = computed(() => {
   <GlobalModal :modelValue="isOpen" @close="closeModal">
     <template #header> Editar </template>
     <template #content>
-      <!-- <div class="w-100">
-        <img :src="brandStore.selectedBrand?.logo" alt="" />
-      </div> -->
       <FloatInput
         label="Nombre de marca"
         inputId="brandName"
