@@ -61,10 +61,7 @@ watch(
 <template>
   <GeneralCard title="Configuración de audiencia">
     <template #content>
-      <h5>Preferencias de tu público</h5>
-      <p class="text-muted">
-        {{ brandStore.selectedBrand?.targetAudience.preferences }}
-      </p>
+      
       <FloatInputArea
         label="Preferencias de tu público"
         inputId="preferences"
@@ -75,10 +72,7 @@ watch(
       />
       <hr class="my-4" />
 
-      <h5>Publicos objetivos</h5>
-      <p class="text-muted">
-        {{ brandStore.selectedBrand?.targetAudience.ageRange.join(', ') }}
-      </p>
+      
       <MultipleSelectInput
         v-model="selectedAgeRanges"
         :options="audienceOptions"
@@ -86,10 +80,7 @@ watch(
         id="ageRangeSelector"
       />
       <hr class="my-4" />
-      <h5>Géneros objetivos</h5>
-      <p class="text-muted">
-        {{ brandStore.selectedBrand?.targetAudience.gender.join(', ') }}
-      </p>
+      
       <MultipleSelectInput
         v-model="selectedGenders"
         :options="genders.map((gender) => gender.label)"

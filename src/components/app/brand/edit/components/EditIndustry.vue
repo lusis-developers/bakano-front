@@ -24,19 +24,9 @@ function openCloseModal(): void {
             <i class="bi bi-pen"></i>
           </button>
         </div>
-        <h5>Preferencias de tu público</h5>
+        <h5>Industria de tu marca actual</h5>
         <p class="text-muted">
-          {{ brandStore.selectedBrand?.targetAudience.preferences }}
-        </p>
-
-        <h5>Publicos objetivos</h5>
-        <p class="text-muted">
-          {{ brandStore.selectedBrand?.targetAudience.ageRange.join(', ') }}
-        </p>
-
-        <h5>Géneros objetivos</h5>
-        <p class="text-muted">
-          {{ brandStore.selectedBrand?.targetAudience.gender.join(', ') }}
+          {{ brandStore.selectedBrand?.industry }}
         </p>
       </div>
     </template>

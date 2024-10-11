@@ -5,14 +5,11 @@ import useBrandStore from '@/stores/brand.store'
 
 import SpinnerLoader from '@/components/shared/SpinnerLoader.vue'
 
+import EditAudience from './components/EditAudience.vue'
 import EditBasicInfo from './components/EditBasicInfo.vue'
+import EditIndustry from './components/EditIndustry.vue'
 
-const {
-  activeStep,
-
-  steps,
-  setStep
-} = useEditBrand()
+const { activeStep, steps, setStep } = useEditBrand()
 
 const brandStore = useBrandStore()
 </script>
@@ -37,10 +34,10 @@ const brandStore = useBrandStore()
           <EditBasicInfo />
         </div>
         <div v-if="activeStep === 2" class="w-100 flex-grow-1">
-          <h4>Actualiza la configuración de tu audiencia</h4>
+          <EditAudience />
         </div>
         <div v-if="activeStep === 3" class="w-100 flex-grow-1">
-          <h4>Actualiza la industria de tu marca</h4>
+          <EditIndustry />
         </div>
       </template>
     </div>
