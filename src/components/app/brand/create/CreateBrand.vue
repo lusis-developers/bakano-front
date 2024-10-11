@@ -3,7 +3,7 @@ import { computed, ref } from 'vue'
 
 import { NotificationType } from '@/enum/components/shared/GeneralNotifications'
 
-import { useBrandCreationService } from '@/composables/forms/brandCreation'
+import { useBrandCreationService } from '@/composables/components/brand/brandCreation'
 
 import useBrandStore from '@/stores/brand.store'
 import useUserStore from '@/stores/user.store'

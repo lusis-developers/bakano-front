@@ -36,7 +36,6 @@ export function useEditBrand() {
     if (field === 'operationCountry') {
       brandUpdated.operationCountry = value
     }
-    console.log(brandUpdated)
   }
 
   function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
@@ -56,20 +55,13 @@ export function useEditBrand() {
     if (data.targetAudience && convertedTargetAudience.gender.length > 0) {
       brandUpdated.targetAudience = convertedTargetAudience
     }
-
-    // brandModified.value = true
   }
 
   function handleDataStep3(industry: string): void {
     if (industry) {
       brandUpdated.industry = industry
-      // brandModified.value = true
     }
   }
-
-  // function resetValues(): void {
-  //   brandUpdated = JSON.parse(JSON.stringify(brandStore.selectedBrand))
-  // }
 
   async function updateBrand(): Promise<void> {
     if (brandStore.selectedBrand) {

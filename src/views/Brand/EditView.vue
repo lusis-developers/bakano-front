@@ -26,20 +26,6 @@ watch(
 
 <template>
   <div class="w-100">
-    <!-- <h5>Editar</h5> -->
-    <!-- <div
-      class="d-flex justify-content-start align-items-center flex-wrap gap-3"
-    >
-      <img
-        :src="brandStore.selectedBrand?.logo"
-        :alt="brandStore.selectedBrand?.name"
-      />
-      <h3>
-        <span :class="[colorClass]">
-          {{ brandStore.selectedBrand?.name.toLocaleUpperCase() }}
-        </span>
-      </h3>
-    </div> -->
     <EditBrand />
   </div>
 </template>

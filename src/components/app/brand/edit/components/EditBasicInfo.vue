@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import { useEditBrand } from '@/composables/forms/EditBrand'
+import { useEditBrand } from '@/composables/components/brand/EditBrand'
 
 import useBrandStore from '@/stores/brand.store'
 

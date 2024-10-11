@@ -1,27 +1,17 @@
 <script setup lang="ts">
-import { useEditBrand } from '@/composables/forms/EditBrand'
+import { useEditBrand } from '@/composables/components/brand/editBrand'
 
 import useBrandStore from '@/stores/brand.store'
 
-// import GeneralNotification from '@/components/shared/GeneralNotification.vue'
 import SpinnerLoader from '@/components/shared/SpinnerLoader.vue'
 
-// import CardStep1 from './components/CardStep1.vue'
-// import CardStep2 from './components/CardStep2.vue'
-// import CardStep3 from './components/CardStep3.vue'
 import EditBasicInfo from './components/EditBasicInfo.vue'
 
 const {
   activeStep,
-  // brandModified,
-  // notificationMessage,
-  // notificationType,
+
   steps,
   setStep
-  // handleDataStep1,
-  // handleDataStep2,
-  // handleDataStep3,
-  // updateBrand
 } = useEditBrand()
 
 const brandStore = useBrandStore()
@@ -48,17 +38,9 @@ const brandStore = useBrandStore()
         </div>
         <div v-if="activeStep === 2" class="w-100 flex-grow-1">
           <h4>Actualiza la configuración de tu audiencia</h4>
-          <!-- <CardStep2
-            @update:brand-data="handleDataStep2"
-            class="w-100 flex-grow-1" -->
-          />
         </div>
         <div v-if="activeStep === 3" class="w-100 flex-grow-1">
           <h4>Actualiza la industria de tu marca</h4>
-          <!-- <CardStep3
-            @update:brand-data="handleDataStep3"
-            class="w-100 flex-grow-1" -->
-          <!-- /> -->
         </div>
       </template>
     </div>

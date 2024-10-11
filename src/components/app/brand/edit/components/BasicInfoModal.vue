@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 import { PrincipalCountries } from '@/enum/brand.enum'
 
-import { useEditBrand } from '@/composables/forms/EditBrand'
+import { useEditBrand } from '@/composables/components/brand/EditBrand'
 
 import useBrandStore from '@/stores/brand.store'
 
