@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { computed, reactive, watch } from 'vue'
 
 import { PrincipalCountries } from '@/enum/brand.enum'
@@ -96,4 +96,4 @@ watch(formData, () => {
       <UploadFileInput @file-selected="handleFileSelected" />
     </template>
   </GeneralCard>
-</template>
+</template> -->

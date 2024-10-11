@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { reactive } from 'vue'
 
 import useBrandStore from '@/stores/brand.store'
@@ -39,4 +39,4 @@ function handleIndustryChange(selectedIndustry: string) {
       />
     </template>
   </GeneralCard>
-</template>
+</template> -->

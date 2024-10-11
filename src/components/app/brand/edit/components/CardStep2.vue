@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
 
 import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
@@ -98,4 +98,4 @@ watch(
       />
     </template>
   </GeneralCard>
-</template>
+</template> -->

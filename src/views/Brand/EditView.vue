@@ -26,8 +26,8 @@ watch(
 
 <template>
   <div class="w-100">
-    <h5>Editar</h5>
-    <div
+    <!-- <h5>Editar</h5> -->
+    <!-- <div
       class="d-flex justify-content-start align-items-center flex-wrap gap-3"
     >
       <img
@@ -39,7 +39,7 @@ watch(
           {{ brandStore.selectedBrand?.name.toLocaleUpperCase() }}
         </span>
       </h3>
-    </div>
+    </div> -->
     <EditBrand />
   </div>
 </template>

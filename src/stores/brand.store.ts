@@ -70,7 +70,7 @@ export const useBrandStore = defineStore('brandStore', {
       }
     },
 
-    async editBrand(
+    async updateBrand(
       brandUpdated: Partial<IBrand>,
       brandId: string
     ): Promise<void> {
