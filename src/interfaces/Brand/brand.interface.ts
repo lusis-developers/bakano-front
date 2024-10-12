@@ -13,7 +13,7 @@ export interface IBrand {
 }
 
 export interface UserTargetAudience {
-  ageRange: [string]
+  ageRange: string[]
   gender: TargetBrandGender[]
   preferences: string
 }

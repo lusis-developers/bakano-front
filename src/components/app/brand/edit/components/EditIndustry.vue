@@ -5,6 +5,8 @@ import useBrandStore from '@/stores/brand.store'
 
 import GlobalCard from '@/components/shared/GlobalCard.vue'
 
+import IndustryModal from './IndustryModal.vue'
+
 const brandStore = useBrandStore()
 
 const isModalOpen = ref(false)
@@ -31,4 +33,5 @@ function openCloseModal(): void {
       </div>
     </template>
   </GlobalCard>
+  <IndustryModal :isOpen="isModalOpen" @close-modal="openCloseModal" />
 </template>

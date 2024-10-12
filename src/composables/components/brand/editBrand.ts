@@ -26,42 +26,78 @@ export function useEditBrand() {
     activeStep.value = step
   }
 
-  function handleDataStep1(field: string, value: string): void {
+  function handleDataStep1(
+    field: string,
+    value: string | string[] | TargetBrandGender[]
+  ): void {
     if (field === 'name') {
-      brandUpdated.name = value
+      brandUpdated.name = value as string
     }
     if (field === 'mainAddress') {
-      brandUpdated.mainAddress = value
+      brandUpdated.mainAddress = value as string
     }
     if (field === 'operationCountry') {
-      brandUpdated.operationCountry = value
+      brandUpdated.operationCountry = value as string
+    }
+    if (field === 'preferences') {
+      if (!brandUpdated.targetAudience) {
+        brandUpdated.targetAudience = {
+          ageRange: [''],
+          gender: [],
+          preferences: ''
+        }
+      }
+      brandUpdated.targetAudience.preferences = value as string
+    }
+    if (field === 'ageRange') {
+      if (!brandUpdated.targetAudience) {
+        brandUpdated.targetAudience = {
+          ageRange: [''],
+          gender: [],
+          preferences: ''
+        }
+      }
+      brandUpdated.targetAudience.ageRange = value as string[]
+    }
+    if (field === 'gender') {
+      if (!brandUpdated.targetAudience) {
+        brandUpdated.targetAudience = {
+          ageRange: [''],
+          gender: [],
+          preferences: ''
+        }
+      }
+      brandUpdated.targetAudience.gender = value as TargetBrandGender[]
+    }
+    if (field === 'industry') {
+      brandUpdated.industry = value as string
     }
   }
 
-  function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
-    const genderMap: Record<string, TargetBrandGender> = {
-      Masculino: TargetBrandGender.MALE,
-      Femenino: TargetBrandGender.FEMALE,
-      'No estoy seguro': TargetBrandGender.NOT_SURE
-    }
+  // function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
+  //   const genderMap: Record<string, TargetBrandGender> = {
+  //     Masculino: TargetBrandGender.MALE,
+  //     Femenino: TargetBrandGender.FEMALE,
+  //     'No estoy seguro': TargetBrandGender.NOT_SURE
+  //   }
 
-    const convertedTargetAudience = {
-      ...data.targetAudience,
-      gender: data.targetAudience.gender
-        ? data.targetAudience.gender.map((g: string) => genderMap[g] || g)
-        : []
-    }
+  //   const convertedTargetAudience = {
+  //     ...data.targetAudience,
+  //     gender: data.targetAudience.gender
+  //       ? data.targetAudience.gender.map((g: string) => genderMap[g] || g)
+  //       : []
+  //   }
 
-    if (data.targetAudience && convertedTargetAudience.gender.length > 0) {
-      brandUpdated.targetAudience = convertedTargetAudience
-    }
-  }
+  //   if (data.targetAudience && convertedTargetAudience.gender.length > 0) {
+  //     brandUpdated.targetAudience = convertedTargetAudience
+  //   }
+  // }
 
-  function handleDataStep3(industry: string): void {
-    if (industry) {
-      brandUpdated.industry = industry
-    }
-  }
+  // function handleDataStep3(industry: string): void {
+  //   if (industry) {
+  //     brandUpdated.industry = industry
+  //   }
+  // }
 
   async function updateBrand(): Promise<void> {
     if (brandStore.selectedBrand) {
@@ -75,8 +111,8 @@ export function useEditBrand() {
     steps,
     setStep,
     handleDataStep1,
-    handleDataStep2,
-    handleDataStep3,
+    // handleDataStep2,
+    // handleDataStep3,
     updateBrand
     // resetValues,
   }

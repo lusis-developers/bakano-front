@@ -5,6 +5,8 @@ import useBrandStore from '@/stores/brand.store'
 
 import GlobalCard from '@/components/shared/GlobalCard.vue'
 
+import AudienceModal from './AudienceModal.vue'
+
 const brandStore = useBrandStore()
 
 const isModalOpen = ref(false)
@@ -24,6 +26,7 @@ function openCloseModal(): void {
             <i class="bi bi-pen"></i>
           </button>
         </div>
+
         <h5>Preferencias de tu público</h5>
         <p class="text-muted">
           {{ brandStore.selectedBrand?.targetAudience.preferences }}
@@ -41,4 +44,5 @@ function openCloseModal(): void {
       </div>
     </template>
   </GlobalCard>
+  <AudienceModal :isOpen="isModalOpen" @close-modal="openCloseModal" />
 </template>
