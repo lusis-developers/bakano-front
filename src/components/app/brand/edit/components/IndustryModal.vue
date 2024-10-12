@@ -19,14 +19,14 @@ defineProps({
 
 const brandStore = useBrandStore()
 
-const { brandUpdated, handleDataStep1, updateBrand } = useEditBrand()
+const { brandUpdated, handleData, updateBrand } = useEditBrand()
 
 function closeModal(): void {
   emit('close-modal')
 }
 
 async function updateField(field: string, value: string): Promise<void> {
-  handleDataStep1(field, value)
+  handleData(field, value)
 }
 
 async function editBrand(): Promise<void> {

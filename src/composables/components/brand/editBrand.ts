@@ -3,12 +3,10 @@ import { reactive, ref } from 'vue'
 import { TargetBrandGender } from '@/enum/brand.enum'
 
 import useBrandStore from '@/stores/brand.store'
-import useUserStore from '@/stores/user.store'
 
 import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 export function useEditBrand() {
-  const userStore = useUserStore()
   const brandStore = useBrandStore()
 
   const steps = [
@@ -26,7 +24,7 @@ export function useEditBrand() {
     activeStep.value = step
   }
 
-  function handleDataStep1(
+  function handleData(
     field: string,
     value: string | string[] | TargetBrandGender[]
   ): void {
@@ -74,31 +72,6 @@ export function useEditBrand() {
     }
   }
 
-  // function handleDataStep2(data: Pick<IBrand, 'targetAudience'>): void {
-  //   const genderMap: Record<string, TargetBrandGender> = {
-  //     Masculino: TargetBrandGender.MALE,
-  //     Femenino: TargetBrandGender.FEMALE,
-  //     'No estoy seguro': TargetBrandGender.NOT_SURE
-  //   }
-
-  //   const convertedTargetAudience = {
-  //     ...data.targetAudience,
-  //     gender: data.targetAudience.gender
-  //       ? data.targetAudience.gender.map((g: string) => genderMap[g] || g)
-  //       : []
-  //   }
-
-  //   if (data.targetAudience && convertedTargetAudience.gender.length > 0) {
-  //     brandUpdated.targetAudience = convertedTargetAudience
-  //   }
-  // }
-
-  // function handleDataStep3(industry: string): void {
-  //   if (industry) {
-  //     brandUpdated.industry = industry
-  //   }
-  // }
-
   async function updateBrand(): Promise<void> {
     if (brandStore.selectedBrand) {
       await brandStore.updateBrand(brandUpdated, brandStore.selectedBrand?._id)
@@ -110,9 +83,7 @@ export function useEditBrand() {
     brandUpdated,
     steps,
     setStep,
-    handleDataStep1,
-    // handleDataStep2,
-    // handleDataStep3,
+    handleData,
     updateBrand
     // resetValues,
   }

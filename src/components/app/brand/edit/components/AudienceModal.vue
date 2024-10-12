@@ -23,7 +23,7 @@ defineProps({
 
 const brandStore = useBrandStore()
 
-const { brandUpdated, handleDataStep1, updateBrand } = useEditBrand()
+const { brandUpdated, handleData, updateBrand } = useEditBrand()
 
 const audienceOptions = Object.values(TargetAudience)
 
@@ -38,7 +38,7 @@ function closeModal(): void {
 }
 
 async function updateField(field: string, value: string): Promise<void> {
-  handleDataStep1(field, value)
+  handleData(field, value)
 }
 
 async function editBrand(): Promise<void> {
