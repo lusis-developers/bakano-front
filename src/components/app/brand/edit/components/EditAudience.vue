@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+
+import { TargetBrandGender } from '@/enum/brand.enum'
+
+import { useEditBrand } from '@/composables/components/brand/editBrand'
 
 import useBrandStore from '@/stores/brand.store'
 
@@ -9,7 +13,22 @@ import AudienceModal from './AudienceModal.vue'
 
 const brandStore = useBrandStore()
 
+const { brandUpdated } = useEditBrand()
+
 const isModalOpen = ref(false)
+
+const genderTranslationMap: Record<TargetBrandGender, string> = {
+  [TargetBrandGender.MALE]: 'masculino',
+  [TargetBrandGender.FEMALE]: 'femenino',
+  [TargetBrandGender.NOT_SURE]: 'no estoy seguro'
+}
+
+const genderSelected = computed(
+  () =>
+    brandUpdated.targetAudience?.gender.map(
+      (gender) => genderTranslationMap[gender]
+    ) || []
+)
 
 function openCloseModal(): void {
   isModalOpen.value = !isModalOpen.value
@@ -39,7 +58,7 @@ function openCloseModal(): void {
 
         <h5>Géneros objetivos</h5>
         <p class="text-muted">
-          {{ brandStore.selectedBrand?.targetAudience.gender.join(', ') }}
+          {{ genderSelected.join(', ') }}
         </p>
       </div>
     </template>

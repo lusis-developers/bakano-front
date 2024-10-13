@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import { TargetAudience } from '@/enum/brand.enum'
 import { TargetBrandGender } from '@/enum/brand.enum'
 
@@ -27,18 +29,42 @@ const { brandUpdated, handleData, updateBrand } = useEditBrand()
 
 const audienceOptions = Object.values(TargetAudience)
 
-const genders: { value: TargetBrandGender; label: string }[] = [
-  { value: TargetBrandGender.MALE, label: 'Masculino' },
-  { value: TargetBrandGender.FEMALE, label: 'Femenino' },
-  { value: TargetBrandGender.NOT_SURE, label: 'No estoy seguro' }
-]
+const genderTranslationMap: Record<TargetBrandGender, string> = {
+  [TargetBrandGender.MALE]: 'masculino',
+  [TargetBrandGender.FEMALE]: 'femenino',
+  [TargetBrandGender.NOT_SURE]: 'no estoy seguro'
+}
+
+const reverseGenderTranslationMap: Record<string, TargetBrandGender> = {
+  masculino: TargetBrandGender.MALE,
+  femenino: TargetBrandGender.FEMALE,
+  'no estoy seguro': TargetBrandGender.NOT_SURE
+}
+
+const genderOptions = computed(() =>
+  Object.values(TargetBrandGender).map((gender) => genderTranslationMap[gender])
+)
+
+const genderSelected = computed(
+  () =>
+    brandUpdated.targetAudience?.gender.map(
+      (gender) => genderTranslationMap[gender]
+    ) || []
+)
 
 function closeModal(): void {
   emit('close-modal')
 }
 
-async function updateField(field: string, value: string): Promise<void> {
-  handleData(field, value)
+async function updateField(field: string, value: string[]): Promise<void> {
+  if (field === 'gender') {
+    const translatedValues = value.map(
+      (val) => reverseGenderTranslationMap[val]
+    )
+    handleData(field, translatedValues)
+  } else {
+    handleData(field, value)
+  }
 }
 
 async function editBrand(): Promise<void> {
@@ -61,21 +87,21 @@ async function editBrand(): Promise<void> {
         placeholder="Escribe lo que consideres le gusta a tu público"
         :initialValue="brandUpdated.targetAudience?.preferences"
         :validations="descriptionValidations"
-        @input="updateField('preferences', $event.target.value)"
+        @input="updateField('preferences', $event)"
       />
       <MultipleSelectInput
         :modelValue="brandUpdated.targetAudience?.ageRange"
         :options="audienceOptions"
         label="Selecciona tu público objetivo"
         id="ageRangeSelector"
-        @update:modelValue="updateField('ageRange', $event.target.value)"
+        @update:modelValue="updateField('ageRange', $event)"
       />
       <MultipleSelectInput
-        :modelValue="brandUpdated.targetAudience?.gender"
-        :options="genders.map((gender) => gender.label)"
+        :modelValue="genderSelected"
+        :options="genderOptions"
         label="Selecciona los géneros objetivo que crees que les puede interesar tu producto"
         id="genderSelector"
-        @update:modelValue="updateField('gender', $event.target.value)"
+        @update:modelValue="updateField('gender', $event)"
       />
     </template>
     <template #footer>
