@@ -26,10 +26,15 @@ const props = defineProps({
   validations: {
     type: Array as PropType<Validation[]>,
     default: () => []
+  },
+  initialValue: {
+    type: String,
+    required: false,
+    default: ''
   }
 })
 
-const inputValue = ref<string>('')
+const inputValue = ref<string>(props.initialValue)
 const errorMessages = ref<string[]>([])
 
 function validateInput(): void {

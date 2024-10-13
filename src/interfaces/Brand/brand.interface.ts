@@ -9,11 +9,11 @@ export interface IBrand {
   logo: string
   user: string
   description: string
-  id: string
+  _id: string
 }
 
 export interface UserTargetAudience {
-  ageRange: [string]
+  ageRange: string[]
   gender: TargetBrandGender[]
   preferences: string
 }

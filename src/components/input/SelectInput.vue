@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { type PropType, computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import type { PropType } from 'vue'
 
 interface Option {
   value: string | number
@@ -26,10 +27,15 @@ const props = defineProps({
   validationErrors: {
     type: Array as PropType<string[]>,
     required: false
+  },
+  initialValue: {
+    type: [String, Number],
+    required: false,
+    default: ''
   }
 })
 
-const selectedValue = ref('')
+const selectedValue = ref(props.initialValue)
 
 const validationErrors = computed(() => {
   return props.validationErrors
@@ -40,6 +46,14 @@ const emit = defineEmits(['update:modelValue'])
 const emitChange = () => {
   emit('update:modelValue', selectedValue.value)
 }
+
+watch(
+  () => props.initialValue,
+  (newVal: string | number) => {
+    selectedValue.value = newVal
+  },
+  { immediate: true } // Para que se ejecute al iniciar
+)
 </script>
 
 <template>
@@ -49,10 +63,10 @@ const emitChange = () => {
       {{ label }}
     </label>
     <select
-      :class="{ 'is-invalid': validationErrors && validationErrors.length > 0 }"
-      class="form-select"
-      :id="inputId"
       v-model="selectedValue"
+      :class="{ 'is-invalid': validationErrors && validationErrors.length > 0 }"
+      :id="inputId"
+      class="form-select"
       @change="emitChange"
     >
       <option

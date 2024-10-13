@@ -70,6 +70,11 @@ class APIBase {
   ): Promise<AxiosResponse<T>> {
     const url = this.buildUrl(endpoint)
     const formData = new FormData()
+
+    if (!file) {
+      throw new Error('No file provided')
+    }
+
     formData.append('file', file)
 
     try {

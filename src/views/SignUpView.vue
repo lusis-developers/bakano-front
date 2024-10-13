@@ -83,7 +83,7 @@ function submit(): void {
   <ContainerWrapper>
     <template #content>
       <div
-        class="form-wraper w-100 mt-5 d-flex flex-column justify-content-center align-items-center"
+        class="form-wraper w-100 mt-5 mx-auto d-flex flex-column justify-content-center align-items-center"
       >
         <form class="w-100">
           <BaseAlert

@@ -29,10 +29,11 @@ export const menuUserOptions: Navigation[] = [
   }
 ]
 
-export const sidebarItems: Navigation[] = [
+export const userMenuItems: Navigation[] = [
   { name: 'Dashboard', icon: 'bi bi-speedometer', link: 'dashboard' },
-  { name: 'Planificar', icon: 'bi bi-journal-richtext', link: 'planning' },
-  { name: 'Post', icon: 'bi bi-file-post', link: 'post' },
-  { name: 'Tendencias', icon: 'bi bi-bar-chart-line', link: 'trends' },
+  // { name: 'Planificar', icon: 'bi bi-journal-richtext', link: 'planning' },
+  // { name: 'Post', icon: 'bi bi-file-post', link: 'post' },
+  // { name: 'Tendencias', icon: 'bi bi-bar-chart-line', link: 'trends' },
+  { name: 'Marca', icon: 'bi bi-bar-chart-line', link: 'brand' },
   { name: 'Perfil', icon: 'bi bi-person', link: 'profile' }
 ]

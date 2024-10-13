@@ -42,7 +42,7 @@ function sendData(): void {
     jobDescription: jobDescription.value,
     gender: gender.value
   }
-  console.log('Enviando datos:', data)
+  console.log(data)
 }
 </script>
 

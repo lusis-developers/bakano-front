@@ -37,7 +37,6 @@ const countryOptions = computed(() =>
 
 function handleUpdate(value: string) {
   selectedCountryCode.value = value
-  console.log('País seleccionado:', value)
 }
 
 function onFileSelected(file: File) {

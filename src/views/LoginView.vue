@@ -29,7 +29,7 @@ const authStore = useAuthStore()
   <ContainerWrapper>
     <template #content>
       <div
-        class="form-wraper w-100 mt-5 d-flex flex-column justify-content-center align-items-center"
+        class="form-wraper w-100 mx-auto mt-5 d-flex flex-column justify-content-center align-items-center"
       >
         <form class="w-100">
           <BaseAlert

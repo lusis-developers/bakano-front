@@ -1,19 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-
-import { useRoute } from 'vue-router'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import ContainerWrapper from '@/components/layout/ContainerWrapper.vue'
-
-import { sidebarItems } from '@/utils/menuItems.utils'
-
-const route = useRoute()
-
-const showHeader = computed(() => {
-  return route.path !== '/app/trends' && route.path !== '/app/profile'
-})
 
 const isScreenSmall = ref(window.innerWidth < 1023)
 
@@ -31,11 +21,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="d-flex">
-    <AppSidebar :sidebarItems="sidebarItems" />
-    <div class="d-flex flex-column flex-grow-1 min-vh-100 col">
-      <AppHeader v-if="showHeader" />
-      <main class="flex-grow-1">
+  <div class="d-flex vh-100 overflow-y-hidden">
+    <AppSidebar />
+    <div class="d-flex flex-column col vh-100">
+      <AppHeader></AppHeader>
+      <main class="overflow-y-auto p-4">
         <ContainerWrapper>
           <template #content>
             <RouterView />
