@@ -107,6 +107,7 @@ export const useBrandStore = defineStore('brandStore', {
       this.isLoading = true
       try {
         await brandService.uploadBrandLogo(file, brandId)
+        this.getUserBrand(brandId)
         this.successMessage = 'Tu imagen ha sido cargada'
       } catch (error: unknown) {
         console.error({ error })
