@@ -10,7 +10,7 @@ import useBrandStore from '@/stores/brand.store'
 
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInputArea from '@/components/input/FloatInputArea.vue'
-import MultipleSelectInput from '@/components/input/MultipleSelectInput.vue'
+import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
 
 import { descriptionValidations } from '@/validation/components/forms/brand.validation'

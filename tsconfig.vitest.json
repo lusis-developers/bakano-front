@@ -8,9 +8,5 @@
     "lib": [],
     "types": ["node", "jsdom"]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "src/types/**/*.d.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/types/**/*.d.ts"]
 }
