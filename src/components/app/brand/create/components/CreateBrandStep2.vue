@@ -4,7 +4,7 @@ import { computed, reactive, ref, watch } from 'vue'
 import { TargetAudience, TargetBrandGender } from '@/enum/brand.enum'
 
 import FloatInputArea from '@/components/input/FloatInputArea.vue'
-import MultipleSelectInput from '@/components/input/MultipleSelectInput.vue'
+import MultipleSelectInput from '@/components/input/multipleSelectInput.vue'
 
 import { descriptionValidations } from '@/validation/components/forms/brand.validation'
 
