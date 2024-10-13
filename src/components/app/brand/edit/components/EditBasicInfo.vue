@@ -37,6 +37,11 @@ function openCloseModal(): void {
           {{ brandStore.selectedBrand?.name }}
         </p>
 
+        <h5>Descripción de la marca</h5>
+        <p class="text-muted">
+          {{ brandStore.selectedBrand?.description }}
+        </p>
+
         <h5>País de marca</h5>
         <p class="text-muted">
           {{ brandStore.selectedBrand?.operationCountry }}

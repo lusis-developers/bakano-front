@@ -9,11 +9,13 @@ import useBrandStore from '@/stores/brand.store'
 
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
+import FloatInputArea from '@/components/input/FloatInputArea.vue'
 import SelectInput from '@/components/input/SelectInput.vue'
 import UploadFileInput from '@/components/input/uploadFileInput.vue'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
 
 import {
+  descriptionValidations,
   mainAddressValidations,
   nameBrandValidations
 } from '@/validation/components/forms/brand.validation'
@@ -72,6 +74,14 @@ async function setImage(file: File): Promise<void> {
         :validations="nameBrandValidations"
         :initialValue="brandUpdated.name"
         @input="updateField('name', $event.target.value)"
+      />
+      <FloatInputArea
+        label="Descripción de marca"
+        inputId="brandDescription"
+        v-model="brandUpdated.description"
+        :validations="descriptionValidations"
+        :initialValue="brandUpdated.description"
+        @input="updateField('description', $event)"
       />
       <SelectInput
         v-model="brandUpdated.operationCountry!"
