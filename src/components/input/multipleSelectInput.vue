@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, watch } from 'vue'
 
 const emits = defineEmits(['update:modelValue'])
@@ -9,18 +9,18 @@ const props = defineProps({
     default: 'Seleccione una o más opciones'
   },
   modelValue: {
-    type: Array,
+    type: Array as () => string[],
     default: () => []
   },
   options: {
-    type: Array,
+    type: Array as () => string[],
     required: true
   }
 })
 
 const selectedOptions = ref([...props.modelValue])
 
-function toggleOption(option) {
+function toggleOption(option: string) {
   if (selectedOptions.value.includes(option)) {
     selectedOptions.value = selectedOptions.value.filter((o) => o !== option)
   } else {
@@ -29,7 +29,7 @@ function toggleOption(option) {
   emits('update:modelValue', selectedOptions.value)
 }
 
-function removeOption(option) {
+function removeOption(option: string) {
   selectedOptions.value = selectedOptions.value.filter((o) => o !== option)
   emits('update:modelValue', selectedOptions.value)
 }
