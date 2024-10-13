@@ -8,6 +8,7 @@ import type { IBrand } from '@/interfaces/Brand/brand.interface'
 
 export function useEditBrand() {
   const brandStore = useBrandStore()
+  const logoFile = ref<File | null>(null)
 
   const steps = [
     { icon: 'bi-person-circle', label: 'Información Básica' },
@@ -78,13 +79,23 @@ export function useEditBrand() {
     }
   }
 
+  async function updateLogo(): Promise<void> {
+    if (logoFile.value && brandStore.selectedBrand) {
+      await brandStore.updateBrandLogo(
+        logoFile.value,
+        brandStore.selectedBrand._id
+      )
+    }
+  }
+
   return {
     activeStep,
     brandUpdated,
     steps,
     setStep,
     handleData,
-    updateBrand
-    // resetValues,
+    updateBrand,
+    updateLogo,
+    logoFile
   }
 }

@@ -10,6 +10,7 @@ import useBrandStore from '@/stores/brand.store'
 import BaseButton from '@/components/base/BaseButton.vue'
 import FloatInput from '@/components/input/FloatInput.vue'
 import SelectInput from '@/components/input/SelectInput.vue'
+import UploadFileInput from '@/components/input/uploadFileInput.vue'
 import GlobalModal from '@/components/shared/GlobalModal.vue'
 
 import {
@@ -27,7 +28,15 @@ defineProps({
 
 const brandStore = useBrandStore()
 
-const { brandUpdated, handleData, updateBrand } = useEditBrand()
+const { brandUpdated, handleData, updateBrand, updateLogo, logoFile } =
+  useEditBrand()
+
+const countryOptions = computed(() => {
+  return Object.values(PrincipalCountries).map((country) => ({
+    value: country,
+    label: country
+  }))
+})
 
 function closeModal(): void {
   emit('close-modal')
@@ -38,22 +47,24 @@ async function updateField(field: string, value: string): Promise<void> {
 }
 
 async function editBrand(): Promise<void> {
-  await updateBrand()
+  if (logoFile.value) {
+    await updateLogo()
+  } else {
+    await updateBrand()
+  }
   closeModal()
 }
 
-const countryOptions = computed(() => {
-  return Object.values(PrincipalCountries).map((country) => ({
-    value: country,
-    label: country
-  }))
-})
+async function setImage(file: File): Promise<void> {
+  logoFile.value = file
+}
 </script>
 
 <template>
   <GlobalModal :modelValue="isOpen" @close="closeModal">
     <template #header> Editar </template>
     <template #content>
+      <UploadFileInput class="mb-4" @file-selected="setImage($event)" />
       <FloatInput
         label="Nombre de marca"
         inputId="brandName"
