@@ -107,7 +107,6 @@ function submitForm(): void {
     alert('Por favor, corrige los errores antes de enviar el formulario.')
     return
   }
-  console.log('Formulario enviado', form)
   hasUnsavedChanges.value = false
 }
 

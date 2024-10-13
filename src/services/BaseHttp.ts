@@ -77,7 +77,6 @@ class APIBase {
 
     formData.append('file', file)
 
-    console.log('file', formData.get('file'))
     try {
       return await axios.post<T>(url, formData, {
         headers: {

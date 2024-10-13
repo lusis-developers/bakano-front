@@ -19,8 +19,6 @@ const scope = facebookPermissions.join(',')
 async function initFacebookSDK() {
   try {
     // Inicializar el SDK de Facebook
-    console.log('estamos encima del init interno')
-    console.log(import.meta.env.VITE_FACEBOOK_ID)
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: import.meta.env.VITE_FACEBOOK_ID,

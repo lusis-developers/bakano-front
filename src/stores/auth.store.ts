@@ -43,7 +43,6 @@ export const useAuthStore = defineStore('authStore', {
         await authService.sendMagicLink(user)
         this.successMessage = 'Un link fue enviado tu bandeja'
       } catch (error: unknown) {
-        console.log(error)
         this.error =
           error instanceof AxiosError ? error.message : ResponseMessage.ERROR
       } finally {
