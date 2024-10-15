@@ -3,7 +3,7 @@ import { onMounted } from 'vue'
 
 import useAuthStore from '@/stores/auth.store'
 
-import { facebookPermissions } from '@/config/components/facebookPermissions.config'
+import { facebookScopes } from '@/config/components/auth/facebookPermissions.config'
 
 const props = defineProps({
   brandId: {
@@ -14,7 +14,7 @@ const props = defineProps({
 
 const authStore = useAuthStore()
 
-const scope = facebookPermissions.join(',')
+const scope = facebookScopes.join(',')
 
 async function initFacebookSDK() {
   try {
@@ -82,9 +82,16 @@ onMounted(() => {
 
 <template>
   <div>
-    <button class="btn btn-facebook" @click="loginWithFacebook">
-      Conectar con Facebook
+    <button class="btn btn-facebook social-button" @click="loginWithFacebook">
+      Conecta con Facebook
       <i class="bi bi-facebook"></i>
     </button>
   </div>
 </template>
+
+<style lang="scss">
+.social-button {
+  width: 100%;
+  max-width: 320px;
+}
+</style>
