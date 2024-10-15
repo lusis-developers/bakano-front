@@ -42,12 +42,7 @@ onMounted(async () => {
 <template>
   <header class="bg-light border-bottom">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <div
-        class="container-fluid d-flex justify-content-between align-items-center"
-      >
-        <div>
-          <slot name="header" />
-        </div>
+      <div class="d-flex justify-content-end align-items-center w-100">
         <div class="d-flex align-items-center gap-3">
           <DropdownMenu
             :menuOptions="menuOptions({ showCreateBrandModal })"

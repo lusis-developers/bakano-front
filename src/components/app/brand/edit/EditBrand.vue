@@ -16,7 +16,7 @@ const brandStore = useBrandStore()
 
 <template>
   <div>
-    <div class="d-flex flex-column align-items-center gap-3 flex-grow-1">
+    <div class="d-flex flex-column align-items-center gap-3">
       <div class="btn-group" role="group" aria-label="Steps navigation">
         <button
           v-for="(step, index) in steps"
@@ -25,7 +25,10 @@ const brandStore = useBrandStore()
           :class="{ active: activeStep === index + 1 }"
           @click="setStep(index + 1)"
         >
-          <i :class="`bi ${step.icon}`" /> {{ step.label }}
+          <i :class="`bi ${step.icon}`" />
+          <span class="label-icon-text">
+            {{ step.label }}
+          </span>
         </button>
       </div>
       <SpinnerLoader v-if="brandStore.isLoading" />
@@ -43,3 +46,12 @@ const brandStore = useBrandStore()
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.label-icon-text {
+  display: none;
+  @media (min-width: 580px) {
+    display: block;
+  }
+}
+</style>
