@@ -81,7 +81,7 @@ async function setImage(file: File): Promise<void> {
         v-model="brandUpdated.description"
         :validations="descriptionValidations"
         :initialValue="brandUpdated.description"
-        @input="updateField('description', $event)"
+        @input="updateField('description', $event.target.value)"
       />
       <SelectInput
         v-model="brandUpdated.operationCountry!"

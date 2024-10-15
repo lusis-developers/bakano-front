@@ -87,7 +87,7 @@ async function editBrand(): Promise<void> {
         placeholder="Escribe lo que consideres le gusta a tu público"
         :initialValue="brandUpdated.targetAudience?.preferences"
         :validations="descriptionValidations"
-        @input="updateField('preferences', $event)"
+        @input="updateField('preferences', $event.target.value)"
       />
       <MultipleSelectInput
         :modelValue="brandUpdated.targetAudience?.ageRange"
