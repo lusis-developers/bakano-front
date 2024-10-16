@@ -33,7 +33,6 @@ export function useEditBrand() {
       brandUpdated.name = value as string
     }
     if (field === 'description') {
-      console.log(value)
       brandUpdated.description = value as string
     }
     if (field === 'mainAddress') {
