@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import useAuthStore from '@/stores/auth.store'
 
@@ -11,25 +11,21 @@ const props = defineProps({
     required: true
   }
 })
-
 const authStore = useAuthStore()
-
 const scope = facebookPermissions.join(',')
-
+const pages = ref<any[]>([])
+const selectedPage = ref<string | null>(null)
 async function initFacebookSDK() {
   try {
-    // Inicializar el SDK de Facebook
     window.fbAsyncInit = function () {
       window.FB.init({
         appId: import.meta.env.VITE_FACEBOOK_ID,
         cookie: true,
         xfbml: true,
-        version: 'v20.0' // Versión de la API DE FACEBOOK
+        version: 'v21 .0'
       })
-      window.FB.AppEvents.logPageView() // Registro de eventos
+      window.FB.AppEvents.logPageView()
     }
-
-    // Cargar el SDK de Facebook de manera asincrónica
     ;(function (d, s, id) {
       const fjs = d.getElementsByTagName(s)[0]
       if (d.getElementById(id)) {
@@ -46,8 +42,6 @@ async function initFacebookSDK() {
     console.log(error)
   }
 }
-
-// Función para manejar el login con Facebook
 function loginWithFacebook() {
   window.FB.getLoginStatus((response: any) => {
     if (response.status === 'connected') {
@@ -64,17 +58,34 @@ function loginWithFacebook() {
     }
   })
 }
-
-// Callback para manejar el estado del login de Facebook
 function statusChangeCallback(response: any) {
   if (response.status === 'connected') {
     const accessToken = response.authResponse.accessToken
-    authStore.sendFacebookTokenToBackend(accessToken, props.brandId) // Enviar el token al backend mediante el store
+    window.FB.api(
+      '/me/accounts',
+      { access_token: accessToken },
+      (pagesResponse: any) => {
+        if (pagesResponse && !pagesResponse.error) {
+          pages.value = pagesResponse.data
+        } else {
+          console.error('Error al obtener páginas: ', pagesResponse.error)
+        }
+      }
+    )
   } else {
     console.log('El usuario no está autenticado con Facebook.')
   }
 }
-
+function sendFacebookData() {
+  const selected = pages.value.find((page) => page.id === selectedPage.value)
+  if (!selected) {
+    console.error('Debes seleccionar una página válida')
+    return
+  }
+  const pageId = selected.id
+  const pageAccessToken = selected.access_token
+  authStore.sendFacebookTokenToBackend(props.brandId, pageAccessToken, pageId)
+}
 onMounted(() => {
   initFacebookSDK()
 })
@@ -85,6 +96,24 @@ onMounted(() => {
     <button class="btn btn-facebook" @click="loginWithFacebook">
       Conectar con Facebook
       <i class="bi bi-facebook"></i>
+    </button>
+
+    <div v-if="pages.length > 0">
+      <label for="pages">Selecciona una página:</label>
+      <select v-model="selectedPage" id="pages">
+        <option disabled value="">Selecciona una página</option>
+        <option v-for="page in pages" :key="page.id" :value="page.id">
+          {{ page.name }}
+        </option>
+      </select>
+    </div>
+
+    <button
+      v-if="selectedPage"
+      class="btn btn-primary"
+      @click="sendFacebookData"
+    >
+      Vincular Página Seleccionada
     </button>
   </div>
 </template>
