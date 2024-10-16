@@ -120,40 +120,38 @@ async function handleCreate() {
 </script>
 
 <template>
-  <div class="create-brand">
-    <GlobalModal :modelValue="isVisible" @close="handleClose">
-      <template #header>
-        <h2>Crear marca 📌</h2>
-      </template>
-      <template #content>
-        <component
-          :is="currentComponent"
-          @update:brand-data="currentDataHandler"
-        />
-      </template>
-      <template #footer>
-        <div class="d-flex justify-content-between w-100">
-          <button
-            @click="prevStep"
-            :disabled="isFirstStep"
-            class="btn bg-primary text-white"
-          >
-            Anterior
-          </button>
-          <button
-            @click="handleNextOrCreate"
-            :disabled="isDisabled"
-            class="btn bg-primary text-white"
-          >
-            {{ buttonText }}
-          </button>
-        </div>
-      </template>
-    </GlobalModal>
-    <GeneralNotification
-      v-if="notificationMessage"
-      :message="notificationMessage"
-      :type="notificationType"
-    />
-  </div>
+  <GlobalModal :modelValue="isVisible" @close="handleClose">
+    <template #header>
+      <h2>Crear marca 📌</h2>
+    </template>
+    <template #content>
+      <component
+        :is="currentComponent"
+        @update:brand-data="currentDataHandler"
+      />
+    </template>
+    <template #footer>
+      <div class="d-flex justify-content-between w-100">
+        <button
+          @click="prevStep"
+          :disabled="isFirstStep"
+          class="btn bg-primary text-white"
+        >
+          Anterior
+        </button>
+        <button
+          @click="handleNextOrCreate"
+          :disabled="isDisabled"
+          class="btn bg-primary text-white"
+        >
+          {{ buttonText }}
+        </button>
+      </div>
+    </template>
+  </GlobalModal>
+  <GeneralNotification
+    v-if="notificationMessage"
+    :message="notificationMessage"
+    :type="notificationType"
+  />
 </template>
