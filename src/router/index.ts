@@ -14,7 +14,6 @@ const profileView = () => import('@/views/Profile/ProfileView.vue')
 const wizardView = () => import('@/views/Wizard/WizardView.vue')
 const authView = () => import('@/views/AuthView.vue')
 const temporaView = () => import('@/views/TemporalView.vue')
-const facebookView = () => import('@/views/FacebookView.vue')
 
 // brand views
 const EditBrand = () => import('@/views/Brand/EditView.vue')
@@ -52,14 +51,6 @@ const routes = [
     path: '/auth',
     name: 'Auth',
     component: authView,
-    meta: {
-      title: 'Autenticando 🚀'
-    }
-  },
-  {
-    path: '/auth/facebook/callback',
-    name: 'Auth Facebook',
-    component: facebookView,
     meta: {
       title: 'Autenticando 🚀'
     }

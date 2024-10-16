@@ -22,7 +22,7 @@ async function initFacebookSDK() {
         appId: import.meta.env.VITE_FACEBOOK_ID,
         cookie: true,
         xfbml: true,
-        version: 'v21.0'
+        version: 'v21 .0'
       })
       window.FB.AppEvents.logPageView()
     }
