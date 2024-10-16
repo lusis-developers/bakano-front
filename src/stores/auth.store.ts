@@ -66,11 +66,12 @@ export const useAuthStore = defineStore('authStore', {
     },
     async sendFacebookTokenToBackend(
       facebookToken: string,
-      brandId: string
+      brandId: string,
+      pageId: string
     ): Promise<void> {
       this.isLoading = true
       try {
-        await authFBService.saveTokenSecret(facebookToken, brandId)
+        await authFBService.saveTokenSecret(brandId, facebookToken, pageId)
         this.facebookToken = facebookToken
       } catch (error: unknown) {
         this.error =

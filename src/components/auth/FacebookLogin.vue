@@ -84,9 +84,7 @@ function sendFacebookData() {
   }
   const pageId = selected.id
   const pageAccessToken = selected.access_token
-  console.log({ pageId })
-  console.log({ pageAccessToken })
-  // authStore.sendFacebookTokenToBackend(pageAccessToken, props.brandId, pageId)
+  authStore.sendFacebookTokenToBackend(props.brandId, pageAccessToken, pageId)
 }
 onMounted(() => {
   initFacebookSDK()
